@@ -142,6 +142,34 @@
                  rdfs:range :FAIR-Entity .
 
 
+###  http://w3id.org/fairness-quality-measures/hasAccessibleKnowledgeRepresentationLanguageforData
+:hasAccessibleKnowledgeRepresentationLanguageforData rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                     rdfs:domain :Dataset ;
+                                                     rdfs:range :AccessibleKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/hasAccessibleKnowledgeRepresentationLanguageforMetadata
+:hasAccessibleKnowledgeRepresentationLanguageforMetadata rdf:type owl:ObjectProperty ;
+                                                         rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                         rdfs:domain :Dataset ;
+                                                         rdfs:range :AccessibleKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/hasApplicableKnowledgeRepresentationLanguageForData
+:hasApplicableKnowledgeRepresentationLanguageForData rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                     rdfs:domain :Dataset ;
+                                                     rdfs:range :AccessibleKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/hasApplicableKnowledgeRepresentationLanguageForMetadata
+:hasApplicableKnowledgeRepresentationLanguageForMetadata rdf:type owl:ObjectProperty ;
+                                                         rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                         rdfs:domain :Dataset ;
+                                                         rdfs:range :AccessibleKnowledgeRepresentationLanguage .
+
+
 ###  http://w3id.org/fairness-quality-measures/hasAttribute
 :hasAttribute rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :hasPart ;
@@ -215,6 +243,13 @@
                                                 rdfs:subPropertyOf :hasDataIndexedOrRegisteredInResource ;
                                                 rdfs:domain :Dataset ;
                                                 rdfs:range :SearchableResource .
+
+
+###  http://w3id.org/fairness-quality-measures/hasDataKnowledgeRepresentationLanguage
+:hasDataKnowledgeRepresentationLanguage rdf:type owl:ObjectProperty ;
+                                        rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                        rdfs:domain :Dataset ;
+                                        rdfs:range :KnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataRegisteredInResource
@@ -392,6 +427,20 @@
                            rdfs:domain :Dataset ;
                            rdfs:range :FAIRnessQualityMeasure ;
                            rdfs:label "hasFAIRnessQualityMeasure" .
+
+
+###  http://w3id.org/fairness-quality-measures/hasFormalKnowledgeRepresentationLanguageForData
+:hasFormalKnowledgeRepresentationLanguageForData rdf:type owl:ObjectProperty ;
+                                                 rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                 rdfs:domain :Dataset ;
+                                                 rdfs:range :FormalKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/hasFormalKnowledgeRepresentationLanguageForMetadata
+:hasFormalKnowledgeRepresentationLanguageForMetadata rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                     rdfs:domain :Dataset ;
+                                                     rdfs:range :FormalKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasGloballyUniqueDataIdentifier
@@ -592,6 +641,13 @@
                                                     rdfs:range :SearchableResource .
 
 
+###  http://w3id.org/fairness-quality-measures/hasMetadataKnowledgeRepresentationLanguage
+:hasMetadataKnowledgeRepresentationLanguage rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                            rdfs:domain :Dataset ;
+                                            rdfs:range :KnowledgeRepresentationLanguage .
+
+
 ###  http://w3id.org/fairness-quality-measures/hasMetadataRegisteredInResource
 :hasMetadataRegisteredInResource rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
@@ -635,11 +691,32 @@
                     ] .
 
 
+###  http://w3id.org/fairness-quality-measures/hasPermanentlyAccessibleMetadata
+:hasPermanentlyAccessibleMetadata rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                  rdfs:domain :Dataset ;
+                                  rdfs:range :PermanentlyAccessibleMetadata .
+
+
 ###  http://w3id.org/fairness-quality-measures/hasRichMetadata
 :hasRichMetadata rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
                  rdfs:domain :Dataset ;
                  rdfs:range :RichMetadata .
+
+
+###  http://w3id.org/fairness-quality-measures/hasSharedKnowledgeRepresentationLanguageforData
+:hasSharedKnowledgeRepresentationLanguageforData rdf:type owl:ObjectProperty ;
+                                                 rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                 rdfs:domain :Dataset ;
+                                                 rdfs:range :SharedKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/hasSharedKnowledgeRepresentationLanguageforMetadata
+:hasSharedKnowledgeRepresentationLanguageforMetadata rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
+                                                     rdfs:domain :Dataset ;
+                                                     rdfs:range :SharedKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/indexed
@@ -937,6 +1014,48 @@
            :detectsDatasetProperty :hasDigitalObjectRetrievalOverCommunicationProtocolAllowingProcedure .
 
 
+###  http://w3id.org/fairness-quality-measures/A1.2-02IS
+:A1.2-02IS rdf:type owl:Class ;
+           rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :modifies ;
+                                                    owl:someValuesFrom :A1.2-01IS
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :focusesOnEntity ;
+                                                    owl:allValuesFrom :Infrastructure
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :maturityLevel ;
+                                                    owl:hasValue 2
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+           :detectsDatasetProperty :hasDigitalObjectRetrievalOverCommunicationProtocolAllowingAuthentication .
+
+
+###  http://w3id.org/fairness-quality-measures/A1.2-03IS
+:A1.2-03IS rdf:type owl:Class ;
+           rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :modifies ;
+                                                    owl:someValuesFrom :A1.2-01IS
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :focusesOnEntity ;
+                                                    owl:allValuesFrom :Infrastructure
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :maturityLevel ;
+                                                    owl:hasValue 2
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+           :detectsDatasetProperty :hasDigitalObjectRetrievalOverCommunicationProtocolAllowingAuthorization .
+
+
 ###  http://w3id.org/fairness-quality-measures/A2
 :A2 rdf:type owl:Class ;
     rdfs:subClassOf [ owl:intersectionOf ( :Accessibility
@@ -948,6 +1067,27 @@
                       rdf:type owl:Class
                     ] ;
     rdfs:comment "A2: Metadata should be accessible even when the data is no longer available" .
+
+
+###  http://w3id.org/fairness-quality-measures/A2-01M
+:A2-01M rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :CoreIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :appliesTo ;
+                                                 owl:someValuesFrom :A2
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Metadata
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 1
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasPermanentlyAccessibleMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/Accessibility
@@ -977,6 +1117,47 @@
 ###  http://w3id.org/fairness-quality-measures/Accessible
 :Accessible rdf:type owl:Class ;
             rdfs:subClassOf :FAIR-Characteristic .
+
+
+###  http://w3id.org/fairness-quality-measures/AccessibleKnowledgeRepresentationLanguage
+:AccessibleKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                           rdfs:subClassOf [ owl:intersectionOf ( :KnowledgeRepresentationLanguage
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasCharacteristic ;
+                                                                                    owl:someValuesFrom :Accessible
+                                                                                  ]
+                                                                                ) ;
+                                                             rdf:type owl:Class
+                                                           ] .
+
+
+###  http://w3id.org/fairness-quality-measures/AccessibleVocabulary
+:AccessibleVocabulary rdf:type owl:Class ;
+                      rdfs:subClassOf [ owl:intersectionOf ( :Vocabulary
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :hasCharacteristic ;
+                                                               owl:someValuesFrom :Accessible
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] .
+
+
+###  http://w3id.org/fairness-quality-measures/Applicable
+:Applicable rdf:type owl:Class ;
+            rdfs:subClassOf :FAIR-Characteristic .
+
+
+###  http://w3id.org/fairness-quality-measures/ApplicableKnowledgeRepresentationLanguage
+:ApplicableKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                           rdfs:subClassOf [ owl:intersectionOf ( :KnowledgeRepresentationLanguage
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasCharacteristic ;
+                                                                                    owl:someValuesFrom :Applicable
+                                                                                  ]
+                                                                                ) ;
+                                                             rdf:type owl:Class
+                                                           ] .
 
 
 ###  http://w3id.org/fairness-quality-measures/Attribute
@@ -1731,6 +1912,35 @@
           rdfs:subClassOf :FAIR-Characteristic .
 
 
+###  http://w3id.org/fairness-quality-measures/FindableVocabulary
+:FindableVocabulary rdf:type owl:Class ;
+                    rdfs:subClassOf [ owl:intersectionOf ( :Vocabulary
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :hasCharacteristic ;
+                                                             owl:someValuesFrom :Findable
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] .
+
+
+###  http://w3id.org/fairness-quality-measures/Formal
+:Formal rdf:type owl:Class ;
+        rdfs:subClassOf :FAIR-Characteristic .
+
+
+###  http://w3id.org/fairness-quality-measures/FormalKnowledgeRepresentationLanguage
+:FormalKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                       rdfs:subClassOf [ owl:intersectionOf ( :KnowledgeRepresentationLanguage
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasCharacteristic ;
+                                                                                owl:someValuesFrom :Formal
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ] .
+
+
 ###  http://w3id.org/fairness-quality-measures/Free
 :Free rdf:type owl:Class ;
       rdfs:subClassOf :FAIR-Characteristic .
@@ -1763,6 +1973,234 @@
                                                                ) ;
                                             rdf:type owl:Class
                                           ] .
+
+
+###  http://w3id.org/fairness-quality-measures/I1
+:I1 rdf:type owl:Class ;
+    rdfs:subClassOf :Interoperablity ;
+    rdfs:comment "I1: (Meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation" .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-01D
+:I1-01D rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :CoreIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :appliesTo ;
+                                                 owl:someValuesFrom :I1
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Data
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 1
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasDataKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-01M
+:I1-01M rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :CoreIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :appliesTo ;
+                                                 owl:someValuesFrom :I1
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Metadata
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 1
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasMetadataKnowledgeRepresentationLanguage .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-02D
+:I1-02D rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01D
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Data
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 2
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasFormalKnowledgeRepresentationLanguageForData .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-02M
+:I1-02M rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01M
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Metadata
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 2
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasFormalKnowledgeRepresentationLanguageForMetadata .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-03D
+:I1-03D rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01D
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Data
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 3
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasAccessibleKnowledgeRepresentationLanguageforData .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-03M
+:I1-03M rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01M
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Metadata
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 3
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasAccessibleKnowledgeRepresentationLanguageforMetadata .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-04D
+:I1-04D rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01D
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Data
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 4
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasSharedKnowledgeRepresentationLanguageforData .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-04M
+:I1-04M rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01M
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Metadata
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 4
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasSharedKnowledgeRepresentationLanguageforMetadata .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-05D
+:I1-05D rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01D
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Data
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 5
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasApplicableKnowledgeRepresentationLanguageForData .
+
+
+###  http://w3id.org/fairness-quality-measures/I1-05M
+:I1-05M rdf:type owl:Class ;
+        rdfs:subClassOf [ owl:intersectionOf ( :ModifyingIndicator
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :modifies ;
+                                                 owl:someValuesFrom :I1-01M
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :focusesOnEntity ;
+                                                 owl:allValuesFrom :Metadata
+                                               ]
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :maturityLevel ;
+                                                 owl:hasValue 5
+                                               ]
+                                             ) ;
+                          rdf:type owl:Class
+                        ] ;
+        :detectsDatasetProperty :hasApplicableKnowledgeRepresentationLanguageForMetadata .
+
+
+###  http://w3id.org/fairness-quality-measures/I2
+:I2 rdf:type owl:Class ;
+    rdfs:subClassOf :Interoperablity ;
+    rdfs:comment "I2: (Meta)data use vocabularies that follow the FAIR principles" .
+
+
+###  http://w3id.org/fairness-quality-measures/I3
+:I3 rdf:type owl:Class ;
+    rdfs:subClassOf :Interoperablity ;
+    rdfs:comment "I3: (Meta)data include qualified references to other (meta)data" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Identifier
@@ -1803,6 +2241,18 @@
                rdfs:subClassOf :FAIR-Characteristic .
 
 
+###  http://w3id.org/fairness-quality-measures/InteroperableVocabulary
+:InteroperableVocabulary rdf:type owl:Class ;
+                         rdfs:subClassOf [ owl:intersectionOf ( :Vocabulary
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasCharacteristic ;
+                                                                  owl:someValuesFrom :Interoperable
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] .
+
+
 ###  http://w3id.org/fairness-quality-measures/Interoperablity
 :Interoperablity rdf:type owl:Class ;
                  rdfs:subClassOf [ owl:intersectionOf ( :FAIR-Principle
@@ -1815,9 +2265,9 @@
                                  ] .
 
 
-###  http://w3id.org/fairness-quality-measures/Language
-:Language rdf:type owl:Class ;
-          rdfs:subClassOf :FAIRnessQualityMeasure .
+###  http://w3id.org/fairness-quality-measures/KnowledgeRepresentationLanguage
+:KnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                 rdfs:subClassOf :FAIRnessQualityMeasure .
 
 
 ###  http://w3id.org/fairness-quality-measures/License
@@ -1840,9 +2290,7 @@
                                                           ]
                                                           [ rdf:type owl:Restriction ;
                                                             owl:onProperty :focusesOnEntity ;
-                                                            owl:someValuesFrom [ rdf:type owl:Class ;
-                                                                                 owl:complementOf :Dataset
-                                                                               ]
+                                                            owl:someValuesFrom :FAIR-Entity
                                                           ]
                                                           [ rdf:type owl:Restriction ;
                                                             owl:onProperty :assesses ;
@@ -1959,9 +2407,26 @@
                                           ] .
 
 
+###  http://w3id.org/fairness-quality-measures/PermanentlyAccessible
+:PermanentlyAccessible rdf:type owl:Class ;
+                       rdfs:subClassOf :Accessible .
+
+
+###  http://w3id.org/fairness-quality-measures/PermanentlyAccessibleMetadata
+:PermanentlyAccessibleMetadata rdf:type owl:Class ;
+                               rdfs:subClassOf [ owl:intersectionOf ( :Metadata
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasCharacteristic ;
+                                                                        owl:someValuesFrom :PermanentlyAccessible
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] .
+
+
 ###  http://w3id.org/fairness-quality-measures/Permissibility
 :Permissibility rdf:type owl:Class ;
-                rdfs:subClassOf :Accessible .
+                rdfs:subClassOf :FAIR-Characteristic .
 
 
 ###  http://w3id.org/fairness-quality-measures/Procedure
@@ -2022,6 +2487,18 @@
           rdfs:subClassOf :FAIR-Characteristic .
 
 
+###  http://w3id.org/fairness-quality-measures/ReusableVocabulary
+:ReusableVocabulary rdf:type owl:Class ;
+                    rdfs:subClassOf [ owl:intersectionOf ( :Vocabulary
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :hasCharacteristic ;
+                                                             owl:someValuesFrom :Reusable
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] .
+
+
 ###  http://w3id.org/fairness-quality-measures/Rich
 :Rich rdf:type owl:Class ;
       rdfs:subClassOf :FAIR-Characteristic .
@@ -2054,6 +2531,23 @@
                                                          ) ;
                                       rdf:type owl:Class
                                     ] .
+
+
+###  http://w3id.org/fairness-quality-measures/Shared
+:Shared rdf:type owl:Class ;
+        rdfs:subClassOf :FAIR-Characteristic .
+
+
+###  http://w3id.org/fairness-quality-measures/SharedKnowledgeRepresentationLanguage
+:SharedKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                       rdfs:subClassOf [ owl:intersectionOf ( :KnowledgeRepresentationLanguage
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasCharacteristic ;
+                                                                                owl:someValuesFrom :Shared
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ] .
 
 
 ###  http://w3id.org/fairness-quality-measures/Standardized
@@ -2092,7 +2586,7 @@
 
 ###  http://w3id.org/fairness-quality-measures/Verifiability
 :Verifiability rdf:type owl:Class ;
-               rdfs:subClassOf :Accessible .
+               rdfs:subClassOf :FAIR-Characteristic .
 
 
 ###  http://w3id.org/fairness-quality-measures/Vocabulary
