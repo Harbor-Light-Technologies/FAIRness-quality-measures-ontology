@@ -19,10 +19,10 @@
 #    Annotation properties
 #################################################################
 
-###  http://w3id.org/fairness-quality-measures/detectsDatasetProperty
-:detectsDatasetProperty rdf:type owl:AnnotationProperty ;
+###  http://w3id.org/fairness-quality-measures/demonstratedByAssessmentProperty
+:demonstratedByAssessmentProperty rdf:type owl:AnnotationProperty ;
                         rdfs:comment "The property on the assessed Dataset for some FAIR-MaturityIndicator whose existence determines if the Dataset meets the criteria for the applicable FAIR-Principle" ;
-                        rdfs:label "detectsDatasetProperty" ;
+                        rdfs:label "demonstratedByAssessmentProperty" ;
                         rdfs:range :hasFAIRnessQualityMeasure ;
                         rdfs:domain :FAIR-MaturityIndicator .
 
@@ -45,12 +45,8 @@
 
 ###  http://w3id.org/fairness-quality-measures/assesses
 :assesses rdf:type owl:ObjectProperty ;
-          rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( :FAIR-Assessment
-                                      :FAIR-MaturityIndicator
-                                    )
-                      ] ;
-          rdfs:range :Dataset .
+          rdfs:domain :FAIR-Assessment ;
+          rdfs:range :FAIR-MaturityIndicator .
 
 
 ###  http://w3id.org/fairness-quality-measures/assigned
@@ -167,7 +163,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasAccessibleDataUsageLicense
 :hasAccessibleDataUsageLicense rdf:type owl:ObjectProperty ;
                                rdfs:subPropertyOf :hasDataUsageLicense ;
-                               rdfs:domain :Dataset ;
+                               rdfs:domain :FAIR-Assessment ;
                                rdfs:range :AccessibleLicense ;
                                owl:propertyChainAxiom ( :hasData
                                                         :assigned
@@ -177,28 +173,28 @@
 ###  http://w3id.org/fairness-quality-measures/hasAccessibleDataVocabulary
 :hasAccessibleDataVocabulary rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                             rdfs:domain :Dataset ;
+                             rdfs:domain :FAIR-Assessment ;
                              rdfs:range :AccessibleVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasAccessibleKnowledgeRepresentationLanguageforData
 :hasAccessibleKnowledgeRepresentationLanguageforData rdf:type owl:ObjectProperty ;
                                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                     rdfs:domain :Dataset ;
+                                                     rdfs:domain :FAIR-Assessment ;
                                                      rdfs:range :AccessibleKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasAccessibleKnowledgeRepresentationLanguageforMetadata
 :hasAccessibleKnowledgeRepresentationLanguageforMetadata rdf:type owl:ObjectProperty ;
                                                          rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                         rdfs:domain :Dataset ;
+                                                         rdfs:domain :FAIR-Assessment ;
                                                          rdfs:range :AccessibleKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasAccessibleMetadataUsageLicense
 :hasAccessibleMetadataUsageLicense rdf:type owl:ObjectProperty ;
                                    rdfs:subPropertyOf :hasMetadataUsageLicense ;
-                                   rdfs:domain :Dataset ;
+                                   rdfs:domain :FAIR-Assessment ;
                                    rdfs:range :AccessibleLicense ;
                                    owl:propertyChainAxiom ( :hasMetadata
                                                             :assigned
@@ -208,21 +204,21 @@
 ###  http://w3id.org/fairness-quality-measures/hasAccessibleMetadataVocabulary
 :hasAccessibleMetadataVocabulary rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :AccessibleVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasApplicableKnowledgeRepresentationLanguageForData
 :hasApplicableKnowledgeRepresentationLanguageForData rdf:type owl:ObjectProperty ;
                                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                     rdfs:domain :Dataset ;
+                                                     rdfs:domain :FAIR-Assessment ;
                                                      rdfs:range :AccessibleKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasApplicableKnowledgeRepresentationLanguageForMetadata
 :hasApplicableKnowledgeRepresentationLanguageForMetadata rdf:type owl:ObjectProperty ;
                                                          rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                         rdfs:domain :Dataset ;
+                                                         rdfs:domain :FAIR-Assessment ;
                                                          rdfs:range :AccessibleKnowledgeRepresentationLanguage .
 
 
@@ -247,7 +243,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasClearDataUsageLicense
 :hasClearDataUsageLicense rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf :hasDataUsageLicense ;
-                          rdfs:domain :Dataset ;
+                          rdfs:domain :FAIR-Assessment ;
                           rdfs:range :ClearLicense ;
                           owl:propertyChainAxiom ( :hasData
                                                    :assigned
@@ -257,7 +253,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasClearMetadataUsageLicense
 :hasClearMetadataUsageLicense rdf:type owl:ObjectProperty ;
                               rdfs:subPropertyOf :hasMetadataUsageLicense ;
-                              rdfs:domain :Dataset ;
+                              rdfs:domain :FAIR-Assessment ;
                               rdfs:range :ClearLicense ;
                               owl:propertyChainAxiom ( :hasMetadata
                                                        :assigned
@@ -267,14 +263,14 @@
 ###  http://w3id.org/fairness-quality-measures/hasData
 :hasData rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :hasPart ;
-         rdfs:domain :Dataset ;
+         rdfs:domain :FAIR-Assessment ;
          rdfs:range :Data .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataAssociatedWithProvenance
 :hasDataAssociatedWithProvenance rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :Provenance ;
                                  owl:propertyChainAxiom ( :hasData
                                                           :assigned
@@ -284,7 +280,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataDescribedWithAccurateAttribute
 :hasDataDescribedWithAccurateAttribute rdf:type owl:ObjectProperty ;
                                        rdfs:subPropertyOf :hasDataDescribedWithAttributes ;
-                                       rdfs:domain :Dataset ;
+                                       rdfs:domain :FAIR-Assessment ;
                                        rdfs:range [ owl:intersectionOf ( :AccurateAttribute
                                                                          :DataAttribute
                                                                        ) ;
@@ -295,7 +291,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataDescribedWithAttributes
 :hasDataDescribedWithAttributes rdf:type owl:ObjectProperty ;
                                 rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                rdfs:domain :Dataset ;
+                                rdfs:domain :FAIR-Assessment ;
                                 rdfs:range :DataAttribute ;
                                 owl:propertyChainAxiom ( :hasData
                                                          :hasAttribute
@@ -305,7 +301,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataDescribedWithPluralAttributes
 :hasDataDescribedWithPluralAttributes rdf:type owl:ObjectProperty ;
                                       rdfs:subPropertyOf :hasDataDescribedWithAttributes ;
-                                      rdfs:domain :Dataset ;
+                                      rdfs:domain :FAIR-Assessment ;
                                       rdfs:range [ owl:intersectionOf ( :DataAttribute
                                                                         :PluralAttribute
                                                                       ) ;
@@ -316,7 +312,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataDescribedWithRelevantAttribute
 :hasDataDescribedWithRelevantAttribute rdf:type owl:ObjectProperty ;
                                        rdfs:subPropertyOf :hasDataDescribedWithAttributes ;
-                                       rdfs:domain :Dataset ;
+                                       rdfs:domain :FAIR-Assessment ;
                                        rdfs:range [ owl:intersectionOf ( :DataAttribute
                                                                          :RelevantAttribute
                                                                        ) ;
@@ -328,7 +324,7 @@
 :hasDataIdentifier rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
                    rdf:type owl:FunctionalProperty ;
-                   rdfs:domain :Dataset ;
+                   rdfs:domain :FAIR-Assessment ;
                    rdfs:range :Identifier ;
                    owl:propertyChainAxiom ( :hasData
                                             :assigned
@@ -339,7 +335,7 @@
 :hasDataIndexedInResource rdf:type owl:ObjectProperty ;
                           owl:equivalentProperty :hasDataIndexedOrRegisteredInResource ;
                           rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                          rdfs:domain :Dataset ;
+                          rdfs:domain :FAIR-Assessment ;
                           rdfs:range :Resource ;
                           owl:propertyChainAxiom ( :hasData
                                                    :indexed
@@ -350,7 +346,7 @@
 :hasDataIndexedInSearchableResource rdf:type owl:ObjectProperty ;
                                     owl:equivalentProperty :hasDataIndexedOrRegisteredInSearchableResource ;
                                     rdfs:subPropertyOf :hasDataIndexedInResource ;
-                                    rdfs:domain :Dataset ;
+                                    rdfs:domain :FAIR-Assessment ;
                                     rdfs:range :SearchableResource ;
                                     owl:propertyChainAxiom ( :hasData
                                                              :indexed
@@ -361,7 +357,7 @@
 :hasDataIndexedOrRegisteredInResource rdf:type owl:ObjectProperty ;
                                       owl:equivalentProperty :hasDataRegisteredInResource ;
                                       rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                      rdfs:domain :Dataset ;
+                                      rdfs:domain :FAIR-Assessment ;
                                       rdfs:range :Resource .
 
 
@@ -369,35 +365,35 @@
 :hasDataIndexedOrRegisteredInSearchableResource rdf:type owl:ObjectProperty ;
                                                 owl:equivalentProperty :hasDataRegisteredInSearchableResource ;
                                                 rdfs:subPropertyOf :hasDataIndexedOrRegisteredInResource ;
-                                                rdfs:domain :Dataset ;
+                                                rdfs:domain :FAIR-Assessment ;
                                                 rdfs:range :SearchableResource .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataKnowledgeRepresentationLanguage
 :hasDataKnowledgeRepresentationLanguage rdf:type owl:ObjectProperty ;
                                         rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                        rdfs:domain :Dataset ;
+                                        rdfs:domain :FAIR-Assessment ;
                                         rdfs:range :KnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataReferencingOtherData
 :hasDataReferencingOtherData rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf :hasReferencesIncludedInData ;
-                             rdfs:domain :Dataset ;
+                             rdfs:domain :FAIR-Assessment ;
                              rdfs:range :OtherDataReference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataReferencingOtherMetadata
 :hasDataReferencingOtherMetadata rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasReferencesIncludedInData ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :OtherMetadataReference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataRegisteredInResource
 :hasDataRegisteredInResource rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                             rdfs:domain :Dataset ;
+                             rdfs:domain :FAIR-Assessment ;
                              rdfs:range :Resource ;
                              owl:propertyChainAxiom ( :hasData
                                                       :registered
@@ -407,7 +403,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRegisteredInSearchableResource
 :hasDataRegisteredInSearchableResource rdf:type owl:ObjectProperty ;
                                        rdfs:subPropertyOf :hasDataRegisteredInResource ;
-                                       rdfs:domain :Dataset ;
+                                       rdfs:domain :FAIR-Assessment ;
                                        rdfs:range :SearchableResource ;
                                        owl:propertyChainAxiom ( :hasData
                                                                 :registered
@@ -417,7 +413,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverCommunicationProtocol
 :hasDataRetrievalOverCommunicationProtocol rdf:type owl:ObjectProperty ;
                                            rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                           rdfs:domain :Dataset ;
+                                           rdfs:domain :FAIR-Assessment ;
                                            rdfs:range :CommunicationProtocol ;
                                            owl:propertyChainAxiom ( :hasDataIdentifier
                                                                     :hasIdentifierScheme
@@ -428,21 +424,21 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverCommunicationProtocolAllowingAuthentication
 :hasDataRetrievalOverCommunicationProtocolAllowingAuthentication rdf:type owl:ObjectProperty ;
                                                                  rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocolAllowingProcedure ;
-                                                                 rdfs:domain :Dataset ;
+                                                                 rdfs:domain :FAIR-Assessment ;
                                                                  rdfs:range :AuthenticationProcedure .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverCommunicationProtocolAllowingAuthorization
 :hasDataRetrievalOverCommunicationProtocolAllowingAuthorization rdf:type owl:ObjectProperty ;
                                                                 rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocolAllowingProcedure ;
-                                                                rdfs:domain :Dataset ;
+                                                                rdfs:domain :FAIR-Assessment ;
                                                                 rdfs:range :AuthorizationProcedure .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverCommunicationProtocolAllowingProcedure
 :hasDataRetrievalOverCommunicationProtocolAllowingProcedure rdf:type owl:ObjectProperty ;
                                                             rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocol ;
-                                                            rdfs:domain :Dataset ;
+                                                            rdfs:domain :FAIR-Assessment ;
                                                             rdfs:range :Procedure ;
                                                             owl:propertyChainAxiom ( :hasDataRetrievalOverCommunicationProtocol
                                                                                      :allowsFor
@@ -452,7 +448,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverFreeCommunicationProtocol
 :hasDataRetrievalOverFreeCommunicationProtocol rdf:type owl:ObjectProperty ;
                                                rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocol ;
-                                               rdfs:domain :Dataset ;
+                                               rdfs:domain :FAIR-Assessment ;
                                                rdfs:range :FreeCommuniationProtocol ;
                                                owl:propertyChainAxiom ( :hasDataIdentifier
                                                                         :hasIdentifierScheme
@@ -463,7 +459,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverOpenCommunicationProtocol
 :hasDataRetrievalOverOpenCommunicationProtocol rdf:type owl:ObjectProperty ;
                                                rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocol ;
-                                               rdfs:domain :Dataset ;
+                                               rdfs:domain :FAIR-Assessment ;
                                                rdfs:range :OpenCommuniationProtocol ;
                                                owl:propertyChainAxiom ( :hasDataIdentifier
                                                                         :hasIdentifierScheme
@@ -474,7 +470,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverStandardizedCommunicationProtocol
 :hasDataRetrievalOverStandardizedCommunicationProtocol rdf:type owl:ObjectProperty ;
                                                        rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocol ;
-                                                       rdfs:domain :Dataset ;
+                                                       rdfs:domain :FAIR-Assessment ;
                                                        rdfs:range :StandardizedCommuniationProtocol ;
                                                        owl:propertyChainAxiom ( :hasDataIdentifier
                                                                                 :hasIdentifierScheme
@@ -485,7 +481,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataRetrievalOverUniversallyImplementableCommunicationProtocol
 :hasDataRetrievalOverUniversallyImplementableCommunicationProtocol rdf:type owl:ObjectProperty ;
                                                                    rdfs:subPropertyOf :hasDataRetrievalOverCommunicationProtocol ;
-                                                                   rdfs:domain :Dataset ;
+                                                                   rdfs:domain :FAIR-Assessment ;
                                                                    rdfs:range :UniversallyImplementableCommuniationProtocol ;
                                                                    owl:propertyChainAxiom ( :hasDataIdentifier
                                                                                             :hasIdentifierScheme
@@ -496,7 +492,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataThatMeetsAStandard
 :hasDataThatMeetsAStandard rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                           rdfs:domain :Dataset ;
+                           rdfs:domain :FAIR-Assessment ;
                            rdfs:range :Standard ;
                            owl:propertyChainAxiom ( :hasData
                                                     :meets
@@ -506,7 +502,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataThatMeetsCommunityStandard
 :hasDataThatMeetsCommunityStandard rdf:type owl:ObjectProperty ;
                                    rdfs:subPropertyOf :hasDataThatMeetsAStandard ;
-                                   rdfs:domain :Dataset ;
+                                   rdfs:domain :FAIR-Assessment ;
                                    rdfs:range :CommunityStandard ;
                                    owl:propertyChainAxiom ( :hasData
                                                             :meets
@@ -516,7 +512,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataThatMeetsDomainRelevantStandard
 :hasDataThatMeetsDomainRelevantStandard rdf:type owl:ObjectProperty ;
                                         rdfs:subPropertyOf :hasDataThatMeetsAStandard ;
-                                        rdfs:domain :Dataset ;
+                                        rdfs:domain :FAIR-Assessment ;
                                         rdfs:range :Domain-SpecificStandard ;
                                         owl:propertyChainAxiom ( :hasData
                                                                  :meets
@@ -526,7 +522,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataUsageLicense
 :hasDataUsageLicense rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                     rdfs:domain :Dataset ;
+                     rdfs:domain :FAIR-Assessment ;
                      rdfs:range :DataUsageLicense ;
                      owl:propertyChainAxiom ( :hasData
                                               :assigned
@@ -536,14 +532,14 @@
 ###  http://w3id.org/fairness-quality-measures/hasDataVocabulary
 :hasDataVocabulary rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                   rdfs:domain :Dataset ;
+                   rdfs:domain :FAIR-Assessment ;
                    rdfs:range :Vocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasDetailedDataProvenance
 :hasDetailedDataProvenance rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf :hasDataAssociatedWithProvenance ;
-                           rdfs:domain :Dataset ;
+                           rdfs:domain :FAIR-Assessment ;
                            rdfs:range :DetailedProvenance ;
                            owl:propertyChainAxiom ( :hasData
                                                     :assigned
@@ -553,7 +549,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDetailedMetadataProvenance
 :hasDetailedMetadataProvenance rdf:type owl:ObjectProperty ;
                                rdfs:subPropertyOf :hasMetadataAssociatedWithProvenance ;
-                               rdfs:domain :Dataset ;
+                               rdfs:domain :FAIR-Assessment ;
                                rdfs:range :DetailedProvenance ;
                                owl:propertyChainAxiom ( :hasMetadata
                                                         :assigned
@@ -563,7 +559,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDigitalDataObjectResolvedByDataIdentifier
 :hasDigitalDataObjectResolvedByDataIdentifier rdf:type owl:ObjectProperty ;
                                               rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                              rdfs:domain :Dataset ;
+                                              rdfs:domain :FAIR-Assessment ;
                                               rdfs:range :DataDigitalObject ;
                                               owl:propertyChainAxiom ( :hasDataIdentifier
                                                                        :resolvesTo
@@ -573,7 +569,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasDigitalMetadataObjectResolvedByMetadataIdentifier
 :hasDigitalMetadataObjectResolvedByMetadataIdentifier rdf:type owl:ObjectProperty ;
                                                       rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                      rdfs:domain :Dataset ;
+                                                      rdfs:domain :FAIR-Assessment ;
                                                       rdfs:range :MetadataDigitalObject ;
                                                       owl:propertyChainAxiom ( :hasMetadataIdentifier
                                                                                :resolvesTo
@@ -584,7 +580,7 @@
 :hasEternallyPersistentDataIdentifier rdf:type owl:ObjectProperty ;
                                       rdfs:subPropertyOf :hasDataIdentifier ;
                                       rdf:type owl:FunctionalProperty ;
-                                      rdfs:domain :Dataset ;
+                                      rdfs:domain :FAIR-Assessment ;
                                       rdfs:range [ owl:intersectionOf ( :DataIdentifier
                                                                         :EnternallyPersistentIdentifier
                                                                       ) ;
@@ -599,7 +595,7 @@
 :hasEternallyPersistentIdentifier rdf:type owl:ObjectProperty ;
                                   rdfs:subPropertyOf :hasIdentifier ;
                                   rdf:type owl:FunctionalProperty ;
-                                  rdfs:domain :Dataset ;
+                                  rdfs:domain :FAIR-Assessment ;
                                   rdfs:range :EnternallyPersistentIdentifier .
 
 
@@ -607,7 +603,7 @@
 :hasEternallyPersistentMetadataIdentifier rdf:type owl:ObjectProperty ;
                                           rdfs:subPropertyOf :hasMetadataIdentifier ;
                                           rdf:type owl:FunctionalProperty ;
-                                          rdfs:domain :Dataset ;
+                                          rdfs:domain :FAIR-Assessment ;
                                           rdfs:range [ owl:intersectionOf ( :EnternallyPersistentIdentifier
                                                                             :MetadataIdentifier
                                                                           ) ;
@@ -620,7 +616,7 @@
 
 ###  http://w3id.org/fairness-quality-measures/hasFAIRnessQualityMeasure
 :hasFAIRnessQualityMeasure rdf:type owl:ObjectProperty ;
-                           rdfs:domain :Dataset ;
+                           rdfs:domain :FAIR-Assessment ;
                            rdfs:range :FAIR-Entity ;
                            rdfs:label "hasFAIRnessQualityMeasure" .
 
@@ -628,28 +624,28 @@
 ###  http://w3id.org/fairness-quality-measures/hasFindableDataVocabulary
 :hasFindableDataVocabulary rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                           rdfs:domain :Dataset ;
+                           rdfs:domain :FAIR-Assessment ;
                            rdfs:range :FindableVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasFindableMetadataVocabulary
 :hasFindableMetadataVocabulary rdf:type owl:ObjectProperty ;
                                rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                               rdfs:domain :Dataset ;
+                               rdfs:domain :FAIR-Assessment ;
                                rdfs:range :FindableVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasFormalKnowledgeRepresentationLanguageForData
 :hasFormalKnowledgeRepresentationLanguageForData rdf:type owl:ObjectProperty ;
                                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                 rdfs:domain :Dataset ;
+                                                 rdfs:domain :FAIR-Assessment ;
                                                  rdfs:range :FormalKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasFormalKnowledgeRepresentationLanguageForMetadata
 :hasFormalKnowledgeRepresentationLanguageForMetadata rdf:type owl:ObjectProperty ;
                                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                     rdfs:domain :Dataset ;
+                                                     rdfs:domain :FAIR-Assessment ;
                                                      rdfs:range :FormalKnowledgeRepresentationLanguage .
 
 
@@ -657,7 +653,7 @@
 :hasGloballyUniqueDataIdentifier rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasDataIdentifier ;
                                  rdf:type owl:FunctionalProperty ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range [ owl:intersectionOf ( :DataIdentifier
                                                                    :GloballyUnqiueIdentifier
                                                                  ) ;
@@ -672,7 +668,7 @@
 :hasGloballyUniqueIdentifier rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf :hasIdentifier ;
                              rdf:type owl:FunctionalProperty ;
-                             rdfs:domain :Dataset ;
+                             rdfs:domain :FAIR-Assessment ;
                              rdfs:range :GloballyUnqiueIdentifier .
 
 
@@ -680,7 +676,7 @@
 :hasGloballyUniqueMetadataIdentifier rdf:type owl:ObjectProperty ;
                                      rdfs:subPropertyOf :hasMetadataIdentifier ;
                                      rdf:type owl:FunctionalProperty ;
-                                     rdfs:domain :Dataset ;
+                                     rdfs:domain :FAIR-Assessment ;
                                      rdfs:range [ owl:intersectionOf ( :GloballyUnqiueIdentifier
                                                                        :MetadataIdentifier
                                                                      ) ;
@@ -695,7 +691,7 @@
 :hasIdentifier rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf owl:topObjectProperty ;
                rdf:type owl:FunctionalProperty ;
-               rdfs:domain :Dataset ;
+               rdfs:domain :FAIR-Assessment ;
                rdfs:range :Identifier .
 
 
@@ -709,28 +705,28 @@
 ###  http://w3id.org/fairness-quality-measures/hasInteroperableDataVocabulary
 :hasInteroperableDataVocabulary rdf:type owl:ObjectProperty ;
                                 rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                rdfs:domain :Dataset ;
+                                rdfs:domain :FAIR-Assessment ;
                                 rdfs:range :InteroperableVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasInteroperableMetadataVocabulary
 :hasInteroperableMetadataVocabulary rdf:type owl:ObjectProperty ;
                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                    rdfs:domain :Dataset ;
+                                    rdfs:domain :FAIR-Assessment ;
                                     rdfs:range :InteroperableVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadata
 :hasMetadata rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :hasPart ;
-             rdfs:domain :Dataset ;
+             rdfs:domain :FAIR-Assessment ;
              rdfs:range :Metadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadataAssociatedWithProvenance
 :hasMetadataAssociatedWithProvenance rdf:type owl:ObjectProperty ;
                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                     rdfs:domain :Dataset ;
+                                     rdfs:domain :FAIR-Assessment ;
                                      rdfs:range :Provenance ;
                                      owl:propertyChainAxiom ( :hasMetadata
                                                               :assigned
@@ -750,7 +746,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataClearlyIncludingDataIdentifier
 :hasMetadataClearlyIncludingDataIdentifier rdf:type owl:ObjectProperty ;
                                            rdfs:subPropertyOf :hasMetadataDescribingDataIdentifier ;
-                                           rdfs:domain :Dataset ;
+                                           rdfs:domain :FAIR-Assessment ;
                                            rdfs:range :ClearlyIncludedDataIdentifierMetadataAttribute ;
                                            owl:propertyChainAxiom ( :hasMetadata
                                                                     :describesDataIdentifierClearly
@@ -760,7 +756,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribedWithAccurateAttributes
 :hasMetadataDescribedWithAccurateAttributes rdf:type owl:ObjectProperty ;
                                             rdfs:subPropertyOf :hasMetadataDescribedWithAttributes ;
-                                            rdfs:domain :Dataset ;
+                                            rdfs:domain :FAIR-Assessment ;
                                             rdfs:range [ owl:intersectionOf ( :AccurateAttribute
                                                                               :MetadataAttribute
                                                                             ) ;
@@ -771,7 +767,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribedWithAttributes
 :hasMetadataDescribedWithAttributes rdf:type owl:ObjectProperty ;
                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                    rdfs:domain :Dataset ;
+                                    rdfs:domain :FAIR-Assessment ;
                                     rdfs:range :MetadataAttribute ;
                                     owl:propertyChainAxiom ( :hasMetadata
                                                              :hasAttribute
@@ -781,7 +777,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribedWithPluralAttributes
 :hasMetadataDescribedWithPluralAttributes rdf:type owl:ObjectProperty ;
                                           rdfs:subPropertyOf :hasMetadataDescribedWithAttributes ;
-                                          rdfs:domain :Dataset ;
+                                          rdfs:domain :FAIR-Assessment ;
                                           rdfs:range [ owl:intersectionOf ( :MetadataAttribute
                                                                             :PluralAttribute
                                                                           ) ;
@@ -792,7 +788,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribedWithRelevantAttributes
 :hasMetadataDescribedWithRelevantAttributes rdf:type owl:ObjectProperty ;
                                             rdfs:subPropertyOf :hasMetadataDescribedWithAttributes ;
-                                            rdfs:domain :Dataset ;
+                                            rdfs:domain :FAIR-Assessment ;
                                             rdfs:range [ owl:intersectionOf ( :MetadataAttribute
                                                                               :RelevantAttribute
                                                                             ) ;
@@ -803,7 +799,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataAccess
 :hasMetadataDescribingDataAccess rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :DataAccessMetadataAttribute ;
                                  owl:propertyChainAxiom ( :hasMetadata
                                                           :describesDataAccess
@@ -813,7 +809,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataDiscovery
 :hasMetadataDescribingDataDiscovery rdf:type owl:ObjectProperty ;
                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                    rdfs:domain :Dataset ;
+                                    rdfs:domain :FAIR-Assessment ;
                                     rdfs:range :DiscoveryMetadataAttribute ;
                                     owl:propertyChainAxiom ( :hasMetadata
                                                              :describesDataForDiscovery
@@ -823,7 +819,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataIdentifier
 :hasMetadataDescribingDataIdentifier rdf:type owl:ObjectProperty ;
                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                     rdfs:domain :Dataset ;
+                                     rdfs:domain :FAIR-Assessment ;
                                      rdfs:range :DataIdentifierMetadataAttribute ;
                                      owl:propertyChainAxiom ( :hasMetadata
                                                               :describesDataIdentifier
@@ -833,7 +829,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataInContext
 :hasMetadataDescribingDataInContext rdf:type owl:ObjectProperty ;
                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                    rdfs:domain :Dataset ;
+                                    rdfs:domain :FAIR-Assessment ;
                                     rdfs:range :DataContextMetadataAttribute ;
                                     owl:propertyChainAxiom ( :hasMetadata
                                                              :describesDataWithContextualInformation
@@ -843,7 +839,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataProcessing
 :hasMetadataDescribingDataProcessing rdf:type owl:ObjectProperty ;
                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                     rdfs:domain :Dataset ;
+                                     rdfs:domain :FAIR-Assessment ;
                                      rdfs:range :DataProcessingMetadataAttribute ;
                                      owl:propertyChainAxiom ( :hasMetadata
                                                               :describesDataProcessing
@@ -853,7 +849,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataProvenance
 :hasMetadataDescribingDataProvenance rdf:type owl:ObjectProperty ;
                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                     rdfs:domain :Dataset ;
+                                     rdfs:domain :FAIR-Assessment ;
                                      rdfs:range :DataProvenanceMetadataAttribute ;
                                      owl:propertyChainAxiom ( :hasMetadata
                                                               :describesDataProvence
@@ -863,7 +859,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataRetrieval
 :hasMetadataDescribingDataRetrieval rdf:type owl:ObjectProperty ;
                                     rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                    rdfs:domain :Dataset ;
+                                    rdfs:domain :FAIR-Assessment ;
                                     rdfs:range :RetrievableDataMetadataAttribute ;
                                     owl:propertyChainAxiom ( :hasMetadata
                                                              :describesDataRetrieval
@@ -873,7 +869,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataUsageLicense
 :hasMetadataDescribingDataUsageLicense rdf:type owl:ObjectProperty ;
                                        rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                       rdfs:domain :Dataset ;
+                                       rdfs:domain :FAIR-Assessment ;
                                        rdfs:range :DataUsageLicenseMetadataAttribute ;
                                        owl:propertyChainAxiom ( :hasMetadata
                                                                 :describesDataUsageLicense
@@ -883,7 +879,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataDescribingDataUse
 :hasMetadataDescribingDataUse rdf:type owl:ObjectProperty ;
                               rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                              rdfs:domain :Dataset ;
+                              rdfs:domain :FAIR-Assessment ;
                               rdfs:range :DataUseMetadataAttribute ;
                               owl:propertyChainAxiom ( :hasMetadata
                                                        :describesDataUse
@@ -893,7 +889,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataExplicitlyIncludingDataIdentifier
 :hasMetadataExplicitlyIncludingDataIdentifier rdf:type owl:ObjectProperty ;
                                               rdfs:subPropertyOf :hasMetadataDescribingDataIdentifier ;
-                                              rdfs:domain :Dataset ;
+                                              rdfs:domain :FAIR-Assessment ;
                                               rdfs:range :ExplicitlyIncludedDataIdentifierMetadataAttribute ;
                                               owl:propertyChainAxiom ( :hasMetadata
                                                                        :describesDataIdentifierExplicitly
@@ -904,7 +900,7 @@
 :hasMetadataIdentifier rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
                        rdf:type owl:FunctionalProperty ;
-                       rdfs:domain :Dataset ;
+                       rdfs:domain :FAIR-Assessment ;
                        rdfs:range :MetadataIdentifier ;
                        owl:propertyChainAxiom ( :hasMetadata
                                                 :assigned
@@ -915,7 +911,7 @@
 :hasMetadataIndexedInResource rdf:type owl:ObjectProperty ;
                               owl:equivalentProperty :hasMetadataIndexedOrRegisteredInResource ;
                               rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                              rdfs:domain :Dataset ;
+                              rdfs:domain :FAIR-Assessment ;
                               rdfs:range :Resource .
 
 
@@ -923,7 +919,7 @@
 :hasMetadataIndexedInSearchableResource rdf:type owl:ObjectProperty ;
                                         owl:equivalentProperty :hasMetadataIndexedOrRegisteredInSearchableResource ;
                                         rdfs:subPropertyOf :hasMetadataIndexedInResource ;
-                                        rdfs:domain :Dataset ;
+                                        rdfs:domain :FAIR-Assessment ;
                                         rdfs:range :SearchableResource ;
                                         owl:propertyChainAxiom ( :hasMetadata
                                                                  :indexed
@@ -934,7 +930,7 @@
 :hasMetadataIndexedOrRegisteredInResource rdf:type owl:ObjectProperty ;
                                           owl:equivalentProperty :hasMetadataRegisteredInResource ;
                                           rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                          rdfs:domain :Dataset ;
+                                          rdfs:domain :FAIR-Assessment ;
                                           rdfs:range :Resource .
 
 
@@ -942,42 +938,42 @@
 :hasMetadataIndexedOrRegisteredInSearchableResource rdf:type owl:ObjectProperty ;
                                                     owl:equivalentProperty :hasMetadataRegisteredInSearchableResource ;
                                                     rdfs:subPropertyOf :hasMetadataIndexedOrRegisteredInResource ;
-                                                    rdfs:domain :Dataset ;
+                                                    rdfs:domain :FAIR-Assessment ;
                                                     rdfs:range :SearchableResource .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadataKnowledgeRepresentationLanguage
 :hasMetadataKnowledgeRepresentationLanguage rdf:type owl:ObjectProperty ;
                                             rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                            rdfs:domain :Dataset ;
+                                            rdfs:domain :FAIR-Assessment ;
                                             rdfs:range :KnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadataReferencingOtherData
 :hasMetadataReferencingOtherData rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasReferencesIncludedInMetadata ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :OtherDataReference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadataReferencingOtherMetadata
 :hasMetadataReferencingOtherMetadata rdf:type owl:ObjectProperty ;
                                      rdfs:subPropertyOf :hasReferencesIncludedInMetadata ;
-                                     rdfs:domain :Dataset ;
+                                     rdfs:domain :FAIR-Assessment ;
                                      rdfs:range :OtherMetadataReference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadataRegisteredInResource
 :hasMetadataRegisteredInResource rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :Resource .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasMetadataRegisteredInSearchableResource
 :hasMetadataRegisteredInSearchableResource rdf:type owl:ObjectProperty ;
                                            rdfs:subPropertyOf :hasMetadataRegisteredInResource ;
-                                           rdfs:domain :Dataset ;
+                                           rdfs:domain :FAIR-Assessment ;
                                            rdfs:range :SearchableResource ;
                                            owl:propertyChainAxiom ( :hasMetadata
                                                                     :registered
@@ -987,7 +983,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataRetrievalOverStandardizedCommunicationProtocol
 :hasMetadataRetrievalOverStandardizedCommunicationProtocol rdf:type owl:ObjectProperty ;
                                                            rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                           rdfs:domain :Dataset ;
+                                                           rdfs:domain :FAIR-Assessment ;
                                                            rdfs:range :StandardizedCommuniationProtocol ;
                                                            owl:propertyChainAxiom ( :hasMetadataIdentifier
                                                                                     :hasIdentifierScheme
@@ -998,7 +994,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataThatMeetsAStandard
 :hasMetadataThatMeetsAStandard rdf:type owl:ObjectProperty ;
                                rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                               rdfs:domain :Dataset ;
+                               rdfs:domain :FAIR-Assessment ;
                                rdfs:range :Standard ;
                                owl:propertyChainAxiom ( :hasMetadata
                                                         :meets
@@ -1008,7 +1004,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataThatMeetsCommunityStandard
 :hasMetadataThatMeetsCommunityStandard rdf:type owl:ObjectProperty ;
                                        rdfs:subPropertyOf :hasMetadataThatMeetsAStandard ;
-                                       rdfs:domain :Dataset ;
+                                       rdfs:domain :FAIR-Assessment ;
                                        rdfs:range :CommunityStandard ;
                                        owl:propertyChainAxiom ( :hasMetadata
                                                                 :meets
@@ -1018,7 +1014,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataThatMeetsDomainRelevantStandard
 :hasMetadataThatMeetsDomainRelevantStandard rdf:type owl:ObjectProperty ;
                                             rdfs:subPropertyOf :hasMetadataThatMeetsAStandard ;
-                                            rdfs:domain :Dataset ;
+                                            rdfs:domain :FAIR-Assessment ;
                                             rdfs:range :Domain-SpecificStandard ;
                                             owl:propertyChainAxiom ( :hasMetadata
                                                                      :meets
@@ -1028,7 +1024,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataUsageLicense
 :hasMetadataUsageLicense rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                         rdfs:domain :Dataset ;
+                         rdfs:domain :FAIR-Assessment ;
                          rdfs:range :DataUsageLicense ;
                          owl:propertyChainAxiom ( :hasMetadata
                                                   :assigned
@@ -1038,7 +1034,7 @@
 ###  http://w3id.org/fairness-quality-measures/hasMetadataVocabulary
 :hasMetadataVocabulary rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                       rdfs:domain :Dataset ;
+                       rdfs:domain :FAIR-Assessment ;
                        rdfs:range :Vocabulary .
 
 
@@ -1058,70 +1054,70 @@
 ###  http://w3id.org/fairness-quality-measures/hasPermanentlyAccessibleMetadata
 :hasPermanentlyAccessibleMetadata rdf:type owl:ObjectProperty ;
                                   rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                  rdfs:domain :Dataset ;
+                                  rdfs:domain :FAIR-Assessment ;
                                   rdfs:range :PermanentlyAccessibleMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasQualifiedReferencesinData
 :hasQualifiedReferencesinData rdf:type owl:ObjectProperty ;
                               rdfs:subPropertyOf :hasReferencesIncludedInData ;
-                              rdfs:domain :Dataset ;
+                              rdfs:domain :FAIR-Assessment ;
                               rdfs:range :QualifiedReference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasQualifiedReferencesinMetadata
 :hasQualifiedReferencesinMetadata rdf:type owl:ObjectProperty ;
                                   rdfs:subPropertyOf :hasReferencesIncludedInMetadata ;
-                                  rdfs:domain :Dataset ;
+                                  rdfs:domain :FAIR-Assessment ;
                                   rdfs:range :QualifiedReference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasReferencesIncludedInData
 :hasReferencesIncludedInData rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                             rdfs:domain :Dataset ;
+                             rdfs:domain :FAIR-Assessment ;
                              rdfs:range :Reference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasReferencesIncludedInMetadata
 :hasReferencesIncludedInMetadata rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                 rdfs:domain :Dataset ;
+                                 rdfs:domain :FAIR-Assessment ;
                                  rdfs:range :Reference .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasReusableDataVocabulary
 :hasReusableDataVocabulary rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                           rdfs:domain :Dataset ;
+                           rdfs:domain :FAIR-Assessment ;
                            rdfs:range :ReusableVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasReusableMetadataVocabulary
 :hasReusableMetadataVocabulary rdf:type owl:ObjectProperty ;
                                rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                               rdfs:domain :Dataset ;
+                               rdfs:domain :FAIR-Assessment ;
                                rdfs:range :ReusableVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasRichMetadata
 :hasRichMetadata rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                 rdfs:domain :Dataset ;
+                 rdfs:domain :FAIR-Assessment ;
                  rdfs:range :RichMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasSharedKnowledgeRepresentationLanguageforData
 :hasSharedKnowledgeRepresentationLanguageforData rdf:type owl:ObjectProperty ;
                                                  rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                 rdfs:domain :Dataset ;
+                                                 rdfs:domain :FAIR-Assessment ;
                                                  rdfs:range :SharedKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/hasSharedKnowledgeRepresentationLanguageforMetadata
 :hasSharedKnowledgeRepresentationLanguageforMetadata rdf:type owl:ObjectProperty ;
                                                      rdfs:subPropertyOf :hasFAIRnessQualityMeasure ;
-                                                     rdfs:domain :Dataset ;
+                                                     rdfs:domain :FAIR-Assessment ;
                                                      rdfs:range :SharedKnowledgeRepresentationLanguage .
 
 
@@ -1259,7 +1255,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDigitalDataObjectResolvedByDataIdentifier .
+        :demonstratedByAssessmentProperty :hasDigitalDataObjectResolvedByDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1-01IS
@@ -1280,7 +1276,7 @@
                                               ) ;
                            rdf:type owl:Class
                          ] ;
-         :detectsDatasetProperty :hasDataRetrievalOverStandardizedCommunicationProtocol .
+         :demonstratedByAssessmentProperty :hasDataRetrievalOverStandardizedCommunicationProtocol .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1-01M
@@ -1301,7 +1297,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDigitalMetadataObjectResolvedByMetadataIdentifier .
+        :demonstratedByAssessmentProperty :hasDigitalMetadataObjectResolvedByMetadataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1-02IS
@@ -1322,7 +1318,7 @@
                                               ) ;
                            rdf:type owl:Class
                          ] ;
-         :detectsDatasetProperty :hasMetadataRetrievalOverStandardizedCommunicationProtocol .
+         :demonstratedByAssessmentProperty :hasMetadataRetrievalOverStandardizedCommunicationProtocol .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1.1
@@ -1349,7 +1345,7 @@
                                                 ) ;
                              rdf:type owl:Class
                            ] ;
-           :detectsDatasetProperty :hasDataRetrievalOverOpenCommunicationProtocol .
+           :demonstratedByAssessmentProperty :hasDataRetrievalOverOpenCommunicationProtocol .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1.1-02IS
@@ -1370,7 +1366,7 @@
                                                 ) ;
                              rdf:type owl:Class
                            ] ;
-           :detectsDatasetProperty :hasDataRetrievalOverFreeCommunicationProtocol .
+           :demonstratedByAssessmentProperty :hasDataRetrievalOverFreeCommunicationProtocol .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1.1-03IS
@@ -1391,7 +1387,7 @@
                                                 ) ;
                              rdf:type owl:Class
                            ] ;
-           :detectsDatasetProperty :hasDataRetrievalOverUniversallyImplementableCommunicationProtocol .
+           :demonstratedByAssessmentProperty :hasDataRetrievalOverUniversallyImplementableCommunicationProtocol .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1.2
@@ -1418,7 +1414,7 @@
                                                 ) ;
                              rdf:type owl:Class
                            ] ;
-           :detectsDatasetProperty :hasDataRetrievalOverCommunicationProtocolAllowingProcedure .
+           :demonstratedByAssessmentProperty :hasDataRetrievalOverCommunicationProtocolAllowingProcedure .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1.2-02IS
@@ -1439,7 +1435,7 @@
                                                 ) ;
                              rdf:type owl:Class
                            ] ;
-           :detectsDatasetProperty :hasDataRetrievalOverCommunicationProtocolAllowingAuthentication .
+           :demonstratedByAssessmentProperty :hasDataRetrievalOverCommunicationProtocolAllowingAuthentication .
 
 
 ###  http://w3id.org/fairness-quality-measures/A1.2-03IS
@@ -1460,7 +1456,7 @@
                                                 ) ;
                              rdf:type owl:Class
                            ] ;
-           :detectsDatasetProperty :hasDataRetrievalOverCommunicationProtocolAllowingAuthorization .
+           :demonstratedByAssessmentProperty :hasDataRetrievalOverCommunicationProtocolAllowingAuthorization .
 
 
 ###  http://w3id.org/fairness-quality-measures/A2
@@ -1494,7 +1490,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasPermanentlyAccessibleMetadata .
+        :demonstratedByAssessmentProperty :hasPermanentlyAccessibleMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/Accessibility
@@ -1708,14 +1704,13 @@
 :Data rdf:type owl:Class ;
       rdfs:subClassOf [ owl:intersectionOf ( :FAIR-Entity
                                              [ rdf:type owl:Restriction ;
-                                               owl:onProperty :isPartOf ;
-                                               owl:someValuesFrom :Dataset
+                                               owl:onProperty :describedWith ;
+                                               owl:someValuesFrom :Metadata
                                              ]
                                            ) ;
                         rdf:type owl:Class
                       ] ;
-      owl:disjointWith :Dataset ,
-                       :Infrastructure ,
+      owl:disjointWith :Infrastructure ,
                        :Metadata .
 
 
@@ -1922,25 +1917,6 @@
                                           ] .
 
 
-###  http://w3id.org/fairness-quality-measures/Dataset
-:Dataset rdf:type owl:Class ;
-         rdfs:subClassOf [ owl:intersectionOf ( :FAIR-Entity
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty :hasPart ;
-                                                  owl:someValuesFrom :Data
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty :hasPart ;
-                                                  owl:someValuesFrom :Metadata
-                                                ]
-                                              ) ;
-                           rdf:type owl:Class
-                         ] ;
-         owl:disjointWith :Infrastructure ,
-                          :Metadata ;
-         rdfs:label "Dataset" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Detailed
 :Detailed rdf:type owl:Class ;
           rdfs:subClassOf :FAIR-Characteristic .
@@ -2070,7 +2046,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataIdentifier .
+        :demonstratedByAssessmentProperty :hasDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F1-01M
@@ -2091,7 +2067,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataIdentifier .
+        :demonstratedByAssessmentProperty :hasMetadataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F1-02D
@@ -2112,7 +2088,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasGloballyUniqueDataIdentifier .
+        :demonstratedByAssessmentProperty :hasGloballyUniqueDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F1-02M
@@ -2133,7 +2109,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasGloballyUniqueMetadataIdentifier .
+        :demonstratedByAssessmentProperty :hasGloballyUniqueMetadataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F1-03D
@@ -2154,7 +2130,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasEternallyPersistentDataIdentifier .
+        :demonstratedByAssessmentProperty :hasEternallyPersistentDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F1-03M
@@ -2175,7 +2151,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasEternallyPersistentMetadataIdentifier .
+        :demonstratedByAssessmentProperty :hasEternallyPersistentMetadataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F2
@@ -2209,7 +2185,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasRichMetadata .
+        :demonstratedByAssessmentProperty :hasRichMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/F2-01M
@@ -2230,7 +2206,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataUsageLicense .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/F2-02M
@@ -2251,7 +2227,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataProvenance .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataProvenance .
 
 
 ###  http://w3id.org/fairness-quality-measures/F2-03M
@@ -2272,7 +2248,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataDiscovery .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataDiscovery .
 
 
 ###  http://w3id.org/fairness-quality-measures/F2-04M
@@ -2293,7 +2269,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataRetrieval .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataRetrieval .
 
 
 ###  http://w3id.org/fairness-quality-measures/F2-05M
@@ -2314,7 +2290,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataAccess .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataAccess .
 
 
 ###  http://w3id.org/fairness-quality-measures/F3
@@ -2348,7 +2324,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataIdentifier .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F3-02M
@@ -2369,7 +2345,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataClearlyIncludingDataIdentifier .
+        :demonstratedByAssessmentProperty :hasMetadataClearlyIncludingDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F3-03M
@@ -2390,7 +2366,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataExplicitlyIncludingDataIdentifier .
+        :demonstratedByAssessmentProperty :hasMetadataExplicitlyIncludingDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/F4
@@ -2417,7 +2393,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataIndexedOrRegisteredInResource .
+        :demonstratedByAssessmentProperty :hasDataIndexedOrRegisteredInResource .
 
 
 ###  http://w3id.org/fairness-quality-measures/F4-01M
@@ -2438,7 +2414,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataIndexedOrRegisteredInResource .
+        :demonstratedByAssessmentProperty :hasMetadataIndexedOrRegisteredInResource .
 
 
 ###  http://w3id.org/fairness-quality-measures/F4-02IS
@@ -2459,7 +2435,7 @@
                                               ) ;
                            rdf:type owl:Class
                          ] ;
-         :detectsDatasetProperty :hasDataIndexedOrRegisteredInSearchableResource .
+         :demonstratedByAssessmentProperty :hasDataIndexedOrRegisteredInSearchableResource .
 
 
 ###  http://w3id.org/fairness-quality-measures/F4-03IS
@@ -2480,15 +2456,14 @@
                                               ) ;
                            rdf:type owl:Class
                          ] ;
-         :detectsDatasetProperty :hasMetadataIndexedOrRegisteredInSearchableResource .
+         :demonstratedByAssessmentProperty :hasMetadataIndexedOrRegisteredInSearchableResource .
 
 
 ###  http://w3id.org/fairness-quality-measures/FAIR-Assessment
 :FAIR-Assessment rdf:type owl:Class ;
                  rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
                                                           owl:onProperty :assesses ;
-                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                          owl:onClass :Dataset
+                                                          owl:allValuesFrom :FAIR-MaturityIndicator
                                                         ]
                                                         [ rdf:type owl:Restriction ;
                                                           owl:onProperty :numberOfMaturityPoints ;
@@ -2527,10 +2502,6 @@
                                                                [ rdf:type owl:Restriction ;
                                                                  owl:onProperty :focusesOnEntity ;
                                                                  owl:someValuesFrom :FAIR-Entity
-                                                               ]
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty :assesses ;
-                                                                 owl:allValuesFrom :Dataset
                                                                ]
                                                                [ rdf:type owl:Restriction ;
                                                                  owl:onProperty :numberOfMaturityPoints ;
@@ -2658,7 +2629,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataKnowledgeRepresentationLanguage .
+        :demonstratedByAssessmentProperty :hasDataKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-01M
@@ -2679,7 +2650,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataKnowledgeRepresentationLanguage .
+        :demonstratedByAssessmentProperty :hasMetadataKnowledgeRepresentationLanguage .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-02D
@@ -2700,7 +2671,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasFormalKnowledgeRepresentationLanguageForData .
+        :demonstratedByAssessmentProperty :hasFormalKnowledgeRepresentationLanguageForData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-02M
@@ -2721,7 +2692,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasFormalKnowledgeRepresentationLanguageForMetadata .
+        :demonstratedByAssessmentProperty :hasFormalKnowledgeRepresentationLanguageForMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-03D
@@ -2742,7 +2713,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasAccessibleKnowledgeRepresentationLanguageforData .
+        :demonstratedByAssessmentProperty :hasAccessibleKnowledgeRepresentationLanguageforData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-03M
@@ -2763,7 +2734,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasAccessibleKnowledgeRepresentationLanguageforMetadata .
+        :demonstratedByAssessmentProperty :hasAccessibleKnowledgeRepresentationLanguageforMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-04D
@@ -2784,7 +2755,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasSharedKnowledgeRepresentationLanguageforData .
+        :demonstratedByAssessmentProperty :hasSharedKnowledgeRepresentationLanguageforData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-04M
@@ -2805,7 +2776,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasSharedKnowledgeRepresentationLanguageforMetadata .
+        :demonstratedByAssessmentProperty :hasSharedKnowledgeRepresentationLanguageforMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-05D
@@ -2826,7 +2797,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasApplicableKnowledgeRepresentationLanguageForData .
+        :demonstratedByAssessmentProperty :hasApplicableKnowledgeRepresentationLanguageForData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I1-05M
@@ -2847,7 +2818,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasApplicableKnowledgeRepresentationLanguageForMetadata .
+        :demonstratedByAssessmentProperty :hasApplicableKnowledgeRepresentationLanguageForMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2
@@ -2874,7 +2845,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataVocabulary .
+        :demonstratedByAssessmentProperty :hasDataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-01M
@@ -2895,7 +2866,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataVocabulary .
+        :demonstratedByAssessmentProperty :hasMetadataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-02D
@@ -2916,7 +2887,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasFindableDataVocabulary .
+        :demonstratedByAssessmentProperty :hasFindableDataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-02M
@@ -2937,7 +2908,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasFindableMetadataVocabulary .
+        :demonstratedByAssessmentProperty :hasFindableMetadataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-03D
@@ -2958,7 +2929,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasAccessibleDataVocabulary .
+        :demonstratedByAssessmentProperty :hasAccessibleDataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-03M
@@ -2979,7 +2950,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasAccessibleMetadataVocabulary .
+        :demonstratedByAssessmentProperty :hasAccessibleMetadataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-04D
@@ -3000,7 +2971,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasInteroperableDataVocabulary .
+        :demonstratedByAssessmentProperty :hasInteroperableDataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-04M
@@ -3021,7 +2992,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasInteroperableMetadataVocabulary .
+        :demonstratedByAssessmentProperty :hasInteroperableMetadataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-05D
@@ -3042,7 +3013,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasReusableDataVocabulary .
+        :demonstratedByAssessmentProperty :hasReusableDataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I2-05M
@@ -3063,7 +3034,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasReusableMetadataVocabulary .
+        :demonstratedByAssessmentProperty :hasReusableMetadataVocabulary .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3
@@ -3090,7 +3061,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasReferencesIncludedInData .
+        :demonstratedByAssessmentProperty :hasReferencesIncludedInData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-01M
@@ -3111,7 +3082,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasReferencesIncludedInMetadata .
+        :demonstratedByAssessmentProperty :hasReferencesIncludedInMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-02D
@@ -3132,7 +3103,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasQualifiedReferencesinData .
+        :demonstratedByAssessmentProperty :hasQualifiedReferencesinData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-02M
@@ -3153,7 +3124,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasQualifiedReferencesinMetadata .
+        :demonstratedByAssessmentProperty :hasQualifiedReferencesinMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-03D
@@ -3174,7 +3145,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataReferencingOtherData .
+        :demonstratedByAssessmentProperty :hasDataReferencingOtherData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-03M
@@ -3195,7 +3166,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataReferencingOtherData .
+        :demonstratedByAssessmentProperty :hasMetadataReferencingOtherData .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-04D
@@ -3216,7 +3187,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataReferencingOtherMetadata .
+        :demonstratedByAssessmentProperty :hasDataReferencingOtherMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/I3-04M
@@ -3237,7 +3208,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataReferencingOtherMetadata .
+        :demonstratedByAssessmentProperty :hasMetadataReferencingOtherMetadata .
 
 
 ###  http://w3id.org/fairness-quality-measures/Identifier
@@ -3315,14 +3286,6 @@
 ###  http://w3id.org/fairness-quality-measures/Metadata
 :Metadata rdf:type owl:Class ;
           rdfs:subClassOf [ owl:intersectionOf ( :FAIR-Entity
-                                                 [ rdf:type owl:Restriction ;
-                                                   owl:onProperty :hasPart ;
-                                                   owl:someValuesFrom :MetadataAttribute
-                                                 ]
-                                                 [ rdf:type owl:Restriction ;
-                                                   owl:onProperty :isPartOf ;
-                                                   owl:someValuesFrom :Dataset
-                                                 ]
                                                  [ rdf:type owl:Restriction ;
                                                    owl:onProperty :describes ;
                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -3579,7 +3542,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataDescribedWithAttributes .
+        :demonstratedByAssessmentProperty :hasDataDescribedWithAttributes .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-01M
@@ -3600,7 +3563,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribedWithAttributes .
+        :demonstratedByAssessmentProperty :hasMetadataDescribedWithAttributes .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-02D
@@ -3621,7 +3584,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataDescribedWithPluralAttributes .
+        :demonstratedByAssessmentProperty :hasDataDescribedWithPluralAttributes .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-02M
@@ -3642,7 +3605,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribedWithPluralAttributes .
+        :demonstratedByAssessmentProperty :hasMetadataDescribedWithPluralAttributes .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-03D
@@ -3663,7 +3626,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataDescribedWithAccurateAttribute .
+        :demonstratedByAssessmentProperty :hasDataDescribedWithAccurateAttribute .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-03M
@@ -3684,7 +3647,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribedWithAccurateAttributes .
+        :demonstratedByAssessmentProperty :hasMetadataDescribedWithAccurateAttributes .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-04D
@@ -3705,7 +3668,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasDataDescribedWithRelevantAttribute .
+        :demonstratedByAssessmentProperty :hasDataDescribedWithRelevantAttribute .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-04M
@@ -3726,7 +3689,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribedWithRelevantAttributes .
+        :demonstratedByAssessmentProperty :hasMetadataDescribedWithRelevantAttributes .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-05M
@@ -3747,7 +3710,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataUse .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataUse .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-06M
@@ -3768,7 +3731,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataInContext .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataInContext .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1-07M
@@ -3789,7 +3752,7 @@
                                              ) ;
                           rdf:type owl:Class
                         ] ;
-        :detectsDatasetProperty :hasMetadataDescribingDataProcessing .
+        :demonstratedByAssessmentProperty :hasMetadataDescribingDataProcessing .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.1
@@ -3816,7 +3779,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDataUsageLicense .
+          :demonstratedByAssessmentProperty :hasDataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.1-01M
@@ -3837,7 +3800,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasMetadataUsageLicense .
+          :demonstratedByAssessmentProperty :hasMetadataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.1-02D
@@ -3858,7 +3821,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasClearDataUsageLicense .
+          :demonstratedByAssessmentProperty :hasClearDataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.1-02M
@@ -3879,7 +3842,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasClearMetadataUsageLicense .
+          :demonstratedByAssessmentProperty :hasClearMetadataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.1-03D
@@ -3900,7 +3863,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasAccessibleDataUsageLicense .
+          :demonstratedByAssessmentProperty :hasAccessibleDataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.1-03M
@@ -3921,7 +3884,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasAccessibleMetadataUsageLicense .
+          :demonstratedByAssessmentProperty :hasAccessibleMetadataUsageLicense .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.2
@@ -3948,7 +3911,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDataAssociatedWithProvenance .
+          :demonstratedByAssessmentProperty :hasDataAssociatedWithProvenance .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.2-01M
@@ -3969,7 +3932,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasMetadataAssociatedWithProvenance .
+          :demonstratedByAssessmentProperty :hasMetadataAssociatedWithProvenance .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.2-02D
@@ -3990,7 +3953,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDetailedDataProvenance .
+          :demonstratedByAssessmentProperty :hasDetailedDataProvenance .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.2-02M
@@ -4011,7 +3974,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDetailedMetadataProvenance .
+          :demonstratedByAssessmentProperty :hasDetailedMetadataProvenance .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.3
@@ -4038,7 +4001,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDataThatMeetsAStandard .
+          :demonstratedByAssessmentProperty :hasDataThatMeetsAStandard .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.3-01M
@@ -4059,7 +4022,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasMetadataThatMeetsAStandard .
+          :demonstratedByAssessmentProperty :hasMetadataThatMeetsAStandard .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.3-02D
@@ -4080,7 +4043,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDataThatMeetsDomainRelevantStandard .
+          :demonstratedByAssessmentProperty :hasDataThatMeetsDomainRelevantStandard .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.3-02M
@@ -4101,7 +4064,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasMetadataThatMeetsDomainRelevantStandard .
+          :demonstratedByAssessmentProperty :hasMetadataThatMeetsDomainRelevantStandard .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.3-03D
@@ -4122,7 +4085,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasDataThatMeetsCommunityStandard .
+          :demonstratedByAssessmentProperty :hasDataThatMeetsCommunityStandard .
 
 
 ###  http://w3id.org/fairness-quality-measures/R1.3-03M
@@ -4143,7 +4106,7 @@
                                                ) ;
                             rdf:type owl:Class
                           ] ;
-          :detectsDatasetProperty :hasMetadataThatMeetsCommunityStandard .
+          :demonstratedByAssessmentProperty :hasMetadataThatMeetsCommunityStandard .
 
 
 ###  http://w3id.org/fairness-quality-measures/Reference
