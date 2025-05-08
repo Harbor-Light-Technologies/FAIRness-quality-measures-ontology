@@ -1,0 +1,18 @@
+@prefix fair: <https://w3id.org/fair/principles/terms/> .
+@prefix fip: <https://w3id.org/fair/fip/terms/> .
+@prefix fqm: <http://w3id.org/fairness-quality-measures/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+
+
+fqm:Dimension owl:equivalentClass fair:FAIR-Principle .
+fqm:Findability owl:equivalentClass fair:F .
+
+
+
+fqm:Principle owl:equivalentClass fair:FAIR-SubPrinciple .
+fqm:F1 owl:equivalentClass fair:F1 .
+
+
+
+fqm:FAIRQualityMeasure skos:closeMatch fip:FIP-Question .
