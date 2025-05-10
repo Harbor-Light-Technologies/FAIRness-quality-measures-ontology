@@ -26,6 +26,22 @@ fqm:satisfiesFAIRQualityMeasure rdf:type owl:AnnotationProperty .
 #    Object Properties
 #################################################################
 
+###  http://w3id.org/fairness-quality-measures/about
+fqm:about rdf:type owl:ObjectProperty ;
+          owl:inverseOf fqm:subjectOf ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( fqm:Category
+                                      fqm:Concept
+                                    )
+                      ] ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( fqm:Category
+                                     fqm:Concept
+                                   )
+                     ] ;
+          rdfs:label "about" .
+
+
 ###  http://w3id.org/fairness-quality-measures/allowsFor
 fqm:allowsFor rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf owl:topObjectProperty ;
@@ -56,6 +72,14 @@ fqm:associatedWith rdf:type owl:ObjectProperty ;
                                ] ;
                    rdfs:range fqm:Provenance ;
                    rdfs:label "associatedWith" .
+
+
+###  http://w3id.org/fairness-quality-measures/definedInScheme
+fqm:definedInScheme rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain fqm:Identifier ;
+                    rdfs:range fqm:IdentifierScheme ;
+                    rdfs:label "definedInScheme" .
 
 
 ###  http://w3id.org/fairness-quality-measures/describedWith
@@ -111,14 +135,48 @@ fqm:hasMaturityLevel rdf:type owl:ObjectProperty ;
                      rdfs:label "hasMaturityLevel" .
 
 
+###  http://w3id.org/fairness-quality-measures/hasMetadata
+fqm:hasMetadata rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf fqm:subjectOf ;
+                rdfs:domain fqm:Data ;
+                rdfs:range fqm:Metadata ;
+                rdfs:label "hasMetadata" .
+
+
+###  http://w3id.org/fairness-quality-measures/hasProvenance
+fqm:hasProvenance rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf fqm:subjectOf ;
+                  owl:inverseOf fqm:isProvenanceFor ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( fqm:Data
+                                              fqm:Metadata
+                                            )
+                              ] ;
+                  rdfs:range fqm:Provenance ;
+                  owl:propertyChainAxiom ( fqm:subjectOf
+                                         ) .
+
+
+###  http://w3id.org/fairness-quality-measures/identifies
+fqm:identifies rdf:type owl:ObjectProperty ;
+               owl:inverseOf fqm:isIdentifiedBy ;
+               rdfs:domain fqm:Identifier ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( fqm:Data
+                                          fqm:Metadata
+                                        )
+                          ] ;
+               rdfs:label "identifies" .
+
+
 ###  http://w3id.org/fairness-quality-measures/includes
 fqm:includes rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
              owl:inverseOf fqm:isIncludedIn ;
              rdfs:domain fqm:Metadata ;
              rdfs:range [ rdf:type owl:Class ;
-                          owl:unionOf ( fqm:DataUsageLicense
-                                        fqm:MetadataAttribute
+                          owl:unionOf ( fqm:Attribute
+                                        fqm:DataUsageLicense
                                         fqm:Provenance
                                         fqm:Reference
                                       )
@@ -137,17 +195,48 @@ fqm:indexedIn rdf:type owl:ObjectProperty ;
               rdfs:label "indexedIn" .
 
 
+###  http://w3id.org/fairness-quality-measures/isIdentifiedBy
+fqm:isIdentifiedBy rdf:type owl:ObjectProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( fqm:Data
+                                               fqm:Metadata
+                                             )
+                               ] ;
+                   rdfs:range fqm:Identifier ;
+                   rdfs:label "isIdentifiedBy" .
+
+
 ###  http://w3id.org/fairness-quality-measures/isIncludedIn
 fqm:isIncludedIn rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf owl:topObjectProperty ;
                  rdfs:domain [ rdf:type owl:Class ;
-                               owl:unionOf ( fqm:DataUsageLicense
-                                             fqm:MetadataAttribute
+                               owl:unionOf ( fqm:Attribute
+                                             fqm:DataUsageLicense
                                              fqm:Provenance
                                            )
                              ] ;
                  rdfs:range fqm:Metadata ;
                  rdfs:label "isIncludedIn" .
+
+
+###  http://w3id.org/fairness-quality-measures/isMetadataFor
+fqm:isMetadataFor rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf fqm:about ;
+                  rdfs:domain fqm:Metadata ;
+                  rdfs:range fqm:Data ;
+                  rdfs:label "isMetadataFor" .
+
+
+###  http://w3id.org/fairness-quality-measures/isProvenanceFor
+fqm:isProvenanceFor rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf fqm:about ;
+                    rdfs:domain fqm:Provenance ;
+                    rdfs:range [ rdf:type owl:Class ;
+                                 owl:unionOf ( fqm:Data
+                                               fqm:Metadata
+                                             )
+                               ] ;
+                    rdfs:label "isProvenanceFor" .
 
 
 ###  http://w3id.org/fairness-quality-measures/meets
@@ -196,16 +285,27 @@ fqm:releasedWith rdf:type owl:ObjectProperty ;
                  rdfs:range fqm:DataUsageLicense .
 
 
-###  http://w3id.org/fairness-quality-measures/retrievableByResolvingIdentifier
-fqm:retrievableByResolvingIdentifier rdf:type owl:ObjectProperty ;
-                                     rdfs:subPropertyOf owl:topObjectProperty ;
-                                     rdfs:domain [ rdf:type owl:Class ;
-                                                   owl:unionOf ( fqm:Data
-                                                                 fqm:Metadata
-                                                               )
-                                                 ] ;
-                                     rdfs:range fqm:Identifier ;
-                                     rdfs:label "retrievableByResolvingIdentifier" .
+###  http://w3id.org/fairness-quality-measures/resolvesTo
+fqm:resolvesTo rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain fqm:Identifier ;
+               rdfs:range fqm:DigitalObject ;
+               rdfs:label "resolvesTo" .
+
+
+###  http://w3id.org/fairness-quality-measures/subjectOf
+fqm:subjectOf rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( fqm:Category
+                                          fqm:Concept
+                                        )
+                          ] ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( fqm:Category
+                                         fqm:Concept
+                                       )
+                         ] ;
+              rdfs:label "subjectOf" .
 
 
 ###  http://w3id.org/fairness-quality-measures/supplementsCoreIndicator
@@ -220,13 +320,9 @@ fqm:supplementsCoreIndicator rdf:type owl:ObjectProperty ,
 ###  http://w3id.org/fairness-quality-measures/uses
 fqm:uses rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
-         rdfs:domain [ rdf:type owl:Class ;
-                       owl:unionOf ( fqm:Data
-                                     fqm:Metadata
-                                   )
-                     ] ;
          rdfs:range [ rdf:type owl:Class ;
                       owl:unionOf ( fqm:KnowledgeRepresentationLanguage
+                                    fqm:Protocol
                                     fqm:Vocabulary
                                   )
                     ] .
@@ -255,19 +351,6 @@ fqm:Accessible rdf:type owl:Class ;
                rdfs:label "Accessible" .
 
 
-###  http://w3id.org/fairness-quality-measures/AccessibleData
-fqm:AccessibleData rdf:type owl:Class ;
-                   rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty fqm:describedWith ;
-                                                            owl:someValuesFrom fqm:DataAccessMetadata
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
-                                   ] ;
-                   rdfs:label "AccessibleData" .
-
-
 ###  http://w3id.org/fairness-quality-measures/AccessibleKnowledgeRepresentationLanguage
 fqm:AccessibleKnowledgeRepresentationLanguage rdf:type owl:Class ;
                                               rdfs:subClassOf [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
@@ -279,19 +362,6 @@ fqm:AccessibleKnowledgeRepresentationLanguage rdf:type owl:Class ;
                                                                 rdf:type owl:Class
                                                               ] ;
                                               rdfs:label "AccessibleKnowledgeRepresentationLanguage" .
-
-
-###  http://w3id.org/fairness-quality-measures/AccessibleLicense
-fqm:AccessibleLicense rdf:type owl:Class ;
-                      rdfs:subClassOf [ owl:intersectionOf ( fqm:License
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty fqm:hasCharacteristic ;
-                                                               owl:someValuesFrom fqm:Accessible
-                                                             ]
-                                                           ) ;
-                                        rdf:type owl:Class
-                                      ] ;
-                      rdfs:label "AccessibleLicense" .
 
 
 ###  http://w3id.org/fairness-quality-measures/AccessibleVocabulary
@@ -358,32 +428,6 @@ fqm:Authenticatable rdf:type owl:Class ;
                     rdfs:label "Authenticatable" .
 
 
-###  http://w3id.org/fairness-quality-measures/AuthenticationProcedure
-fqm:AuthenticationProcedure rdf:type owl:Class ;
-                            rdfs:subClassOf [ owl:intersectionOf ( fqm:Procedure
-                                                                   [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty fqm:hasCharacteristic ;
-                                                                     owl:someValuesFrom fqm:Authenticatable
-                                                                   ]
-                                                                 ) ;
-                                              rdf:type owl:Class
-                                            ] ;
-                            rdfs:label "AuthenticationProcedure" .
-
-
-###  http://w3id.org/fairness-quality-measures/AuthorizationProcedure
-fqm:AuthorizationProcedure rdf:type owl:Class ;
-                           rdfs:subClassOf [ owl:intersectionOf ( fqm:Procedure
-                                                                  [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty fqm:hasCharacteristic ;
-                                                                    owl:someValuesFrom fqm:Permissibility
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ;
-                           rdfs:label "AuthorizationProcedure" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Category
 fqm:Category rdf:type owl:Class ;
              rdfs:isDefinedBy <http://w3id.org/fairness-quality-measures> ;
@@ -407,19 +451,6 @@ fqm:ClearDataIdentifierAttribute rdf:type owl:Class ;
                                                    rdf:type owl:Class
                                                  ] ;
                                  rdfs:label "ClearDataIdentifierAttribute" .
-
-
-###  http://w3id.org/fairness-quality-measures/ClearLicense
-fqm:ClearLicense rdf:type owl:Class ;
-                 rdfs:subClassOf [ owl:intersectionOf ( fqm:License
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty fqm:hasCharacteristic ;
-                                                          owl:someValuesFrom fqm:Clear
-                                                        ]
-                                                      ) ;
-                                   rdf:type owl:Class
-                                 ] ;
-                 rdfs:label "ClearLicense" .
 
 
 ###  http://w3id.org/fairness-quality-measures/CommunicationProtocol
@@ -470,7 +501,14 @@ fqm:CoreIndicator rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/Data
 fqm:Data rdf:type owl:Class ;
-         rdfs:subClassOf fqm:Category ;
+         rdfs:subClassOf [ owl:intersectionOf ( fqm:Category
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty fqm:hasMetadata ;
+                                                  owl:someValuesFrom fqm:Metadata
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] ;
          rdfs:label "Data" .
 
 
@@ -485,65 +523,6 @@ fqm:DataAccessAttribute rdf:type owl:Class ;
                                           rdf:type owl:Class
                                         ] ;
                         rdfs:label "DataAccessAttribute" .
-
-
-###  http://w3id.org/fairness-quality-measures/DataAccessMetadata
-fqm:DataAccessMetadata rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:includes ;
-                                                                owl:someValuesFrom fqm:DataAccessAttribute
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:label "DataAccessMetadata" .
-
-
-###  http://w3id.org/fairness-quality-measures/MetadataAssignedEternallyPersistentIdentifier
-fqm:MetadataAssignedEternallyPersistentIdentifier rdf:type owl:Class ;
-                                              rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAssignedIdentifier
-                                                                                     [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty fqm:assigned ;
-                                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
-                                                                                                                                 [ rdf:type owl:Restriction ;
-                                                                                                                                   owl:onProperty fqm:hasCharacteristic ;
-                                                                                                                                   owl:someValuesFrom fqm:EternallyPersistent
-                                                                                                                                 ]
-                                                                                                                               ) ;
-                                                                                                            rdf:type owl:Class
-                                                                                                          ]
-                                                                                     ]
-                                                                                   ) ;
-                                                                rdf:type owl:Class
-                                                              ] ;
-                                              fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F1-03M ;
-                                              rdfs:comment "Metadata identifier is eternally persistent" ;
-                                              rdfs:label "MetadataAssignedEternallyPersistentIdentifier" .
-
-
-###  http://w3id.org/fairness-quality-measures/MetadataAssignedGloballyUnqiueIdentifier
-fqm:MetadataAssignedGloballyUnqiueIdentifier rdf:type owl:Class ;
-                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAssignedIdentifier
-                                                                                [ rdf:type owl:Restriction ;
-                                                                                  owl:onProperty fqm:assigned ;
-                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
-                                                                                                                            [ rdf:type owl:Restriction ;
-                                                                                                                              owl:onProperty fqm:hasCharacteristic ;
-                                                                                                                              owl:someValuesFrom fqm:GloballyUnique
-                                                                                                                            ]
-                                                                                                                          ) ;
-                                                                                                       rdf:type owl:Class
-                                                                                                     ]
-                                                                                ]
-                                                                              ) ;
-                                                           rdf:type owl:Class
-                                                         ] ;
-                                         fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F1-02M ;
-                                         rdfs:comment "Metadata identifier is globally unique" ;
-                                         rdfs:label "MetadataAssignedGloballyUnqiueIdentifier" .
-
-
 
 
 ###  http://w3id.org/fairness-quality-measures/DataAssignedEternallyPersistentIdentifier
@@ -563,7 +542,7 @@ fqm:DataAssignedEternallyPersistentIdentifier rdf:type owl:Class ;
                                                                                    ) ;
                                                                 rdf:type owl:Class
                                                               ] ;
-                                              fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F1-03D ;
+                                              fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F1-03D ;
                                               rdfs:comment "Data identifier is eternally persistent" ;
                                               rdfs:label "DataAssignedEternallyPersistentIdentifier" .
 
@@ -585,7 +564,7 @@ fqm:DataAssignedGloballyUnqiueIdentifier rdf:type owl:Class ;
                                                                               ) ;
                                                            rdf:type owl:Class
                                                          ] ;
-                                         fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F1-02D ;
+                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F1-02D ;
                                          rdfs:comment "Data identifier is globally unique" ;
                                          rdfs:label "DataAssignedGloballyUnqiueIdentifier" .
 
@@ -617,17 +596,25 @@ fqm:DataContextualInformationAttribute rdf:type owl:Class ;
                                        rdfs:label "DataContextualInformationAttribute" .
 
 
-###  http://w3id.org/fairness-quality-measures/DataDiscoveryMetadata
-fqm:DataDiscoveryMetadata rdf:type owl:Class ;
-                          rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty fqm:includes ;
-                                                                   owl:someValuesFrom fqm:DiscoveryAttribute
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
-                                          ] ;
-                          rdfs:label "DataDiscoveryMetadata" .
+###  http://w3id.org/fairness-quality-measures/DataDescribedWithRichMetadata
+fqm:DataDescribedWithRichMetadata rdf:type owl:Class ;
+                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty fqm:describedWith ;
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Metadata
+                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                       owl:someValuesFrom fqm:Rich
+                                                                                                                     ]
+                                                                                                                   ) ;
+                                                                                                rdf:type owl:Class
+                                                                                              ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ] ;
+                                  fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F2-01D ;
+                                  rdfs:label "DataDescribedWithRichMetadata" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DataIdentifierAttribute
@@ -636,23 +623,374 @@ fqm:DataIdentifierAttribute rdf:type owl:Class ;
                             rdfs:label "DataIdentifierAttribute" .
 
 
-###  http://w3id.org/fairness-quality-measures/DataIdentifierMetadata
-fqm:DataIdentifierMetadata rdf:type owl:Class ;
-                           rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
-                                                                  [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty fqm:includes ;
-                                                                    owl:someValuesFrom fqm:DataIdentifierAttribute
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ;
-                           rdfs:label "DataIdentifierMetadata" .
+###  http://w3id.org/fairness-quality-measures/DataIdentifierResolvesToDigitalObject
+fqm:DataIdentifierResolvesToDigitalObject rdf:type owl:Class ;
+                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:DataAssignedIdentifier
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty fqm:assigned ;
+                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                               owl:onProperty fqm:resolvesTo ;
+                                                                                                                               owl:someValuesFrom fqm:DigitalObject
+                                                                                                                             ]
+                                                                                                                           ) ;
+                                                                                                        rdf:type owl:Class
+                                                                                                      ]
+                                                                                 ]
+                                                                               ) ;
+                                                            rdf:type owl:Class
+                                                          ] ;
+                                          fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_A1-01D ;
+                                          rdfs:label "DataIdentifierResolvesToDigitalObject" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesFreeProtocol
+fqm:DataIdentifierSchemeUsesFreeProtocol rdf:type owl:Class ;
+                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty fqm:assigned ;
+                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty fqm:definedInScheme ;
+                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                          owl:onProperty fqm:uses ;
+                                                                                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:Protocol
+                                                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                      owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                      owl:someValuesFrom fqm:Free
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                  ) ;
+                                                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                                                             ]
+                                                                                                                                                                        ]
+                                                                                                                                                                      ) ;
+                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                 ]
+                                                                                                                            ]
+                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty fqm:resolvesTo ;
+                                                                                                                              owl:someValuesFrom fqm:DigitalObject
+                                                                                                                            ]
+                                                                                                                          ) ;
+                                                                                                       rdf:type owl:Class
+                                                                                                     ]
+                                                                                ]
+                                                                              ) ;
+                                                           rdf:type owl:Class
+                                                         ] ;
+                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.1-02IS ;
+                                         rdfs:label "DataIdentifierSchemeUsesFreeProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesOpenProtocol
+fqm:DataIdentifierSchemeUsesOpenProtocol rdf:type owl:Class ;
+                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty fqm:assigned ;
+                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty fqm:definedInScheme ;
+                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                          owl:onProperty fqm:uses ;
+                                                                                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:Protocol
+                                                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                      owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                      owl:someValuesFrom fqm:Open
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                  ) ;
+                                                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                                                             ]
+                                                                                                                                                                        ]
+                                                                                                                                                                      ) ;
+                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                 ]
+                                                                                                                            ]
+                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty fqm:resolvesTo ;
+                                                                                                                              owl:someValuesFrom fqm:DigitalObject
+                                                                                                                            ]
+                                                                                                                          ) ;
+                                                                                                       rdf:type owl:Class
+                                                                                                     ]
+                                                                                ]
+                                                                              ) ;
+                                                           rdf:type owl:Class
+                                                         ] ;
+                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.1-01IS ;
+                                         rdfs:label "DataIdentifierSchemeUsesOpenProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesProtocolAllowsForAuthenticationProcedure
+fqm:DataIdentifierSchemeUsesProtocolAllowsForAuthenticationProcedure rdf:type owl:Class ;
+                                                                     rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary
+                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                              owl:onProperty fqm:assigned ;
+                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                          owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                      owl:onProperty fqm:uses ;
+                                                                                                                                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                  owl:onProperty fqm:allowsFor ;
+                                                                                                                                                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Procedure
+                                                                                                                                                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                                                              owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                                                                              owl:someValuesFrom fqm:Authenticatable
+                                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                                          ) ;
+                                                                                                                                                                                                                                                                       rdf:type owl:Class
+                                                                                                                                                                                                                                                                     ]
+                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                              ) ;
+                                                                                                                                                                                                                           rdf:type owl:Class
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                  ) ;
+                                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                                             ]
+                                                                                                                                                        ]
+                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                          owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                          owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                        ]
+                                                                                                                                                      ) ;
+                                                                                                                                   rdf:type owl:Class
+                                                                                                                                 ]
+                                                                                                            ]
+                                                                                                          ) ;
+                                                                                       rdf:type owl:Class
+                                                                                     ] ;
+                                                                     fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.2-02IS ;
+                                                                     rdfs:label "DataIdentifierSchemeUsesProtocolAllowsForAuthenticationProcedure" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesProtocolAllowsForAuthorizationProcedure
+fqm:DataIdentifierSchemeUsesProtocolAllowsForAuthorizationProcedure rdf:type owl:Class ;
+                                                                    rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary
+                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                             owl:onProperty fqm:assigned ;
+                                                                                                             owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                         owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                     owl:onProperty fqm:uses ;
+                                                                                                                                                                                                     owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                 owl:onProperty fqm:allowsFor ;
+                                                                                                                                                                                                                                                 owl:someValuesFrom [ owl:intersectionOf ( fqm:Procedure
+                                                                                                                                                                                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                                                             owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                                                                             owl:someValuesFrom fqm:Permissibility
+                                                                                                                                                                                                                                                                                           ]
+                                                                                                                                                                                                                                                                                         ) ;
+                                                                                                                                                                                                                                                                      rdf:type owl:Class
+                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                               ]
+                                                                                                                                                                                                                                             ) ;
+                                                                                                                                                                                                                          rdf:type owl:Class
+                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                                 ) ;
+                                                                                                                                                                              rdf:type owl:Class
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                         owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                       ]
+                                                                                                                                                     ) ;
+                                                                                                                                  rdf:type owl:Class
+                                                                                                                                ]
+                                                                                                           ]
+                                                                                                         ) ;
+                                                                                      rdf:type owl:Class
+                                                                                    ] ;
+                                                                    fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.2-03IS ;
+                                                                    rdfs:label "DataIdentifierSchemeUsesProtocolAllowsForAuthorizationProcedure" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary
+fqm:DataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary rdf:type owl:Class ;
+                                                                     rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                              owl:onProperty fqm:assigned ;
+                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                          owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                      owl:onProperty fqm:uses ;
+                                                                                                                                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                  owl:onProperty fqm:allowsFor ;
+                                                                                                                                                                                                                                                  owl:someValuesFrom fqm:Procedure
+                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                              ) ;
+                                                                                                                                                                                                                           rdf:type owl:Class
+                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                  ) ;
+                                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                                             ]
+                                                                                                                                                        ]
+                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                          owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                          owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                        ]
+                                                                                                                                                      ) ;
+                                                                                                                                   rdf:type owl:Class
+                                                                                                                                 ]
+                                                                                                            ]
+                                                                                                          ) ;
+                                                                                       rdf:type owl:Class
+                                                                                     ] ;
+                                                                     fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_A1.2-01IS ;
+                                                                     rdfs:label "DataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesStandardCommunicationProtocol
+fqm:DataIdentifierSchemeUsesStandardCommunicationProtocol rdf:type owl:Class ;
+                                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierResolvesToDigitalObject
+                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty fqm:assigned ;
+                                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                               owl:onProperty fqm:definedInScheme ;
+                                                                                                                                               owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                                                                                                           owl:onProperty fqm:uses ;
+                                                                                                                                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                       owl:someValuesFrom fqm:Standardized
+                                                                                                                                                                                                                                     ]
+                                                                                                                                                                                                                                   ) ;
+                                                                                                                                                                                                                rdf:type owl:Class
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                         ]
+                                                                                                                                                                                       ) ;
+                                                                                                                                                                    rdf:type owl:Class
+                                                                                                                                                                  ]
+                                                                                                                                             ]
+                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                               owl:onProperty fqm:resolvesTo ;
+                                                                                                                                               owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                             ]
+                                                                                                                                           ) ;
+                                                                                                                        rdf:type owl:Class
+                                                                                                                      ]
+                                                                                                 ]
+                                                                                               ) ;
+                                                                            rdf:type owl:Class
+                                                                          ] ;
+                                                          fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1-01IS ;
+                                                          rdfs:label "DataIdentifierSchemeUsesStandardCommunicationProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIdentifierSchemeUsesUniversallyImplementableProtocol
+fqm:DataIdentifierSchemeUsesUniversallyImplementableProtocol rdf:type owl:Class ;
+                                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty fqm:assigned ;
+                                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                  owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                                                              owl:onProperty fqm:uses ;
+                                                                                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:Protocol
+                                                                                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                          owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                          owl:someValuesFrom fqm:UniversallyImplementable
+                                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                                      ) ;
+                                                                                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                                                                                 ]
+                                                                                                                                                                                            ]
+                                                                                                                                                                                          ) ;
+                                                                                                                                                                       rdf:type owl:Class
+                                                                                                                                                                     ]
+                                                                                                                                                ]
+                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                  owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                  owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                ]
+                                                                                                                                              ) ;
+                                                                                                                           rdf:type owl:Class
+                                                                                                                         ]
+                                                                                                    ]
+                                                                                                  ) ;
+                                                                               rdf:type owl:Class
+                                                                             ] ;
+                                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.1-03IS ;
+                                                             rdfs:label "DataIdentifierSchemeUsesUniversallyImplementableProtocol" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DataProcessingAttribute
 fqm:DataProcessingAttribute rdf:type owl:Class ;
                             rdfs:subClassOf fqm:MetadataAttribute ;
                             rdfs:label "DataProcessingAttribute" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataRegisteredOrIndexedInResource
+fqm:DataRegisteredOrIndexedInResource rdf:type owl:Class ;
+                                      rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
+                                                                             [ rdf:type owl:Class ;
+                                                                               owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty fqm:indexedIn ;
+                                                                                               owl:someValuesFrom fqm:Resource
+                                                                                             ]
+                                                                                             [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty fqm:registeredIn ;
+                                                                                               owl:someValuesFrom fqm:Resource
+                                                                                             ]
+                                                                                           )
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ] ;
+                                      fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-01D ;
+                                      rdfs:label "DataRegisteredOrIndexedInResource" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataRegisteredOrIndexedInSearchableResource
+fqm:DataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
+                                                rdfs:subClassOf [ owl:intersectionOf ( fqm:DataRegisteredOrIndexedInResource
+                                                                                       [ rdf:type owl:Class ;
+                                                                                         owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                         owl:onProperty fqm:indexedIn ;
+                                                                                                         owl:someValuesFrom [ owl:intersectionOf ( fqm:Resource
+                                                                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                                                                     owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                     owl:someValuesFrom fqm:Searchable
+                                                                                                                                                   ]
+                                                                                                                                                 ) ;
+                                                                                                                              rdf:type owl:Class
+                                                                                                                            ]
+                                                                                                       ]
+                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                         owl:onProperty fqm:registeredIn ;
+                                                                                                         owl:someValuesFrom [ owl:intersectionOf ( fqm:Resource
+                                                                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                                                                     owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                     owl:someValuesFrom fqm:Searchable
+                                                                                                                                                   ]
+                                                                                                                                                 ) ;
+                                                                                                                              rdf:type owl:Class
+                                                                                                                            ]
+                                                                                                       ]
+                                                                                                     )
+                                                                                       ]
+                                                                                     ) ;
+                                                                  rdf:type owl:Class
+                                                                ] ;
+                                                fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-02IS ;
+                                                rdfs:label "DataRegisteredOrIndexedInSearchableResource" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DataRetrievalAttribute
@@ -668,22 +1006,10 @@ fqm:DataRetrievalAttribute rdf:type owl:Class ;
                            rdfs:label "DataRetrievalAttribute" .
 
 
-###  http://w3id.org/fairness-quality-measures/DataRetrievalMetadata
-fqm:DataRetrievalMetadata rdf:type owl:Class ;
-                          rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty fqm:includes ;
-                                                                   owl:someValuesFrom fqm:DataRetrievalAttribute
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
-                                          ] ;
-                          rdfs:label "DataRetrievalMetadata" .
-
-
 ###  http://w3id.org/fairness-quality-measures/DataUsageLicense
 fqm:DataUsageLicense rdf:type owl:Class ;
                      rdfs:subClassOf fqm:License ;
+                     rdfs:comment "A license that describes under which conditions the discovered data can be used" ;
                      rdfs:label "DataUsageLicense" .
 
 
@@ -706,19 +1032,6 @@ fqm:Detailed rdf:type owl:Class ;
              rdfs:label "Detailed" .
 
 
-###  http://w3id.org/fairness-quality-measures/DetailedProvenance
-fqm:DetailedProvenance rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Provenance
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:hasCharacteristic ;
-                                                                owl:someValuesFrom fqm:Detailed
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:label "DetailedProvenance" .
-
-
 ###  http://w3id.org/fairness-quality-measures/DigitalObject
 fqm:DigitalObject rdf:type owl:Class ;
                   rdfs:subClassOf fqm:Concept ;
@@ -737,33 +1050,6 @@ fqm:Dimension rdf:type owl:Class ;
 fqm:Discoverable rdf:type owl:Class ;
                  rdfs:subClassOf fqm:Element ;
                  rdfs:label "Discoverable" .
-
-
-###  http://w3id.org/fairness-quality-measures/DiscoverableData
-fqm:DiscoverableData rdf:type owl:Class ;
-                     rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty fqm:describedWith ;
-                                                              owl:someValuesFrom fqm:DataDiscoveryMetadata
-                                                            ]
-                                                          ) ;
-                                       rdf:type owl:Class
-                                     ] ;
-                     rdfs:label "DiscoverableData" .
-
-
-###  http://w3id.org/fairness-quality-measures/DiscoveryAttribute
-fqm:DiscoveryAttribute rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAttribute
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:hasCharacteristic ;
-                                                                owl:someValuesFrom fqm:Discoverable
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:comment "A \"MetadataAttribute\" that makes the \"Data\" the \"Metadata\" describes more \"Discoverable\"" ;
-                       rdfs:label "DiscoveryAttribute" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DomainRelevantStandard
@@ -902,19 +1188,6 @@ fqm:Free rdf:type owl:Class ;
          rdfs:label "Free" .
 
 
-###  http://w3id.org/fairness-quality-measures/FreeCommunicationProtocol
-fqm:FreeCommunicationProtocol rdf:type owl:Class ;
-                              rdfs:subClassOf [ owl:intersectionOf ( fqm:CommunicationProtocol
-                                                                     [ rdf:type owl:Restriction ;
-                                                                       owl:onProperty fqm:hasCharacteristic ;
-                                                                       owl:someValuesFrom fqm:Free
-                                                                     ]
-                                                                   ) ;
-                                                rdf:type owl:Class
-                                              ] ;
-                              rdfs:label "FreeCommunicationProtocol" .
-
-
 ###  http://w3id.org/fairness-quality-measures/GloballyUnique
 fqm:GloballyUnique rdf:type owl:Class ;
                    rdfs:subClassOf fqm:Element ;
@@ -923,13 +1196,40 @@ fqm:GloballyUnique rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/Identifier
 fqm:Identifier rdf:type owl:Class ;
-               rdfs:subClassOf fqm:Concept ;
+               rdfs:subClassOf [ owl:intersectionOf ( fqm:Concept
+                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty fqm:definedInScheme ;
+                                                                               owl:someValuesFrom fqm:IdentifierScheme
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty fqm:identifies ;
+                                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                               owl:onClass [ rdf:type owl:Class ;
+                                                                                             owl:unionOf ( fqm:Data
+                                                                                                           fqm:Metadata
+                                                                                                         )
+                                                                                           ]
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ;
                rdfs:comment "A unique and persistent identifier for data and/or metadata" ;
                rdfs:label "Identifier" .
 
 
+###  http://w3id.org/fairness-quality-measures/IdentifierScheme
+fqm:IdentifierScheme rdf:type owl:Class ;
+                     rdfs:subClassOf fqm:Concept ;
+                     rdfs:comment "The scheme or domain in which the Identifier should be unique. The scheme may define things such as the communication protocol for resolving. Example: DOI, ARK, URL, UUID, etc." ;
+                     rdfs:label "IdentifierScheme" .
+
+
 ###  http://w3id.org/fairness-quality-measures/Infrastructure
 fqm:Infrastructure rdf:type owl:Class ;
+                   owl:equivalentClass fqm:Resource ;
                    rdfs:subClassOf fqm:Category ;
                    rdfs:label "Infrastructure" .
 
@@ -997,14 +1297,66 @@ fqm:Level-3 rdf:type owl:Class ;
 ###  http://w3id.org/fairness-quality-measures/License
 fqm:License rdf:type owl:Class ;
             rdfs:subClassOf fqm:Concept ;
-            rdfs:comment "A license that describes under which conditions the discovered data can be used" ;
+            rdfs:comment "An abstract, higher-level concept of a license. This class serves as a super class for other licenses in the future" ;
             rdfs:label "License" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Metadata
 fqm:Metadata rdf:type owl:Class ;
-             rdfs:subClassOf fqm:Category ;
+             rdfs:subClassOf [ owl:intersectionOf ( fqm:Category
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty fqm:isMetadataFor ;
+                                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass fqm:Data
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
              rdfs:label "Metadata" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataAssignedEternallyPersistentIdentifier
+fqm:MetadataAssignedEternallyPersistentIdentifier rdf:type owl:Class ;
+                                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAssignedIdentifier
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty fqm:assigned ;
+                                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                       owl:someValuesFrom fqm:EternallyPersistent
+                                                                                                                                     ]
+                                                                                                                                   ) ;
+                                                                                                                rdf:type owl:Class
+                                                                                                              ]
+                                                                                         ]
+                                                                                       ) ;
+                                                                    rdf:type owl:Class
+                                                                  ] ;
+                                                  fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F1-03M ;
+                                                  rdfs:comment "Metadata identifier is eternally persistent" ;
+                                                  rdfs:label "MetadataAssignedEternallyPersistentIdentifier" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataAssignedGloballyUnqiueIdentifier
+fqm:MetadataAssignedGloballyUnqiueIdentifier rdf:type owl:Class ;
+                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAssignedIdentifier
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty fqm:assigned ;
+                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                  owl:someValuesFrom fqm:GloballyUnique
+                                                                                                                                ]
+                                                                                                                              ) ;
+                                                                                                           rdf:type owl:Class
+                                                                                                         ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ] ;
+                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F1-02M ;
+                                             rdfs:comment "Metadata identifier is globally unique" ;
+                                             rdfs:label "MetadataAssignedGloballyUnqiueIdentifier" .
 
 
 ###  http://w3id.org/fairness-quality-measures/MetadataAssignedIdentifier
@@ -1027,23 +1379,525 @@ fqm:MetadataAttribute rdf:type owl:Class ;
                       rdfs:label "MetadataAttribute" .
 
 
+###  http://w3id.org/fairness-quality-measures/MetadataClearlyAndExplicitlyIncludesDataIdentifier
+fqm:MetadataClearlyAndExplicitlyIncludesDataIdentifier rdf:type owl:Class ;
+                                                       owl:equivalentClass [ owl:intersectionOf ( fqm:MetadataClearlyIncludesDataIdentifier
+                                                                                                  fqm:MetadataExplicitlyIncludesDataIdentifier
+                                                                                                ) ;
+                                                                             rdf:type owl:Class
+                                                                           ] ;
+                                                       rdfs:subClassOf fqm:MetadataIncludeDataIdentifier ;
+                                                       rdfs:label "MetadataClearlyAndExplicitlyIncludesDataIdentifier" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataClearlyIncludesDataIdentifier
+fqm:MetadataClearlyIncludesDataIdentifier rdf:type owl:Class ;
+                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeDataIdentifier
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty fqm:includes ;
+                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                               owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                               owl:someValuesFrom fqm:Clear
+                                                                                                                             ]
+                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                               owl:onProperty fqm:identifies ;
+                                                                                                                               owl:someValuesFrom fqm:Data
+                                                                                                                             ]
+                                                                                                                           ) ;
+                                                                                                        rdf:type owl:Class
+                                                                                                      ]
+                                                                                 ]
+                                                                               ) ;
+                                                            rdf:type owl:Class
+                                                          ] ;
+                                          fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F3-02M ;
+                                          rdfs:label "MetadataClearlyIncludesDataIdentifier" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataClearlyOrExplicitlyIncludesDataIdentifier
+fqm:MetadataClearlyOrExplicitlyIncludesDataIdentifier rdf:type owl:Class ;
+                                                      owl:equivalentClass [ rdf:type owl:Class ;
+                                                                            owl:unionOf ( fqm:MetadataClearlyIncludesDataIdentifier
+                                                                                          fqm:MetadataExplicitlyIncludesDataIdentifier
+                                                                                        )
+                                                                          ] ;
+                                                      rdfs:subClassOf fqm:MetadataIncludeDataIdentifier .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataExplicitlyIncludesDataIdentifier
+fqm:MetadataExplicitlyIncludesDataIdentifier rdf:type owl:Class ;
+                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeDataIdentifier
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty fqm:includes ;
+                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                  owl:someValuesFrom fqm:Explicit
+                                                                                                                                ]
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:identifies ;
+                                                                                                                                  owl:someValuesFrom fqm:Data
+                                                                                                                                ]
+                                                                                                                              ) ;
+                                                                                                           rdf:type owl:Class
+                                                                                                         ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ] ;
+                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F3-03M ;
+                                             rdfs:label "MetadataExplicitlyIncludesDataIdentifier" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierResolvesToDigitalObject
+fqm:MetadataIdentifierResolvesToDigitalObject rdf:type owl:Class ;
+                                              rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAssignedIdentifier
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty fqm:assigned ;
+                                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty fqm:resolvesTo ;
+                                                                                                                                   owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                 ]
+                                                                                                                               ) ;
+                                                                                                            rdf:type owl:Class
+                                                                                                          ]
+                                                                                     ]
+                                                                                   ) ;
+                                                                rdf:type owl:Class
+                                                              ] ;
+                                              fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_A1-01M ;
+                                              rdfs:label "MetadataIdentifierResolvesToDigitalObject" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesFreeProtocol
+fqm:MetadataIdentifierSchemeUsesFreeProtocol rdf:type owl:Class ;
+                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty fqm:assigned ;
+                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:definedInScheme ;
+                                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty fqm:uses ;
+                                                                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:Protocol
+                                                                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                          owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                          owl:someValuesFrom fqm:Free
+                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                      ) ;
+                                                                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                                                                 ]
+                                                                                                                                                                            ]
+                                                                                                                                                                          ) ;
+                                                                                                                                                       rdf:type owl:Class
+                                                                                                                                                     ]
+                                                                                                                                ]
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:resolvesTo ;
+                                                                                                                                  owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                ]
+                                                                                                                              ) ;
+                                                                                                           rdf:type owl:Class
+                                                                                                         ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ] ;
+                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.1-02IS ;
+                                             rdfs:label "MetadataIdentifierSchemeUsesFreeProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesOpenProtocol
+fqm:MetadataIdentifierSchemeUsesOpenProtocol rdf:type owl:Class ;
+                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty fqm:assigned ;
+                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:definedInScheme ;
+                                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty fqm:uses ;
+                                                                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:Protocol
+                                                                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                          owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                          owl:someValuesFrom fqm:Open
+                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                      ) ;
+                                                                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                                                                 ]
+                                                                                                                                                                            ]
+                                                                                                                                                                          ) ;
+                                                                                                                                                       rdf:type owl:Class
+                                                                                                                                                     ]
+                                                                                                                                ]
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:resolvesTo ;
+                                                                                                                                  owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                ]
+                                                                                                                              ) ;
+                                                                                                           rdf:type owl:Class
+                                                                                                         ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ] ;
+                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.1-01IS ;
+                                             rdfs:label "MetadataIdentifierSchemeUsesOpenProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesProtocolAllowsForAuthenticationProcedure
+fqm:MetadataIdentifierSchemeUsesProtocolAllowsForAuthenticationProcedure rdf:type owl:Class ;
+                                                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary
+                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                  owl:onProperty fqm:assigned ;
+                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                              owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                          owl:onProperty fqm:uses ;
+                                                                                                                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                      owl:onProperty fqm:allowsFor ;
+                                                                                                                                                                                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Procedure
+                                                                                                                                                                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                                                                  owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                                                                                  owl:someValuesFrom fqm:Authenticatable
+                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                              ) ;
+                                                                                                                                                                                                                                                                           rdf:type owl:Class
+                                                                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                  ) ;
+                                                                                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                                                                                             ]
+                                                                                                                                                                                                        ]
+                                                                                                                                                                                                      ) ;
+                                                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                                                 ]
+                                                                                                                                                            ]
+                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                              owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                              owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                            ]
+                                                                                                                                                          ) ;
+                                                                                                                                       rdf:type owl:Class
+                                                                                                                                     ]
+                                                                                                                ]
+                                                                                                              ) ;
+                                                                                           rdf:type owl:Class
+                                                                                         ] ;
+                                                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.2-02IS ;
+                                                                         rdfs:label "MetadataIdentifierSchemeUsesProtocolAllowsForAuthenticationProcedure" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesProtocolAllowsForAuthorizationProcedure
+fqm:MetadataIdentifierSchemeUsesProtocolAllowsForAuthorizationProcedure rdf:type owl:Class ;
+                                                                        rdfs:subClassOf fqm:MetadataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary ;
+                                                                        fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.2-03IS ;
+                                                                        rdfs:label "MetadataIdentifierSchemeUsesProtocolAllowsForAuthorizationProcedure" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary
+fqm:MetadataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary rdf:type owl:Class ;
+                                                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                  owl:onProperty fqm:assigned ;
+                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                              owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                          owl:onProperty fqm:uses ;
+                                                                                                                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                                      owl:onProperty fqm:allowsFor ;
+                                                                                                                                                                                                                                                      owl:someValuesFrom fqm:Procedure
+                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                  ) ;
+                                                                                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                                                                                             ]
+                                                                                                                                                                                                        ]
+                                                                                                                                                                                                      ) ;
+                                                                                                                                                                                   rdf:type owl:Class
+                                                                                                                                                                                 ]
+                                                                                                                                                            ]
+                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                              owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                              owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                            ]
+                                                                                                                                                          ) ;
+                                                                                                                                       rdf:type owl:Class
+                                                                                                                                     ]
+                                                                                                                ]
+                                                                                                              ) ;
+                                                                                           rdf:type owl:Class
+                                                                                         ] ;
+                                                                         fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_A1.2-01IS ;
+                                                                         rdfs:label "MetadataIdentifierSchemeUsesProtocolAllowsForProcedureWhereNecessary" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesStandardCommunicationProtocol
+fqm:MetadataIdentifierSchemeUsesStandardCommunicationProtocol rdf:type owl:Class ;
+                                                              rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIdentifierResolvesToDigitalObject
+                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                       owl:onProperty fqm:assigned ;
+                                                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                                                   owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                                                               owl:onProperty fqm:uses ;
+                                                                                                                                                                                               owl:someValuesFrom [ owl:intersectionOf ( fqm:CommunicationProtocol
+                                                                                                                                                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                           owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                           owl:someValuesFrom fqm:Standardized
+                                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                                                       ) ;
+                                                                                                                                                                                                                    rdf:type owl:Class
+                                                                                                                                                                                                                  ]
+                                                                                                                                                                                             ]
+                                                                                                                                                                                           ) ;
+                                                                                                                                                                        rdf:type owl:Class
+                                                                                                                                                                      ]
+                                                                                                                                                 ]
+                                                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                                                   owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                   owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                 ]
+                                                                                                                                               ) ;
+                                                                                                                            rdf:type owl:Class
+                                                                                                                          ]
+                                                                                                     ]
+                                                                                                   ) ;
+                                                                                rdf:type owl:Class
+                                                                              ] ;
+                                                              fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1-02IS ;
+                                                              rdfs:label "MetadataIdentifierSchemeUsesStandardCommunicationProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIdentifierSchemeUsesUniversallyImplementableProtocol
+fqm:MetadataIdentifierSchemeUsesUniversallyImplementableProtocol rdf:type owl:Class ;
+                                                                 rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIdentifierSchemeUsesStandardCommunicationProtocol
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty fqm:assigned ;
+                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                      owl:onProperty fqm:definedInScheme ;
+                                                                                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierScheme
+                                                                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                  owl:onProperty fqm:uses ;
+                                                                                                                                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Protocol
+                                                                                                                                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                                                                                                                                              owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                                                                                                              owl:someValuesFrom fqm:UniversallyImplementable
+                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                          ) ;
+                                                                                                                                                                                                                       rdf:type owl:Class
+                                                                                                                                                                                                                     ]
+                                                                                                                                                                                                ]
+                                                                                                                                                                                              ) ;
+                                                                                                                                                                           rdf:type owl:Class
+                                                                                                                                                                         ]
+                                                                                                                                                    ]
+                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                      owl:onProperty fqm:resolvesTo ;
+                                                                                                                                                      owl:someValuesFrom fqm:DigitalObject
+                                                                                                                                                    ]
+                                                                                                                                                  ) ;
+                                                                                                                               rdf:type owl:Class
+                                                                                                                             ]
+                                                                                                        ]
+                                                                                                      ) ;
+                                                                                   rdf:type owl:Class
+                                                                                 ] ;
+                                                                 fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_A1.1-03IS ;
+                                                                 rdfs:label "MetadataIdentifierSchemeUsesUniversallyImplementableProtocol" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeDataAccessAttributes
+fqm:MetadataIncludeDataAccessAttributes rdf:type owl:Class ;
+                                        rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty fqm:includes ;
+                                                                                 owl:someValuesFrom [ owl:intersectionOf ( fqm:Attribute
+                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                             owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                             owl:someValuesFrom fqm:Accessible
+                                                                                                                           ]
+                                                                                                                         ) ;
+                                                                                                      rdf:type owl:Class
+                                                                                                    ]
+                                                                               ]
+                                                                             ) ;
+                                                          rdf:type owl:Class
+                                                        ] ;
+                                        fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F2-05M ;
+                                        rdfs:label "MetadataIncludeDataAccessAttributes" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeDataIdentifier
+fqm:MetadataIncludeDataIdentifier rdf:type owl:Class ;
+                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty fqm:includes ;
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty fqm:identifies ;
+                                                                                                                       owl:someValuesFrom fqm:Data
+                                                                                                                     ]
+                                                                                                                   ) ;
+                                                                                                rdf:type owl:Class
+                                                                                              ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ] ;
+                                  fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F3-01M ;
+                                  rdfs:label "MetadataIncludeDataIdentifier" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeDataProvenance
+fqm:MetadataIncludeDataProvenance rdf:type owl:Class ;
+                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty fqm:includes ;
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Provenance
+                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty fqm:isProvenanceFor ;
+                                                                                                                       owl:someValuesFrom fqm:Data
+                                                                                                                     ]
+                                                                                                                   ) ;
+                                                                                                rdf:type owl:Class
+                                                                                              ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ] ;
+                                  fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F2-02M ;
+                                  rdfs:label "MetadataIncludeDataProvenance" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeDataRetrievalAttributes
+fqm:MetadataIncludeDataRetrievalAttributes rdf:type owl:Class ;
+                                           rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty fqm:includes ;
+                                                                                    owl:someValuesFrom [ owl:intersectionOf ( fqm:Attribute
+                                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                                owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                owl:someValuesFrom fqm:Retrievable
+                                                                                                                              ]
+                                                                                                                            ) ;
+                                                                                                         rdf:type owl:Class
+                                                                                                       ]
+                                                                                  ]
+                                                                                ) ;
+                                                             rdf:type owl:Class
+                                                           ] ;
+                                           fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F2-04M ;
+                                           rdfs:label "MetadataIncludeDataRetrievalAttributes" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeDataUsageLicense
+fqm:MetadataIncludeDataUsageLicense rdf:type owl:Class ;
+                                    rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty fqm:includes ;
+                                                                             owl:someValuesFrom fqm:DataUsageLicense
+                                                                           ]
+                                                                         ) ;
+                                                      rdf:type owl:Class
+                                                    ] ;
+                                    fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F2-01M ;
+                                    rdfs:label "MetadataIncludeDataUsageLicense" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeDiscoveryAttributes
+fqm:MetadataIncludeDiscoveryAttributes rdf:type owl:Class ;
+                                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty fqm:includes ;
+                                                                                owl:someValuesFrom [ owl:intersectionOf ( fqm:Attribute
+                                                                                                                          [ rdf:type owl:Restriction ;
+                                                                                                                            owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                            owl:someValuesFrom fqm:Discoverable
+                                                                                                                          ]
+                                                                                                                        ) ;
+                                                                                                     rdf:type owl:Class
+                                                                                                   ]
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ] ;
+                                       fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F2-03M ;
+                                       rdfs:label "MetadataIncludeDiscoveryAttributes" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataRegisteredOrIndexedInResource
+fqm:MetadataRegisteredOrIndexedInResource rdf:type owl:Class ;
+                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                                 [ rdf:type owl:Class ;
+                                                                                   owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty fqm:indexedIn ;
+                                                                                                   owl:someValuesFrom fqm:Resource
+                                                                                                 ]
+                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty fqm:registeredIn ;
+                                                                                                   owl:someValuesFrom fqm:Resource
+                                                                                                 ]
+                                                                                               )
+                                                                                 ]
+                                                                               ) ;
+                                                            rdf:type owl:Class
+                                                          ] ;
+                                          fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-01M ;
+                                          rdfs:label "MetadataRegisteredOrIndexedInResource" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataRegisteredOrIndexedInSearchableResource
+fqm:MetadataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
+                                                    rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataRegisteredOrIndexedInResource
+                                                                                           [ rdf:type owl:Class ;
+                                                                                             owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                             owl:onProperty fqm:indexedIn ;
+                                                                                                             owl:someValuesFrom [ owl:intersectionOf ( fqm:Resource
+                                                                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                         owl:someValuesFrom fqm:Searchable
+                                                                                                                                                       ]
+                                                                                                                                                     ) ;
+                                                                                                                                  rdf:type owl:Class
+                                                                                                                                ]
+                                                                                                           ]
+                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                             owl:onProperty fqm:registeredIn ;
+                                                                                                             owl:someValuesFrom [ owl:intersectionOf ( fqm:Resource
+                                                                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                         owl:someValuesFrom fqm:Searchable
+                                                                                                                                                       ]
+                                                                                                                                                     ) ;
+                                                                                                                                  rdf:type owl:Class
+                                                                                                                                ]
+                                                                                                           ]
+                                                                                                         )
+                                                                                           ]
+                                                                                         ) ;
+                                                                      rdf:type owl:Class
+                                                                    ] ;
+                                                    fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-03IS ;
+                                                    rdfs:label "MetadataRegisteredOrIndexedInSearchableResource" .
+
+
 ###  http://w3id.org/fairness-quality-measures/Open
 fqm:Open rdf:type owl:Class ;
          rdfs:subClassOf fqm:Element ;
          rdfs:label "Open" .
-
-
-###  http://w3id.org/fairness-quality-measures/OpenCommunicationProtocol
-fqm:OpenCommunicationProtocol rdf:type owl:Class ;
-                              rdfs:subClassOf [ owl:intersectionOf ( fqm:CommunicationProtocol
-                                                                     [ rdf:type owl:Restriction ;
-                                                                       owl:onProperty fqm:hasCharacteristic ;
-                                                                       owl:someValuesFrom fqm:Open
-                                                                     ]
-                                                                   ) ;
-                                                rdf:type owl:Class
-                                              ] ;
-                              rdfs:label "OpenCommunicationProtocol" .
 
 
 ###  http://w3id.org/fairness-quality-measures/OtherDataReference
@@ -1088,6 +1942,7 @@ fqm:PermanentlyAccessibleMetadata rdf:type owl:Class ;
                                                                        ) ;
                                                     rdf:type owl:Class
                                                   ] ;
+                                  fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_A2-01M ;
                                   rdfs:label "PermanentlyAccessibleMetadata" .
 
 
@@ -1146,7 +2001,19 @@ fqm:Protocol rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/Provenance
 fqm:Provenance rdf:type owl:Class ;
-               rdfs:subClassOf fqm:Concept ;
+               rdfs:subClassOf [ owl:intersectionOf ( fqm:Concept
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty fqm:isProvenanceFor ;
+                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass [ rdf:type owl:Class ;
+                                                                      owl:unionOf ( fqm:Data
+                                                                                    fqm:Metadata
+                                                                                  )
+                                                                    ]
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ;
                rdfs:comment """Information on when and how the data or metadata was created and modified, and
 by whom, its sources and ownership throughout its lifecycle""" ;
                rdfs:label "Provenance" .
@@ -1210,19 +2077,6 @@ fqm:Retrievable rdf:type owl:Class ;
                 rdfs:label "Retrievable" .
 
 
-###  http://w3id.org/fairness-quality-measures/RetrievableData
-fqm:RetrievableData rdf:type owl:Class ;
-                    rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
-                                                           [ rdf:type owl:Restriction ;
-                                                             owl:onProperty fqm:describedWith ;
-                                                             owl:someValuesFrom fqm:DataRetrievalMetadata
-                                                           ]
-                                                         ) ;
-                                      rdf:type owl:Class
-                                    ] ;
-                    rdfs:label "RetrievableData" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Reusable
 fqm:Reusable rdf:type owl:Class ;
              rdfs:subClassOf fqm:Element ;
@@ -1248,36 +2102,9 @@ fqm:Rich rdf:type owl:Class ;
          rdfs:label "Rich" .
 
 
-###  http://w3id.org/fairness-quality-measures/RichMetadata
-fqm:RichMetadata rdf:type owl:Class ;
-                 rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty fqm:hasCharacteristic ;
-                                                          owl:someValuesFrom fqm:Rich
-                                                        ]
-                                                      ) ;
-                                   rdf:type owl:Class
-                                 ] ;
-                 rdfs:comment "A set of descriptors of data including those minimally required for search and discovery, as well as those needed for understanding and reuse. This core concept is closely related to ‘Attribute’ in the context of (re)use" ;
-                 rdfs:label "RichMetadata" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Searchable
 fqm:Searchable rdf:type owl:Class ;
                rdfs:subClassOf fqm:Element .
-
-
-###  http://w3id.org/fairness-quality-measures/SearchableResource
-fqm:SearchableResource rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Resource
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:hasCharacteristic ;
-                                                                owl:someValuesFrom fqm:Searchable
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:label "SearchableResource" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Shared
@@ -1310,19 +2137,6 @@ fqm:Standardized rdf:type owl:Class ;
                  rdfs:subClassOf fqm:Element .
 
 
-###  http://w3id.org/fairness-quality-measures/StandardizedCommunicationProtocol
-fqm:StandardizedCommunicationProtocol rdf:type owl:Class ;
-                                      rdfs:subClassOf [ owl:intersectionOf ( fqm:CommunicationProtocol
-                                                                             [ rdf:type owl:Restriction ;
-                                                                               owl:onProperty fqm:hasCharacteristic ;
-                                                                               owl:someValuesFrom fqm:Standardized
-                                                                             ]
-                                                                           ) ;
-                                                        rdf:type owl:Class
-                                                      ] ;
-                                      rdfs:label "StandardizedCommunicationProtocol" .
-
-
 ###  http://w3id.org/fairness-quality-measures/SupplementalIndicator
 fqm:SupplementalIndicator rdf:type owl:Class ;
                           rdfs:subClassOf [ owl:intersectionOf ( fqm:FAIRQualityMeasure
@@ -1343,19 +2157,6 @@ fqm:UniversallyImplementable rdf:type owl:Class ;
                              rdfs:subClassOf fqm:Element .
 
 
-###  http://w3id.org/fairness-quality-measures/UniversallyImplementableCommunicationProtocol
-fqm:UniversallyImplementableCommunicationProtocol rdf:type owl:Class ;
-                                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:CommunicationProtocol
-                                                                                         [ rdf:type owl:Restriction ;
-                                                                                           owl:onProperty fqm:hasCharacteristic ;
-                                                                                           owl:someValuesFrom fqm:UniversallyImplementable
-                                                                                         ]
-                                                                                       ) ;
-                                                                    rdf:type owl:Class
-                                                                  ] ;
-                                                  rdfs:label "UniversallyImplementableCommunicationProtocol" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Usable
 fqm:Usable rdf:type owl:Class ;
            rdfs:subClassOf fqm:Element ;
@@ -1374,6 +2175,38 @@ may consist of terms and definitions that describe the types of data, their char
 #    Individuals
 #################################################################
 
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_A1-01D
+fqm:CoreIndicator_A1-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:A1 ;
+                         rdfs:comment "Data identifier resolves to a Digital Object" ;
+                         rdfs:label "CoreIndicator: A1-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_A1-01M
+fqm:CoreIndicator_A1-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:A1 ;
+                         rdfs:comment "Metadata identifier resolves to a Digital Object" ;
+                         rdfs:label "CoreIndicator: A1-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_A1.2-01IS
+fqm:CoreIndicator_A1.2-01IS rdf:type owl:NamedIndividual ,
+                                     fqm:CoreIndicator ;
+                            fqm:forPrinciple fair:A1.2 ;
+                            rdfs:comment "The protocol allows for procedure, where necessary" ;
+                            rdfs:label "CoreIndicator: A1.2-01IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_A2-01M
+fqm:CoreIndicator_A2-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:A2 ;
+                         rdfs:comment "Metadata are accessible permanently" ;
+                         rdfs:label "CoreIndicator: A2-01M" .
+
+
 ###  http://w3id.org/fairness-quality-measures/CoreIndicator_F1-01D
 fqm:CoreIndicator_F1-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
@@ -1390,40 +2223,54 @@ fqm:CoreIndicator_F1-01M rdf:type owl:NamedIndividual ,
                          rdfs:label "CoreIndicator: F1-01M" .
 
 
-###  http://w3id.org/fairness-quality-measures/CoreIndicator_F1-02D
-fqm:CoreIndicator_F1-02D rdf:type owl:NamedIndividual ,
-                                  fqm:SupplementalIndicator ;
-                         fqm:forPrinciple fair:F1 ;
-                         fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
-                         rdfs:comment "Data Identifier is globally unique" ;
-                         rdfs:label "SupplementalIndicator: F1-02D" .
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_F2-01D
+fqm:CoreIndicator_F2-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:F2 ;
+                         rdfs:comment "Data are described with rich Metadata" ;
+                         rdfs:label "CoreIndicator: F2-01D" .
 
 
-###  http://w3id.org/fairness-quality-measures/CoreIndicator_F1-02M
-fqm:CoreIndicator_F1-02M rdf:type owl:NamedIndividual ,
-                                  fqm:SupplementalIndicator ;
-                         fqm:forPrinciple fair:F1 ;
-                         fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
-                         rdfs:comment "Metadata Identifier is globally unique" ;
-                         rdfs:label "SupplementalIndicator: F1-02M" .
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_F3-01M
+fqm:CoreIndicator_F3-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:F3 ;
+                         rdfs:comment "Metadata include the identifier of the data it describes" ;
+                         rdfs:label "CoreIndicator: F3-01M" .
 
 
-###  http://w3id.org/fairness-quality-measures/CoreIndicator_F1-03D
-fqm:CoreIndicator_F1-03D rdf:type owl:NamedIndividual ,
-                                  fqm:SupplementalIndicator ;
-                         fqm:forPrinciple fair:F1 ;
-                         fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
-                         rdfs:comment "Data Identifier is eternally persistent" ;
-                         rdfs:label "SupplementalIndicator: F1-03D" .
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_F4-01D
+fqm:CoreIndicator_F4-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:F4 ;
+                         rdfs:comment "Data are registered or indexed in a resource" ;
+                         rdfs:label "CoreIndicator: F4-01D" .
 
 
-###  http://w3id.org/fairness-quality-measures/CoreIndicator_F1-03M
-fqm:CoreIndicator_F1-03M rdf:type owl:NamedIndividual ,
-                                  fqm:SupplementalIndicator ;
-                         fqm:forPrinciple fair:F1 ;
-                         fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
-                         rdfs:comment "Metadata Identifier is eternally persistent" ;
-                         rdfs:label "SupplementalIndicator: F1-03M" .
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_F4-01M
+fqm:CoreIndicator_F4-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:F4 ;
+                         rdfs:comment "Metadata are registered or indexed in a resource" ;
+                         rdfs:label "CoreIndicator: F4-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_F4-02IS
+fqm:CoreIndicator_F4-02IS rdf:type owl:NamedIndividual ,
+                                   fqm:SupplementalIndicator ;
+                          fqm:forPrinciple fair:F4 ;
+                          fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                          rdfs:comment "Resource for data is searchable" ;
+                          rdfs:label "SupplementalIndicator: F4-02IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_F4-03IS
+fqm:CoreIndicator_F4-03IS rdf:type owl:NamedIndividual ,
+                                   fqm:SupplementalIndicator ;
+                          fqm:forPrinciple fair:F4 ;
+                          fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                          rdfs:comment "Resource for metadata is searchable" ;
+                          rdfs:label "SupplementalIndicator: F4-03IS" .
 
 
 ###  http://w3id.org/fairness-quality-measures/FQMLevel-0_NoInformationAvailable
@@ -1464,6 +2311,171 @@ fqm:FQMLevel-3_Optimal rdf:type owl:NamedIndividual ,
                        rdfs:label "FAIRQualityMaturityLevel3: Optimal" .
 
 
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1-01IS
+fqm:SupplementalIndicator_A1-01IS rdf:type owl:NamedIndividual ,
+                                           fqm:SupplementalIndicator ;
+                                  fqm:forPrinciple fair:A1 ;
+                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ;
+                                  rdfs:comment "The communication protocol for data retrieval is standardized" ;
+                                  rdfs:label "SupplementalIndicator: A1-01IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1-02IS
+fqm:SupplementalIndicator_A1-02IS rdf:type owl:NamedIndividual ,
+                                           fqm:SupplementalIndicator ;
+                                  fqm:forPrinciple fair:A1 ;
+                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01M ;
+                                  rdfs:comment "The communication protocol for metadata retrieval is standardized" ;
+                                  rdfs:label "SupplementalIndicator: A1-02IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1.1-01IS
+fqm:SupplementalIndicator_A1.1-01IS rdf:type owl:NamedIndividual ,
+                                             fqm:SupplementalIndicator ;
+                                    fqm:forPrinciple fair:A1.1 ;
+                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ,
+                                                                 fqm:CoreIndicator_A1-01M ;
+                                    rdfs:comment "The protocol is open" ;
+                                    rdfs:label "SupplementalIndicator: A1.1-01IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1.1-02IS
+fqm:SupplementalIndicator_A1.1-02IS rdf:type owl:NamedIndividual ,
+                                             fqm:SupplementalIndicator ;
+                                    fqm:forPrinciple fair:A1.1 ;
+                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ,
+                                                                 fqm:CoreIndicator_A1-01M ;
+                                    rdfs:comment "The protocol is free" ;
+                                    rdfs:label "SupplementalIndicator: A1.1-02IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1.1-03IS
+fqm:SupplementalIndicator_A1.1-03IS rdf:type owl:NamedIndividual ,
+                                             fqm:SupplementalIndicator ;
+                                    fqm:forPrinciple fair:A1.1 ;
+                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ,
+                                                                 fqm:CoreIndicator_A1-01M ;
+                                    rdfs:comment "The protocol is universally implementable" ;
+                                    rdfs:label "SupplementalIndicator: A1.1-03IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1.2-02IS
+fqm:SupplementalIndicator_A1.2-02IS rdf:type owl:NamedIndividual ,
+                                             fqm:SupplementalIndicator ;
+                                    fqm:forPrinciple fair:A1.2 ;
+                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_A1.2-01IS ;
+                                    rdfs:comment "The procedure includes that for authentication" ;
+                                    rdfs:label "SupplementalIndicator: A1.2-02IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1.2-03IS
+fqm:SupplementalIndicator_A1.2-03IS rdf:type owl:NamedIndividual ,
+                                             fqm:SupplementalIndicator ;
+                                    fqm:forPrinciple fair:A1.2 ;
+                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_A1.2-01IS ;
+                                    rdfs:comment "The procedure includes that for authorization" ;
+                                    rdfs:label "SupplementalIndicator: A1.2-03IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F1-02D
+fqm:SupplementalIndicator_F1-02D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01D ;
+                                 rdfs:comment "Data Identifier is globally unique" ;
+                                 rdfs:label "SupplementalIndicator: F1-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F1-02M
+fqm:SupplementalIndicator_F1-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                 rdfs:comment "Metadata Identifier is globally unique" ;
+                                 rdfs:label "SupplementalIndicator: F1-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F1-03D
+fqm:SupplementalIndicator_F1-03D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                 rdfs:comment "Data Identifier is eternally persistent" ;
+                                 rdfs:label "SupplementalIndicator: F1-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F1-03M
+fqm:SupplementalIndicator_F1-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                 rdfs:comment "Metadata Identifier is eternally persistent" ;
+                                 rdfs:label "SupplementalIndicator: F1-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F2-01M
+fqm:SupplementalIndicator_F2-01M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 rdfs:comment "Metadata include data usage license" ;
+                                 rdfs:label "SupplementalIndicator: F2-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F2-02M
+fqm:SupplementalIndicator_F2-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 rdfs:comment "Metadata include data provenance" ;
+                                 rdfs:label "SupplementalIndicator: F2-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F2-03M
+fqm:SupplementalIndicator_F2-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 rdfs:comment "Metadata include attributes for discovery" ;
+                                 rdfs:label "SupplementalIndicator: F2-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F2-04M
+fqm:SupplementalIndicator_F2-04M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 rdfs:comment "Metadata include attributes for data retrieval" ;
+                                 rdfs:label "SupplementalIndicator: F2-04M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F2-05M
+fqm:SupplementalIndicator_F2-05M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 rdfs:comment "Metadata include attributes for data access" ;
+                                 rdfs:label "SupplementalIndicator: F2-05M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F3-02M
+fqm:SupplementalIndicator_F3-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F3-01M ;
+                                 rdfs:comment "Metadata clearly includes the data identifier" ;
+                                 rdfs:label "SupplementalIndicator: F3-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F3-03M
+fqm:SupplementalIndicator_F3-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:F3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_F3-01M ;
+                                 rdfs:comment "Metadata explicitly includes the data identifier" ;
+                                 rdfs:label "SupplementalIndicator: F3-03M" .
+
+
 ###  https://w3id.org/fair/principles/terms/A
 fair:A rdf:type owl:NamedIndividual ,
                 fqm:Dimension ;
@@ -1481,7 +2493,8 @@ fair:A1 rdf:type owl:NamedIndividual ,
 fair:A1.1 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:A ;
-          rdfs:label "Principle: A1.1" .
+          rdfs:label "Principle: A1.1" ;
+          rdfs:seeAlso "https://www.go-fair.org/fair-principles/a1-1-protocol-open-free-universally-implementable/"^^xsd:anyURI .
 
 
 ###  https://w3id.org/fair/principles/terms/A1.2
