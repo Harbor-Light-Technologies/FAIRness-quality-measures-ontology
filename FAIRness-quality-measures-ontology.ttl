@@ -351,32 +351,6 @@ fqm:Accessible rdf:type owl:Class ;
                rdfs:label "Accessible" .
 
 
-###  http://w3id.org/fairness-quality-measures/AccessibleKnowledgeRepresentationLanguage
-fqm:AccessibleKnowledgeRepresentationLanguage rdf:type owl:Class ;
-                                              rdfs:subClassOf [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
-                                                                                     [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty fqm:hasCharacteristic ;
-                                                                                       owl:someValuesFrom fqm:Accessible
-                                                                                     ]
-                                                                                   ) ;
-                                                                rdf:type owl:Class
-                                                              ] ;
-                                              rdfs:label "AccessibleKnowledgeRepresentationLanguage" .
-
-
-###  http://w3id.org/fairness-quality-measures/AccessibleVocabulary
-fqm:AccessibleVocabulary rdf:type owl:Class ;
-                         rdfs:subClassOf [ owl:intersectionOf ( fqm:Vocabulary
-                                                                [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty fqm:hasCharacteristic ;
-                                                                  owl:someValuesFrom fqm:Accessible
-                                                                ]
-                                                              ) ;
-                                           rdf:type owl:Class
-                                         ] ;
-                         rdfs:label "AccessibleVocabulary" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Accurate
 fqm:Accurate rdf:type owl:Class ;
              rdfs:subClassOf fqm:Element ;
@@ -400,19 +374,6 @@ fqm:AccurateAttribute rdf:type owl:Class ;
 fqm:Applicable rdf:type owl:Class ;
                rdfs:subClassOf fqm:Element ;
                rdfs:label "Applicable" .
-
-
-###  http://w3id.org/fairness-quality-measures/ApplicableKnowledgeRepresentationLanguage
-fqm:ApplicableKnowledgeRepresentationLanguage rdf:type owl:Class ;
-                                              rdfs:subClassOf [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
-                                                                                     [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty fqm:hasCharacteristic ;
-                                                                                       owl:someValuesFrom fqm:Applicable
-                                                                                     ]
-                                                                                   ) ;
-                                                                rdf:type owl:Class
-                                                              ] ;
-                                              rdfs:label "ApplicableKnowledgeRepresentationLanguage" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Attribute
@@ -463,19 +424,6 @@ fqm:CommunicationProtocol rdf:type owl:Class ;
 fqm:Community-Driven rdf:type owl:Class ;
                      rdfs:subClassOf fqm:Element ;
                      rdfs:label "Community-Driven" .
-
-
-###  http://w3id.org/fairness-quality-measures/CommunityStandard
-fqm:CommunityStandard rdf:type owl:Class ;
-                      rdfs:subClassOf [ owl:intersectionOf ( fqm:Standard
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty fqm:hasCharacteristic ;
-                                                               owl:someValuesFrom fqm:Community-Driven
-                                                             ]
-                                                           ) ;
-                                        rdf:type owl:Class
-                                      ] ;
-                      rdfs:label "CommunityStandard" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Concept
@@ -1026,6 +974,20 @@ fqm:DataUseAttribute rdf:type owl:Class ;
                      rdfs:label "DataUseAttribute" .
 
 
+###  http://w3id.org/fairness-quality-measures/DataUsesKnowledgeRepresentationLanguage
+fqm:DataUsesKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                            rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty fqm:uses ;
+                                                                                     owl:someValuesFrom fqm:KnowledgeRepresentationLanguage
+                                                                                   ]
+                                                                                 ) ;
+                                                              rdf:type owl:Class
+                                                            ] ;
+                                            fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I1-01D ;
+                                            rdfs:label "DataUsesKnowledgeRepresentationLanguage" .
+
+
 ###  http://w3id.org/fairness-quality-measures/Detailed
 fqm:Detailed rdf:type owl:Class ;
              rdfs:subClassOf fqm:Element ;
@@ -1050,19 +1012,6 @@ fqm:Dimension rdf:type owl:Class ;
 fqm:Discoverable rdf:type owl:Class ;
                  rdfs:subClassOf fqm:Element ;
                  rdfs:label "Discoverable" .
-
-
-###  http://w3id.org/fairness-quality-measures/DomainRelevantStandard
-fqm:DomainRelevantStandard rdf:type owl:Class ;
-                           rdfs:subClassOf [ owl:intersectionOf ( fqm:Standard
-                                                                  [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty fqm:hasCharacteristic ;
-                                                                    owl:someValuesFrom fqm:DomainSpecific
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ;
-                           rdfs:label "DomainRelevantStandard" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DomainSpecific
@@ -1119,67 +1068,16 @@ fqm:FAIRQualityMeasure rdf:type owl:Class ;
                        rdfs:label "FAIRQualityMeasure" .
 
 
-###  http://w3id.org/fairness-quality-measures/FAIRVocabulary
-fqm:FAIRVocabulary rdf:type owl:Class ;
-                   rdfs:subClassOf [ owl:intersectionOf ( fqm:Vocabulary
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty fqm:hasCharacteristic ;
-                                                            owl:someValuesFrom fqm:Accessible
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty fqm:hasCharacteristic ;
-                                                            owl:someValuesFrom fqm:Findable
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty fqm:hasCharacteristic ;
-                                                            owl:someValuesFrom fqm:Interoperable
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty fqm:hasCharacteristic ;
-                                                            owl:someValuesFrom fqm:Reusable
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
-                                   ] ;
-                   rdfs:label "FAIRVocabulary" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Findable
 fqm:Findable rdf:type owl:Class ;
              rdfs:subClassOf fqm:Element ;
              rdfs:label "Findable" .
 
 
-###  http://w3id.org/fairness-quality-measures/FindableVocabulary
-fqm:FindableVocabulary rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Vocabulary
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:hasCharacteristic ;
-                                                                owl:someValuesFrom fqm:Findable
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:label "FindableVocabulary" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Formal
 fqm:Formal rdf:type owl:Class ;
            rdfs:subClassOf fqm:Element ;
            rdfs:label "Formal" .
-
-
-###  http://w3id.org/fairness-quality-measures/FormalKnowledgeRepresentationLanguage
-fqm:FormalKnowledgeRepresentationLanguage rdf:type owl:Class ;
-                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
-                                                                                 [ rdf:type owl:Restriction ;
-                                                                                   owl:onProperty fqm:hasCharacteristic ;
-                                                                                   owl:someValuesFrom fqm:Formal
-                                                                                 ]
-                                                                               ) ;
-                                                            rdf:type owl:Class
-                                                          ] ;
-                                          rdfs:label "FormalKnowledgeRepresentationLanguage" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Free
@@ -1238,19 +1136,6 @@ fqm:Infrastructure rdf:type owl:Class ;
 fqm:Interoperable rdf:type owl:Class ;
                   rdfs:subClassOf fqm:Element ;
                   rdfs:label "Interoperable" .
-
-
-###  http://w3id.org/fairness-quality-measures/InteroperableVocabulary
-fqm:InteroperableVocabulary rdf:type owl:Class ;
-                            rdfs:subClassOf [ owl:intersectionOf ( fqm:Vocabulary
-                                                                   [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty fqm:hasCharacteristic ;
-                                                                     owl:someValuesFrom fqm:Interoperable
-                                                                   ]
-                                                                 ) ;
-                                              rdf:type owl:Class
-                                            ] ;
-                            rdfs:label "InteroperableVocabulary" .
 
 
 ###  http://w3id.org/fairness-quality-measures/KnowledgeRepresentationLanguage
@@ -1894,6 +1779,41 @@ fqm:MetadataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
                                                     rdfs:label "MetadataRegisteredOrIndexedInSearchableResource" .
 
 
+###  http://w3id.org/fairness-quality-measures/MetadataUsesFormalKnowledgeRepresentationLanguage
+fqm:MetadataUsesFormalKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                      rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUsesKnowledgeRepresentationLanguage
+                                                                                             [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty fqm:uses ;
+                                                                                               owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                                                           owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                           owl:someValuesFrom fqm:Formal
+                                                                                                                                         ]
+                                                                                                                                       ) ;
+                                                                                                                    rdf:type owl:Class
+                                                                                                                  ]
+                                                                                             ]
+                                                                                           ) ;
+                                                                        rdf:type owl:Class
+                                                                      ] ;
+                                                      fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-02M ;
+                                                      rdfs:label "MetadataUsesFormalKnowledgeRepresentationLanguage" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUsesKnowledgeRepresentationLanguage
+fqm:MetadataUsesKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty fqm:uses ;
+                                                                                         owl:someValuesFrom fqm:KnowledgeRepresentationLanguage
+                                                                                       ]
+                                                                                     ) ;
+                                                                  rdf:type owl:Class
+                                                                ] ;
+                                                fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I1-01M ;
+                                                rdfs:label "MetadataUsesKnowledgeRepresentationLanguage" .
+
+
 ###  http://w3id.org/fairness-quality-measures/Open
 fqm:Open rdf:type owl:Class ;
          rdfs:subClassOf fqm:Element ;
@@ -2083,19 +2003,6 @@ fqm:Reusable rdf:type owl:Class ;
              rdfs:label "Reusable" .
 
 
-###  http://w3id.org/fairness-quality-measures/ReusableVocabulary
-fqm:ReusableVocabulary rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Vocabulary
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:hasCharacteristic ;
-                                                                owl:someValuesFrom fqm:Reusable
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:label "ReusableVocabulary" .
-
-
 ###  http://w3id.org/fairness-quality-measures/Rich
 fqm:Rich rdf:type owl:Class ;
          rdfs:subClassOf fqm:Element ;
@@ -2110,19 +2017,6 @@ fqm:Searchable rdf:type owl:Class ;
 ###  http://w3id.org/fairness-quality-measures/Shared
 fqm:Shared rdf:type owl:Class ;
            rdfs:subClassOf fqm:Element .
-
-
-###  http://w3id.org/fairness-quality-measures/SharedKnowledgeRepresentationLanguage
-fqm:SharedKnowledgeRepresentationLanguage rdf:type owl:Class ;
-                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
-                                                                                 [ rdf:type owl:Restriction ;
-                                                                                   owl:onProperty fqm:hasCharacteristic ;
-                                                                                   owl:someValuesFrom fqm:Shared
-                                                                                 ]
-                                                                               ) ;
-                                                            rdf:type owl:Class
-                                                          ] ;
-                                          rdfs:label "SharedKnowledgeRepresentationLanguage" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Standard
