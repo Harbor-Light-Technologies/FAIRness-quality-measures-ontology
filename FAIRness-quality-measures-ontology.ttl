@@ -2255,22 +2255,116 @@ fqm:CoreIndicator_F4-01M rdf:type owl:NamedIndividual ,
                          rdfs:label "CoreIndicator: F4-01M" .
 
 
-###  http://w3id.org/fairness-quality-measures/CoreIndicator_F4-02IS
-fqm:CoreIndicator_F4-02IS rdf:type owl:NamedIndividual ,
-                                   fqm:SupplementalIndicator ;
-                          fqm:forPrinciple fair:F4 ;
-                          fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
-                          rdfs:comment "Resource for data is searchable" ;
-                          rdfs:label "SupplementalIndicator: F4-02IS" .
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_I1-01D
+fqm:CoreIndicator_I1-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:I1 ;
+                         rdfs:comment "Data use langauge for knowledge representation" ;
+                         rdfs:label "CoreIndicator: I1-01D" .
 
 
-###  http://w3id.org/fairness-quality-measures/CoreIndicator_F4-03IS
-fqm:CoreIndicator_F4-03IS rdf:type owl:NamedIndividual ,
-                                   fqm:SupplementalIndicator ;
-                          fqm:forPrinciple fair:F4 ;
-                          fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
-                          rdfs:comment "Resource for metadata is searchable" ;
-                          rdfs:label "SupplementalIndicator: F4-03IS" .
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_I1-01M
+fqm:CoreIndicator_I1-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:I1 ;
+                         rdfs:comment "Metadata use langauge for knowledge representation" ;
+                         rdfs:label "CoreIndicator: I1-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_I2-01D
+fqm:CoreIndicator_I2-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:I2 ;
+                         rdfs:comment "Data use a vocabulary" ;
+                         rdfs:label "CoreIndicator: I2-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_I2-01M
+fqm:CoreIndicator_I2-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:I2 ;
+                         rdfs:comment "Metadata use a vocabulary" ;
+                         rdfs:label "CoreIndicator: I2-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_I3-01D
+fqm:CoreIndicator_I3-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:I3 ;
+                         rdfs:comment "Data include references" ;
+                         rdfs:label "CoreIndicator: I3-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_I3-01M
+fqm:CoreIndicator_I3-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:I3 ;
+                         rdfs:comment "Metadata include references" ;
+                         rdfs:label "CoreIndicator: I3-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1-01D
+fqm:CoreIndicator_R1-01D rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:R1 ;
+                         rdfs:comment "Data described with attributes" ;
+                         rdfs:label "CoreIndicator: R1-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1-01M
+fqm:CoreIndicator_R1-01M rdf:type owl:NamedIndividual ,
+                                  fqm:CoreIndicator ;
+                         fqm:forPrinciple fair:R1 ;
+                         rdfs:comment "Metadata described with attributes" ;
+                         rdfs:label "CoreIndicator: R1-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1.1-01D
+fqm:CoreIndicator_R1.1-01D rdf:type owl:NamedIndividual ,
+                                    fqm:CoreIndicator ;
+                           fqm:forPrinciple fair:R1.1 ;
+                           rdfs:comment "Data are released with a data usage license" ;
+                           rdfs:label "CoreIndicator: R1.1-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1.1-01M
+fqm:CoreIndicator_R1.1-01M rdf:type owl:NamedIndividual ,
+                                    fqm:CoreIndicator ;
+                           fqm:forPrinciple fair:R1.1 ;
+                           rdfs:comment "Metadata are released with a data usage license" ;
+                           rdfs:label "CoreIndicator: R1.1-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1.2-01D
+fqm:CoreIndicator_R1.2-01D rdf:type owl:NamedIndividual ,
+                                    fqm:CoreIndicator ;
+                           fqm:forPrinciple fair:R1.2 ;
+                           rdfs:comment "Data are associated with provenance" ;
+                           rdfs:label "CoreIndicator: R1.2-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1.2-01M
+fqm:CoreIndicator_R1.2-01M rdf:type owl:NamedIndividual ,
+                                    fqm:CoreIndicator ;
+                           fqm:forPrinciple fair:R1.2 ;
+                           rdfs:comment "Metadata are associated with provenance" ;
+                           rdfs:label "CoreIndicator: R1.2-01M" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1.3-01D
+fqm:CoreIndicator_R1.3-01D rdf:type owl:NamedIndividual ,
+                                    fqm:CoreIndicator ;
+                           fqm:forPrinciple fair:R1.3 ;
+                           rdfs:comment "Data meet standards" ;
+                           rdfs:label "CoreIndicator: R1.3-01D" .
+
+
+###  http://w3id.org/fairness-quality-measures/CoreIndicator_R1.3-01M
+fqm:CoreIndicator_R1.3-01M rdf:type owl:NamedIndividual ,
+                                    fqm:CoreIndicator ;
+                           fqm:forPrinciple fair:R1.3 ;
+                           rdfs:comment "Metadata meet standards" ;
+                           rdfs:label "CoreIndicator: R1.3-01M" .
 
 
 ###  http://w3id.org/fairness-quality-measures/FQMLevel-0_NoInformationAvailable
@@ -2476,6 +2570,393 @@ fqm:SupplementalIndicator_F3-03M rdf:type owl:NamedIndividual ,
                                  rdfs:label "SupplementalIndicator: F3-03M" .
 
 
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F4-02IS
+fqm:SupplementalIndicator_F4-02IS rdf:type owl:NamedIndividual ,
+                                           fqm:SupplementalIndicator ;
+                                  fqm:forPrinciple fair:F4 ;
+                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                  rdfs:comment "Resource for data is searchable" ;
+                                  rdfs:label "SupplementalIndicator: F4-02IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_F4-03IS
+fqm:SupplementalIndicator_F4-03IS rdf:type owl:NamedIndividual ,
+                                           fqm:SupplementalIndicator ;
+                                  fqm:forPrinciple fair:F4 ;
+                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                  rdfs:comment "Resource for metadata is searchable" ;
+                                  rdfs:label "SupplementalIndicator: F4-03IS" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-02D
+fqm:SupplementalIndicator_I1-02D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 rdfs:comment "The data language is formal" ;
+                                 rdfs:label "SupplementalIndicator: I1-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-02M
+fqm:SupplementalIndicator_I1-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 rdfs:comment "The metadata language is formal" ;
+                                 rdfs:label "SupplementalIndicator: I1-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-03D
+fqm:SupplementalIndicator_I1-03D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 rdfs:comment "The data language is accessible" ;
+                                 rdfs:label "SupplementalIndicator: I1-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-03M
+fqm:SupplementalIndicator_I1-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 rdfs:comment "The metadata language is accessible" ;
+                                 rdfs:label "SupplementalIndicator: I1-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-04D
+fqm:SupplementalIndicator_I1-04D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 rdfs:comment "The data language is shared" ;
+                                 rdfs:label "SupplementalIndicator: I1-04D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-04M
+fqm:SupplementalIndicator_I1-04M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 rdfs:comment "The metadata language is shared" ;
+                                 rdfs:label "SupplementalIndicator: I1-04M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-05D
+fqm:SupplementalIndicator_I1-05D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 rdfs:comment "The data language is broadly applicable" ;
+                                 rdfs:label "SupplementalIndicator: I1-05D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I1-05M
+fqm:SupplementalIndicator_I1-05M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 rdfs:comment "The metadata language is broadly applicable" ;
+                                 rdfs:label "SupplementalIndicator: I1-05M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-02D
+fqm:SupplementalIndicator_I2-02D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 rdfs:comment "The data vocabulary is findable" ;
+                                 rdfs:label "SupplementalIndicator: I2-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-02M
+fqm:SupplementalIndicator_I2-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 rdfs:comment "The metadata vocabulary is findable" ;
+                                 rdfs:label "SupplementalIndicator: I2-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-03D
+fqm:SupplementalIndicator_I2-03D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 rdfs:comment "The data vocabulary is accessible" ;
+                                 rdfs:label "SupplementalIndicator: I2-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-03M
+fqm:SupplementalIndicator_I2-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 rdfs:comment "The metadata vocabulary is accessible" ;
+                                 rdfs:label "SupplementalIndicator: I2-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-04D
+fqm:SupplementalIndicator_I2-04D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 rdfs:comment "The data vocabulary is interoperable" ;
+                                 rdfs:label "SupplementalIndicator: I2-04D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-04M
+fqm:SupplementalIndicator_I2-04M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 rdfs:comment "The metadata vocabulary is interoperable" ;
+                                 rdfs:label "SupplementalIndicator: I2-04M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-05D
+fqm:SupplementalIndicator_I2-05D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 rdfs:comment "The data vocabulary is reusable" ;
+                                 rdfs:label "SupplementalIndicator: I2-05D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I2-05M
+fqm:SupplementalIndicator_I2-05M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I2 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 rdfs:comment "The metadata vocabulary is reusable" ;
+                                 rdfs:label "SupplementalIndicator: I2-05M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I3-02D
+fqm:SupplementalIndicator_I3-02D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01D ;
+                                 rdfs:comment "The data references are qualified" ;
+                                 rdfs:label "SupplementalIndicator: I3-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I3-02M
+fqm:SupplementalIndicator_I3-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01M ;
+                                 rdfs:comment "The metadata references are qualified" ;
+                                 rdfs:label "SupplementalIndicator: I3-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I3-03D
+fqm:SupplementalIndicator_I3-03D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01D ;
+                                 rdfs:comment "References included in data are to other data" ;
+                                 rdfs:label "SupplementalIndicator: I3-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I3-03M
+fqm:SupplementalIndicator_I3-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01M ;
+                                 rdfs:comment "References included in metadata are to other data" ;
+                                 rdfs:label "SupplementalIndicator: I3-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I3-04D
+fqm:SupplementalIndicator_I3-04D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01D ;
+                                 rdfs:comment "References included in data are to other metadata" ;
+                                 rdfs:label "SupplementalIndicator: I3-04D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_I3-04M
+fqm:SupplementalIndicator_I3-04M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:I3 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01M ;
+                                 rdfs:comment "References included in metadata are to other metadata" ;
+                                 rdfs:label "SupplementalIndicator: I3-04M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-02D
+fqm:SupplementalIndicator_R1-02D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01D ;
+                                 rdfs:comment "Data attributes are plural" ;
+                                 rdfs:label "SupplementalIndicator: R1-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-02M
+fqm:SupplementalIndicator_R1-02M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 rdfs:comment "Metadata attributes are plural" ;
+                                 rdfs:label "SupplementalIndicator: R1-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-03D
+fqm:SupplementalIndicator_R1-03D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01D ;
+                                 rdfs:comment "Data attributes are accurate" ;
+                                 rdfs:label "SupplementalIndicator: R1-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-03M
+fqm:SupplementalIndicator_R1-03M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 rdfs:comment "Metadata attributes are accurate" ;
+                                 rdfs:label "SupplementalIndicator: R1-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-04D
+fqm:SupplementalIndicator_R1-04D rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01D ;
+                                 rdfs:comment "Data attributes are relevant" ;
+                                 rdfs:label "SupplementalIndicator: R1-04D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-04M
+fqm:SupplementalIndicator_R1-04M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 rdfs:comment "Metadata attributes are relevant" ;
+                                 rdfs:label "SupplementalIndicator: R1-04M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-05M
+fqm:SupplementalIndicator_R1-05M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 rdfs:comment "Metadata include attributes for data use" ;
+                                 rdfs:label "SupplementalIndicator: R1-05M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-06M
+fqm:SupplementalIndicator_R1-06M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 rdfs:comment "Metadata include attributes for data contextual information" ;
+                                 rdfs:label "SupplementalIndicator: R1-06M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1-07M
+fqm:SupplementalIndicator_R1-07M rdf:type owl:NamedIndividual ,
+                                          fqm:SupplementalIndicator ;
+                                 fqm:forPrinciple fair:R1 ;
+                                 fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 rdfs:comment "Metadata include attributes for data processing information" ;
+                                 rdfs:label "SupplementalIndicator: R1-07M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.1-02D
+fqm:SupplementalIndicator_R1.1-02D rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.1 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01D ;
+                                   rdfs:comment "Data license is clear" ;
+                                   rdfs:label "SupplementalIndicator: R1.1-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.1-02M
+fqm:SupplementalIndicator_R1.1-02M rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.1 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01M ;
+                                   rdfs:comment "Metadata license is clear" ;
+                                   rdfs:label "SupplementalIndicator: R1.1-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.1-03D
+fqm:SupplementalIndicator_R1.1-03D rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.1 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01D ;
+                                   rdfs:comment "Data license is accessible" ;
+                                   rdfs:label "SupplementalIndicator: R1.1-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.1-03M
+fqm:SupplementalIndicator_R1.1-03M rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.1 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01M ;
+                                   rdfs:comment "Metadata license is accessible" ;
+                                   rdfs:label "SupplementalIndicator: R1.1-03M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.2-02D
+fqm:SupplementalIndicator_R1.2-02D rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.2 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.2-01D ;
+                                   rdfs:comment "Data provenance is detailed" ;
+                                   rdfs:label "SupplementalIndicator: R1.2-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.2-02M
+fqm:SupplementalIndicator_R1.2-02M rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.2 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.2-01M ;
+                                   rdfs:comment "Metadata provenance is detailed" ;
+                                   rdfs:label "SupplementalIndicator: R1.2-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.3-02D
+fqm:SupplementalIndicator_R1.3-02D rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.3 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01D ;
+                                   rdfs:comment "Data standards are domain-relevant" ;
+                                   rdfs:label "SupplementalIndicator: R1.3-02D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.3-02M
+fqm:SupplementalIndicator_R1.3-02M rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.3 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01M ;
+                                   rdfs:comment "Metadata standards are domain-relevant" ;
+                                   rdfs:label "SupplementalIndicator: R1.3-02M" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.3-03D
+fqm:SupplementalIndicator_R1.3-03D rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.3 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01D ;
+                                   rdfs:comment "Data standards are community standards" ;
+                                   rdfs:label "SupplementalIndicator: R1.3-03D" .
+
+
+###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_R1.3-03M
+fqm:SupplementalIndicator_R1.3-03M rdf:type owl:NamedIndividual ,
+                                            fqm:SupplementalIndicator ;
+                                   fqm:forPrinciple fair:R1.3 ;
+                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01M ;
+                                   rdfs:comment "Metadata standards are community standards" ;
+                                   rdfs:label "SupplementalIndicator: R1.3-03M" .
+
+
 ###  https://w3id.org/fair/principles/terms/A
 fair:A rdf:type owl:NamedIndividual ,
                 fqm:Dimension ;
@@ -2493,8 +2974,7 @@ fair:A1 rdf:type owl:NamedIndividual ,
 fair:A1.1 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:A ;
-          rdfs:label "Principle: A1.1" ;
-          rdfs:seeAlso "https://www.go-fair.org/fair-principles/a1-1-protocol-open-free-universally-implementable/"^^xsd:anyURI .
+          rdfs:label "Principle: A1.1" .
 
 
 ###  https://w3id.org/fair/principles/terms/A1.2
