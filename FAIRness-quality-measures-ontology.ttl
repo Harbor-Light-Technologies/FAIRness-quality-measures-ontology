@@ -974,6 +974,69 @@ fqm:DataUseAttribute rdf:type owl:Class ;
                      rdfs:label "DataUseAttribute" .
 
 
+###  http://w3id.org/fairness-quality-measures/DataUsesAccessibleKnowledgeRepresentationLanguage
+fqm:DataUsesAccessibleKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                      rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUsesKnowledgeRepresentationLanguage
+                                                                                             [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty fqm:uses ;
+                                                                                               owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                                                           owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                           owl:someValuesFrom fqm:Accessible
+                                                                                                                                         ]
+                                                                                                                                       ) ;
+                                                                                                                    rdf:type owl:Class
+                                                                                                                  ]
+                                                                                             ]
+                                                                                           ) ;
+                                                                        rdf:type owl:Class
+                                                                      ] ;
+                                                      fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-03D ;
+                                                      rdfs:label "DataUsesAccessibleKnowledgeRepresentationLanguage" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUsesBroadlyApplicableKnowledgeRepresentationLanguage
+fqm:DataUsesBroadlyApplicableKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUsesKnowledgeRepresentationLanguage
+                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty fqm:uses ;
+                                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                                  owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                  owl:someValuesFrom fqm:Applicable
+                                                                                                                                                ]
+                                                                                                                                              ) ;
+                                                                                                                           rdf:type owl:Class
+                                                                                                                         ]
+                                                                                                    ]
+                                                                                                  ) ;
+                                                                               rdf:type owl:Class
+                                                                             ] ;
+                                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-05D ;
+                                                             rdfs:label "DataUsesBroadlyApplicableKnowledgeRepresentationLanguage" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUsesFormalKnowledgeRepresentationLanguage
+fqm:DataUsesFormalKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUsesKnowledgeRepresentationLanguage
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty fqm:uses ;
+                                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                       owl:someValuesFrom fqm:Formal
+                                                                                                                                     ]
+                                                                                                                                   ) ;
+                                                                                                                rdf:type owl:Class
+                                                                                                              ]
+                                                                                         ]
+                                                                                       ) ;
+                                                                    rdf:type owl:Class
+                                                                  ] ;
+                                                  fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-02D ;
+                                                  rdfs:label "DataUsesFormalKnowledgeRepresentationLanguage" .
+
+
 ###  http://w3id.org/fairness-quality-measures/DataUsesKnowledgeRepresentationLanguage
 fqm:DataUsesKnowledgeRepresentationLanguage rdf:type owl:Class ;
                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
@@ -986,6 +1049,27 @@ fqm:DataUsesKnowledgeRepresentationLanguage rdf:type owl:Class ;
                                                             ] ;
                                             fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I1-01D ;
                                             rdfs:label "DataUsesKnowledgeRepresentationLanguage" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUsesSharedKnowledgeRepresentationLanguage
+fqm:DataUsesSharedKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUsesKnowledgeRepresentationLanguage
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty fqm:uses ;
+                                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                       owl:someValuesFrom fqm:Shared
+                                                                                                                                     ]
+                                                                                                                                   ) ;
+                                                                                                                rdf:type owl:Class
+                                                                                                              ]
+                                                                                         ]
+                                                                                       ) ;
+                                                                    rdf:type owl:Class
+                                                                  ] ;
+                                                  fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-04D ;
+                                                  rdfs:label "DataUsesSharedKnowledgeRepresentationLanguage" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Detailed
@@ -1779,6 +1863,48 @@ fqm:MetadataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
                                                     rdfs:label "MetadataRegisteredOrIndexedInSearchableResource" .
 
 
+###  http://w3id.org/fairness-quality-measures/MetadataUsesAccessibleKnowledgeRepresentationLanguage
+fqm:MetadataUsesAccessibleKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                          rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUsesKnowledgeRepresentationLanguage
+                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty fqm:uses ;
+                                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                               owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                               owl:someValuesFrom fqm:Accessible
+                                                                                                                                             ]
+                                                                                                                                           ) ;
+                                                                                                                        rdf:type owl:Class
+                                                                                                                      ]
+                                                                                                 ]
+                                                                                               ) ;
+                                                                            rdf:type owl:Class
+                                                                          ] ;
+                                                          fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-03M ;
+                                                          rdfs:label "MetadataUsesAccessibleKnowledgeRepresentationLanguage" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUsesBroadlyApplicableKnowledgeRepresentationLanguage
+fqm:MetadataUsesBroadlyApplicableKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                                 rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUsesKnowledgeRepresentationLanguage
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty fqm:uses ;
+                                                                                                          owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                      owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                                      owl:someValuesFrom fqm:Applicable
+                                                                                                                                                    ]
+                                                                                                                                                  ) ;
+                                                                                                                               rdf:type owl:Class
+                                                                                                                             ]
+                                                                                                        ]
+                                                                                                      ) ;
+                                                                                   rdf:type owl:Class
+                                                                                 ] ;
+                                                                 fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-05M ;
+                                                                 rdfs:label "MetadataUsesBroadlyApplicableKnowledgeRepresentationLanguage" .
+
+
 ###  http://w3id.org/fairness-quality-measures/MetadataUsesFormalKnowledgeRepresentationLanguage
 fqm:MetadataUsesFormalKnowledgeRepresentationLanguage rdf:type owl:Class ;
                                                       rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUsesKnowledgeRepresentationLanguage
@@ -1812,6 +1938,27 @@ fqm:MetadataUsesKnowledgeRepresentationLanguage rdf:type owl:Class ;
                                                                 ] ;
                                                 fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I1-01M ;
                                                 rdfs:label "MetadataUsesKnowledgeRepresentationLanguage" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUsesSharedKnowledgeRepresentationLanguage
+fqm:MetadataUsesSharedKnowledgeRepresentationLanguage rdf:type owl:Class ;
+                                                      rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUsesKnowledgeRepresentationLanguage
+                                                                                             [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty fqm:uses ;
+                                                                                               owl:someValuesFrom [ owl:intersectionOf ( fqm:KnowledgeRepresentationLanguage
+                                                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                                                           owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                                           owl:someValuesFrom fqm:Shared
+                                                                                                                                         ]
+                                                                                                                                       ) ;
+                                                                                                                    rdf:type owl:Class
+                                                                                                                  ]
+                                                                                             ]
+                                                                                           ) ;
+                                                                        rdf:type owl:Class
+                                                                      ] ;
+                                                      fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I1-04M ;
+                                                      rdfs:label "MetadataUsesSharedKnowledgeRepresentationLanguage" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Open
