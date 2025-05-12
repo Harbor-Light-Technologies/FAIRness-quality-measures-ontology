@@ -879,6 +879,83 @@ fqm:DataIdentifierSchemeUsesUniversallyImplementableProtocol rdf:type owl:Class 
                                                              rdfs:label "DataIdentifierSchemeUsesUniversallyImplementableProtocol" .
 
 
+###  http://w3id.org/fairness-quality-measures/DataIncludeQualifiedReferences
+fqm:DataIncludeQualifiedReferences rdf:type owl:Class ;
+                                   rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIncludeReferences
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty fqm:includes ;
+                                                                            owl:someValuesFrom [ owl:intersectionOf ( fqm:Reference
+                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                        owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                        owl:someValuesFrom fqm:Qualified
+                                                                                                                      ]
+                                                                                                                    ) ;
+                                                                                                 rdf:type owl:Class
+                                                                                               ]
+                                                                          ]
+                                                                        ) ;
+                                                     rdf:type owl:Class
+                                                   ] ;
+                                   fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I3-02D ;
+                                   rdfs:label "DataIncludeQualifiedReferences" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIncludeReferences
+fqm:DataIncludeReferences rdf:type owl:Class ;
+                          rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty fqm:includes ;
+                                                                   owl:someValuesFrom fqm:Reference
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                          fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I3-01D ;
+                          rdfs:label "DataIncludeReferences" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIncludeReferencesToOtherData
+fqm:DataIncludeReferencesToOtherData rdf:type owl:Class ;
+                                     rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIncludeReferences
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty fqm:includes ;
+                                                                              owl:someValuesFrom [ owl:intersectionOf ( fqm:Reference
+                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                          owl:onProperty fqm:references ;
+                                                                                                                          owl:someValuesFrom fqm:Data
+                                                                                                                        ]
+                                                                                                                      ) ;
+                                                                                                   rdf:type owl:Class
+                                                                                                 ]
+                                                                            ]
+                                                                          ) ;
+                                                       rdf:type owl:Class
+                                                     ] ;
+                                     fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I3-03D ;
+                                     rdfs:label "DataIncludeReferencesToOtherData" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataIncludeReferencesToOtherMetadata
+fqm:DataIncludeReferencesToOtherMetadata rdf:type owl:Class ;
+                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:DataIncludeReferences
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty fqm:includes ;
+                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Reference
+                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty fqm:references ;
+                                                                                                                              owl:someValuesFrom fqm:Metadata
+                                                                                                                            ]
+                                                                                                                          ) ;
+                                                                                                       rdf:type owl:Class
+                                                                                                     ]
+                                                                                ]
+                                                                              ) ;
+                                                           rdf:type owl:Class
+                                                         ] ;
+                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I3-04D ;
+                                         rdfs:label "DataIncludeReferencesToOtherMetadata" .
+
+
 ###  http://w3id.org/fairness-quality-measures/DataProcessingAttribute
 fqm:DataProcessingAttribute rdf:type owl:Class ;
                             rdfs:subClassOf fqm:MetadataAttribute ;
@@ -961,6 +1038,27 @@ fqm:DataUsageLicense rdf:type owl:Class ;
                      rdfs:label "DataUsageLicense" .
 
 
+###  http://w3id.org/fairness-quality-measures/DataUseAccessibleVocabulary
+fqm:DataUseAccessibleVocabulary rdf:type owl:Class ;
+                                rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUseVocabulary
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty fqm:uses ;
+                                                                         owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                                     owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                     owl:someValuesFrom fqm:Accessible
+                                                                                                                   ]
+                                                                                                                 ) ;
+                                                                                              rdf:type owl:Class
+                                                                                            ]
+                                                                       ]
+                                                                     ) ;
+                                                  rdf:type owl:Class
+                                                ] ;
+                                fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-03D ;
+                                rdfs:label "DataUseAccessibleVocabulary" .
+
+
 ###  http://w3id.org/fairness-quality-measures/DataUseAttribute
 fqm:DataUseAttribute rdf:type owl:Class ;
                      rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataAttribute
@@ -972,6 +1070,83 @@ fqm:DataUseAttribute rdf:type owl:Class ;
                                        rdf:type owl:Class
                                      ] ;
                      rdfs:label "DataUseAttribute" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUseFindableVocabulary
+fqm:DataUseFindableVocabulary rdf:type owl:Class ;
+                              rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUseVocabulary
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty fqm:uses ;
+                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                   owl:someValuesFrom fqm:Findable
+                                                                                                                 ]
+                                                                                                               ) ;
+                                                                                            rdf:type owl:Class
+                                                                                          ]
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                              fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-02D ;
+                              rdfs:label "DataUseFindableVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUseInteroperableVocabulary
+fqm:DataUseInteroperableVocabulary rdf:type owl:Class ;
+                                   rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUseVocabulary
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty fqm:uses ;
+                                                                            owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                        owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                        owl:someValuesFrom fqm:Interoperable
+                                                                                                                      ]
+                                                                                                                    ) ;
+                                                                                                 rdf:type owl:Class
+                                                                                               ]
+                                                                          ]
+                                                                        ) ;
+                                                     rdf:type owl:Class
+                                                   ] ;
+                                   fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-04D ;
+                                   rdfs:label "DataUseInteroperableVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUseReusableVocabulary
+fqm:DataUseReusableVocabulary rdf:type owl:Class ;
+                              rdfs:subClassOf [ owl:intersectionOf ( fqm:DataUseVocabulary
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty fqm:uses ;
+                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                   owl:someValuesFrom fqm:Reusable
+                                                                                                                 ]
+                                                                                                               ) ;
+                                                                                            rdf:type owl:Class
+                                                                                          ]
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                              fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-05D ;
+                              rdfs:label "DataUseReusableVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUseVocabulary
+fqm:DataUseVocabulary rdf:type owl:Class ;
+                      rdfs:subClassOf [ owl:intersectionOf ( fqm:Data
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty fqm:uses ;
+                                                               owl:someValuesFrom fqm:Vocabulary
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                      fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I2-01D ;
+                      rdfs:label "DataUseVocabulary" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DataUsesAccessibleKnowledgeRepresentationLanguage
@@ -1807,6 +1982,83 @@ fqm:MetadataIncludeDiscoveryAttributes rdf:type owl:Class ;
                                        rdfs:label "MetadataIncludeDiscoveryAttributes" .
 
 
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeQualifiedReferences
+fqm:MetadataIncludeQualifiedReferences rdf:type owl:Class ;
+                                       rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeReferences
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty fqm:includes ;
+                                                                                owl:someValuesFrom [ owl:intersectionOf ( fqm:Reference
+                                                                                                                          [ rdf:type owl:Restriction ;
+                                                                                                                            owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                            owl:someValuesFrom fqm:Qualified
+                                                                                                                          ]
+                                                                                                                        ) ;
+                                                                                                     rdf:type owl:Class
+                                                                                                   ]
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ] ;
+                                       rdfs:label "MetadataIncludeQualifiedReferences" ;
+                                       owl:incompatibleWith fqm:SupplementalIndicator_I3-02M .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeReferences
+fqm:MetadataIncludeReferences rdf:type owl:Class ;
+                              rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty fqm:includes ;
+                                                                       owl:someValuesFrom fqm:Reference
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                              fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I3-01M ;
+                              rdfs:label "MetadataIncludeReferences" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeReferencesToOtherData
+fqm:MetadataIncludeReferencesToOtherData rdf:type owl:Class ;
+                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeReferences
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty fqm:includes ;
+                                                                                  owl:someValuesFrom [ owl:intersectionOf ( fqm:Reference
+                                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty fqm:references ;
+                                                                                                                              owl:someValuesFrom fqm:Data
+                                                                                                                            ]
+                                                                                                                          ) ;
+                                                                                                       rdf:type owl:Class
+                                                                                                     ]
+                                                                                ]
+                                                                              ) ;
+                                                           rdf:type owl:Class
+                                                         ] ;
+                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I3-03M ;
+                                         rdfs:label "MetadataIncludeReferencesToOtherData" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataIncludeReferencesToOtherMetadata
+fqm:MetadataIncludeReferencesToOtherMetadata rdf:type owl:Class ;
+                                             rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeReferences
+                                                                                    [ rdf:type owl:Restriction ;
+                                                                                      owl:onProperty fqm:includes ;
+                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Reference
+                                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                                  owl:onProperty fqm:references ;
+                                                                                                                                  owl:someValuesFrom fqm:Metadata
+                                                                                                                                ]
+                                                                                                                              ) ;
+                                                                                                           rdf:type owl:Class
+                                                                                                         ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ] ;
+                                             fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I3-04M ;
+                                             rdfs:label "MetadataIncludeReferencesToOtherMetadata" .
+
+
 ###  http://w3id.org/fairness-quality-measures/MetadataRegisteredOrIndexedInResource
 fqm:MetadataRegisteredOrIndexedInResource rdf:type owl:Class ;
                                           rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
@@ -1861,6 +2113,104 @@ fqm:MetadataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
                                                                     ] ;
                                                     fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-03IS ;
                                                     rdfs:label "MetadataRegisteredOrIndexedInSearchableResource" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUseAccessibleVocabulary
+fqm:MetadataUseAccessibleVocabulary rdf:type owl:Class ;
+                                    rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUseVocabulary
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty fqm:uses ;
+                                                                             owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                                         owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                         owl:someValuesFrom fqm:Accessible
+                                                                                                                       ]
+                                                                                                                     ) ;
+                                                                                                  rdf:type owl:Class
+                                                                                                ]
+                                                                           ]
+                                                                         ) ;
+                                                      rdf:type owl:Class
+                                                    ] ;
+                                    fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-03M ;
+                                    rdfs:label "MetadataUseAccessibleVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUseFindableVocabulary
+fqm:MetadataUseFindableVocabulary rdf:type owl:Class ;
+                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUseVocabulary
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty fqm:uses ;
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                       owl:someValuesFrom fqm:Findable
+                                                                                                                     ]
+                                                                                                                   ) ;
+                                                                                                rdf:type owl:Class
+                                                                                              ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ] ;
+                                  fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-02M ;
+                                  rdfs:label "MetadataUseFindableVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUseInteroperableVocabulary
+fqm:MetadataUseInteroperableVocabulary rdf:type owl:Class ;
+                                       rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUseVocabulary
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty fqm:uses ;
+                                                                                owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                          [ rdf:type owl:Restriction ;
+                                                                                                                            owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                            owl:someValuesFrom fqm:Interoperable
+                                                                                                                          ]
+                                                                                                                        ) ;
+                                                                                                     rdf:type owl:Class
+                                                                                                   ]
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ] ;
+                                       fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-04M ;
+                                       rdfs:label "MetadataUseInteroperableVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUseReusableVocabulary
+fqm:MetadataUseReusableVocabulary rdf:type owl:Class ;
+                                  rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataUseVocabulary
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty fqm:uses ;
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Vocabulary
+                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty fqm:hasCharacteristic ;
+                                                                                                                       owl:someValuesFrom fqm:Reusable
+                                                                                                                     ]
+                                                                                                                   ) ;
+                                                                                                rdf:type owl:Class
+                                                                                              ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ] ;
+                                  fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_I2-05M ;
+                                  rdfs:label "MetadataUseReusableVocabulary" .
+
+
+###  http://w3id.org/fairness-quality-measures/MetadataUseVocabulary
+fqm:MetadataUseVocabulary rdf:type owl:Class ;
+                          rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty fqm:uses ;
+                                                                   owl:someValuesFrom fqm:Vocabulary
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                          fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_I2-01M ;
+                          rdfs:label "MetadataUseVocabulary" .
 
 
 ###  http://w3id.org/fairness-quality-measures/MetadataUsesAccessibleKnowledgeRepresentationLanguage
@@ -2090,19 +2440,6 @@ by whom, its sources and ownership throughout its lifecycle""" ;
 fqm:Qualified rdf:type owl:Class ;
               rdfs:subClassOf fqm:Element ;
               rdfs:label "Qualified" .
-
-
-###  http://w3id.org/fairness-quality-measures/QualifiedReference
-fqm:QualifiedReference rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( fqm:Reference
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty fqm:hasCharacteristic ;
-                                                                owl:someValuesFrom fqm:Qualified
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
-                       rdfs:label "QualifiedReference" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Reference
