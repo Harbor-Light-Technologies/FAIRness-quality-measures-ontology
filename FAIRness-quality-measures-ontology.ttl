@@ -1,6 +1,4 @@
 @prefix : <http://w3id.org/fairness-quality-measures/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix fip: <https://w3id.org/fair/fip/terms/> .
 @prefix fqm: <http://w3id.org/fairness-quality-measures/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -18,6 +16,14 @@
 #    Annotation properties
 #################################################################
 
+###  http://w3id.org/fairness-quality-measures/inspectsCategoryClass
+fqm:inspectsCategoryClass rdf:type owl:AnnotationProperty ;
+                          rdfs:comment "The class of rdf:type Category that some FAIRQualityMeasure inspects." ;
+                          rdfs:label "inspectsCategoryClass" ;
+                          rdfs:range fqm:Category ;
+                          rdfs:domain fqm:FAIRQualityMeasure .
+
+
 ###  http://w3id.org/fairness-quality-measures/satisfiesFAIRQualityMeasure
 fqm:satisfiesFAIRQualityMeasure rdf:type owl:AnnotationProperty .
 
@@ -25,22 +31,6 @@ fqm:satisfiesFAIRQualityMeasure rdf:type owl:AnnotationProperty .
 #################################################################
 #    Object Properties
 #################################################################
-
-###  http://w3id.org/fairness-quality-measures/about
-fqm:about rdf:type owl:ObjectProperty ;
-          owl:inverseOf fqm:subjectOf ;
-          rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( fqm:Category
-                                      fqm:Concept
-                                    )
-                      ] ;
-          rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( fqm:Category
-                                     fqm:Concept
-                                   )
-                     ] ;
-          rdfs:label "about" .
-
 
 ###  http://w3id.org/fairness-quality-measures/allowsFor
 fqm:allowsFor rdf:type owl:ObjectProperty ;
@@ -97,6 +87,18 @@ fqm:describedWith rdf:type owl:ObjectProperty ;
                              ] .
 
 
+###  http://w3id.org/fairness-quality-measures/describes
+fqm:describes rdf:type owl:ObjectProperty ;
+              rdfs:domain fqm:Attribute ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( fqm:Category
+                                         fqm:Concept
+                                       )
+                         ] ;
+              rdfs:comment "An attribute that describes some Category or Concept. This allows for  characteristics of the attribute to be described." ;
+              rdfs:label "describes" .
+
+
 ###  http://w3id.org/fairness-quality-measures/forPrinciple
 fqm:forPrinciple rdf:type owl:ObjectProperty ,
                           owl:FunctionalProperty ;
@@ -107,12 +109,10 @@ fqm:forPrinciple rdf:type owl:ObjectProperty ,
 
 
 ###  http://w3id.org/fairness-quality-measures/hasCharacteristic
-fqm:hasCharacteristic rdf:type owl:ObjectProperty ,
-                               owl:FunctionalProperty ;
+fqm:hasCharacteristic rdf:type owl:ObjectProperty ;
                       rdfs:domain [ rdf:type owl:Class ;
                                     owl:unionOf ( fqm:Category
                                                   fqm:Concept
-                                                  fqm:Dimension
                                                 )
                                   ] ;
                       rdfs:range fqm:Element ;
@@ -129,37 +129,8 @@ fqm:hasDimension rdf:type owl:ObjectProperty ,
                  rdfs:label "hasDimension" .
 
 
-###  http://w3id.org/fairness-quality-measures/hasMaturityLevel
-fqm:hasMaturityLevel rdf:type owl:ObjectProperty ;
-                     rdfs:range fqm:FAIRQualityMaturityLevel ;
-                     rdfs:label "hasMaturityLevel" .
-
-
-###  http://w3id.org/fairness-quality-measures/hasMetadata
-fqm:hasMetadata rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf fqm:subjectOf ;
-                rdfs:domain fqm:Data ;
-                rdfs:range fqm:Metadata ;
-                rdfs:label "hasMetadata" .
-
-
-###  http://w3id.org/fairness-quality-measures/hasProvenance
-fqm:hasProvenance rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf fqm:subjectOf ;
-                  owl:inverseOf fqm:isProvenanceFor ;
-                  rdfs:domain [ rdf:type owl:Class ;
-                                owl:unionOf ( fqm:Data
-                                              fqm:Metadata
-                                            )
-                              ] ;
-                  rdfs:range fqm:Provenance ;
-                  owl:propertyChainAxiom ( fqm:subjectOf
-                                         ) .
-
-
 ###  http://w3id.org/fairness-quality-measures/identifies
 fqm:identifies rdf:type owl:ObjectProperty ;
-               owl:inverseOf fqm:isIdentifiedBy ;
                rdfs:domain fqm:Identifier ;
                rdfs:range [ rdf:type owl:Class ;
                             owl:unionOf ( fqm:Data
@@ -172,7 +143,6 @@ fqm:identifies rdf:type owl:ObjectProperty ;
 ###  http://w3id.org/fairness-quality-measures/includes
 fqm:includes rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
-             owl:inverseOf fqm:isIncludedIn ;
              rdfs:domain fqm:Metadata ;
              rdfs:range [ rdf:type owl:Class ;
                           owl:unionOf ( fqm:Attribute
@@ -185,6 +155,7 @@ fqm:includes rdf:type owl:ObjectProperty ;
 
 ###  http://w3id.org/fairness-quality-measures/indexedIn
 fqm:indexedIn rdf:type owl:ObjectProperty ;
+              owl:equivalentProperty fqm:registeredIn ;
               rdfs:subPropertyOf owl:topObjectProperty ;
               rdfs:domain [ rdf:type owl:Class ;
                             owl:unionOf ( fqm:Data
@@ -195,33 +166,9 @@ fqm:indexedIn rdf:type owl:ObjectProperty ;
               rdfs:label "indexedIn" .
 
 
-###  http://w3id.org/fairness-quality-measures/isIdentifiedBy
-fqm:isIdentifiedBy rdf:type owl:ObjectProperty ;
-                   rdfs:domain [ rdf:type owl:Class ;
-                                 owl:unionOf ( fqm:Data
-                                               fqm:Metadata
-                                             )
-                               ] ;
-                   rdfs:range fqm:Identifier ;
-                   rdfs:label "isIdentifiedBy" .
-
-
-###  http://w3id.org/fairness-quality-measures/isIncludedIn
-fqm:isIncludedIn rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf owl:topObjectProperty ;
-                 rdfs:domain [ rdf:type owl:Class ;
-                               owl:unionOf ( fqm:Attribute
-                                             fqm:DataUsageLicense
-                                             fqm:Provenance
-                                           )
-                             ] ;
-                 rdfs:range fqm:Metadata ;
-                 rdfs:label "isIncludedIn" .
-
-
 ###  http://w3id.org/fairness-quality-measures/isMetadataFor
 fqm:isMetadataFor rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf fqm:about ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
                   rdfs:domain fqm:Metadata ;
                   rdfs:range fqm:Data ;
                   rdfs:label "isMetadataFor" .
@@ -229,7 +176,7 @@ fqm:isMetadataFor rdf:type owl:ObjectProperty ;
 
 ###  http://w3id.org/fairness-quality-measures/isProvenanceFor
 fqm:isProvenanceFor rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf fqm:about ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
                     rdfs:domain fqm:Provenance ;
                     rdfs:range [ rdf:type owl:Class ;
                                  owl:unionOf ( fqm:Data
@@ -293,21 +240,6 @@ fqm:resolvesTo rdf:type owl:ObjectProperty ,
                rdfs:label "resolvesTo" .
 
 
-###  http://w3id.org/fairness-quality-measures/subjectOf
-fqm:subjectOf rdf:type owl:ObjectProperty ;
-              rdfs:domain [ rdf:type owl:Class ;
-                            owl:unionOf ( fqm:Category
-                                          fqm:Concept
-                                        )
-                          ] ;
-              rdfs:range [ rdf:type owl:Class ;
-                           owl:unionOf ( fqm:Category
-                                         fqm:Concept
-                                       )
-                         ] ;
-              rdfs:label "subjectOf" .
-
-
 ###  http://w3id.org/fairness-quality-measures/supplementsCoreIndicator
 fqm:supplementsCoreIndicator rdf:type owl:ObjectProperty ,
                                       owl:FunctionalProperty ;
@@ -320,6 +252,11 @@ fqm:supplementsCoreIndicator rdf:type owl:ObjectProperty ,
 ###  http://w3id.org/fairness-quality-measures/uses
 fqm:uses rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( fqm:Data
+                                     fqm:Metadata
+                                   )
+                     ] ;
          rdfs:range [ rdf:type owl:Class ;
                       owl:unionOf ( fqm:KnowledgeRepresentationLanguage
                                     fqm:Protocol
@@ -332,13 +269,26 @@ fqm:uses rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
-###  http://w3id.org/fairness-quality-measures/maturityLevel
-fqm:maturityLevel rdf:type owl:DatatypeProperty ,
-                           owl:FunctionalProperty ;
-                  rdfs:domain fqm:FAIRQualityMaturityLevel ;
-                  rdfs:range xsd:integer ;
-                  rdfs:comment "A property in order to rank, sory or order FAIR Quality maturity levels" ;
-                  rdfs:label "maturityLevel" .
+###  http://w3id.org/fairness-quality-measures/indicatorNumber
+fqm:indicatorNumber rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain fqm:FAIRQualityMeasure ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "The level of an indicator. CoreIndicator classes always have a level = 1. SupplementalIndicator's always have values > 1." ;
+                    rdfs:label "indicatorNumber" .
+
+
+###  http://w3id.org/fairness-quality-measures/rank
+fqm:rank rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( fqm:Dimension
+                                     fqm:Principle
+                                   )
+                     ] ;
+         rdfs:range xsd:decimal ;
+         rdfs:comment "The rank order across some set of instances. This value helps implementing software order instances in some meaningful way. Example: Instances of Dimensions F, A, I, R woudl alpha sort as A, F, I, R. This property allows them to be sorted by a xsd:decimal value. This ontology assigns rank to Dimension NamedIndividuals as F=1, A=2, I=3, R=4." ;
+         rdfs:label "rank" .
 
 
 #################################################################
@@ -422,7 +372,6 @@ fqm:Concept rdf:type owl:Class ;
 ###  http://w3id.org/fairness-quality-measures/Contextualizes
 fqm:Contextualizes rdf:type owl:Class ;
                    rdfs:subClassOf fqm:Element ;
-                   rdfs:comment "change to Contextualizing" ;
                    rdfs:label "Contextualizes" .
 
 
@@ -438,13 +387,20 @@ fqm:CoreIndicator rdf:type owl:Class ;
 fqm:Data rdf:type owl:Class ;
          rdfs:subClassOf [ owl:intersectionOf ( fqm:Category
                                                 [ rdf:type owl:Restriction ;
-                                                  owl:onProperty fqm:hasMetadata ;
+                                                  owl:onProperty fqm:describedWith ;
                                                   owl:someValuesFrom fqm:Metadata
                                                 ]
                                               ) ;
                            rdf:type owl:Class
                          ] ;
+         owl:disjointWith fqm:Infrastructure ;
          rdfs:label "Data" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataAccessAttribute
+fqm:DataAccessAttribute rdf:type owl:Class ;
+                        rdfs:subClassOf fqm:Attribute ;
+                        rdfs:label "DataAccessAttribute" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DataAssignedEternallyPersistentIdentifier
@@ -1136,7 +1092,7 @@ fqm:DataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
                                                                                      ) ;
                                                                   rdf:type owl:Class
                                                                 ] ;
-                                                fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-02IS ;
+                                                fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F4-02IS ;
                                                 rdfs:label "DataRegisteredOrIndexedInSearchableResource" .
 
 
@@ -1196,11 +1152,30 @@ fqm:DataReleasedWithDataUsageLicense rdf:type owl:Class ;
                                      rdfs:label "DataReleasedWithDataUsageLicense" .
 
 
+###  http://w3id.org/fairness-quality-measures/DataRetrievalAttribute
+fqm:DataRetrievalAttribute rdf:type owl:Class ;
+                           rdfs:subClassOf fqm:Attribute ;
+                           rdfs:label "DataRetrievalAttribute" .
+
+
 ###  http://w3id.org/fairness-quality-measures/DataUsageLicense
 fqm:DataUsageLicense rdf:type owl:Class ;
                      rdfs:subClassOf fqm:License ;
                      rdfs:comment "A license that describes under which conditions the discovered data can be used" ;
                      rdfs:label "DataUsageLicense" .
+
+
+###  http://w3id.org/fairness-quality-measures/DataUsageLicenseAttribute
+fqm:DataUsageLicenseAttribute rdf:type owl:Class ;
+                              rdfs:subClassOf [ owl:intersectionOf ( fqm:Attribute
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty fqm:describes ;
+                                                                       owl:someValuesFrom fqm:DataUsageLicense
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                              rdfs:label "DataUsageLicenseAttribute" .
 
 
 ###  http://w3id.org/fairness-quality-measures/DataUseAccessibleVocabulary
@@ -1455,17 +1430,20 @@ fqm:Explicit rdf:type owl:Class ;
              rdfs:label "Explicit" .
 
 
-###  http://w3id.org/fairness-quality-measures/FAIRQualityMaturityLevel
-fqm:FAIRQualityMaturityLevel rdf:type owl:Class ;
-                             rdfs:label "FAIRQualityMaturityLevel" .
-
-
 ###  http://w3id.org/fairness-quality-measures/FAIRQualityMeasure
 fqm:FAIRQualityMeasure rdf:type owl:Class ;
-                       rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                         owl:onProperty fqm:forPrinciple ;
-                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                         owl:onClass fqm:Principle
+                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                owl:onProperty fqm:forPrinciple ;
+                                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onClass fqm:Principle
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty fqm:indicatorNumber ;
+                                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onDataRange xsd:decimal
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
                                        ] ;
                        rdfs:comment "can check for 1 or more CategoryPredicate. Example: F4 with registered or Indexed." ;
                        rdfs:isDefinedBy <http://w3id.org/fairness-quality-measures> ;
@@ -1522,6 +1500,19 @@ fqm:Identifier rdf:type owl:Class ;
                rdfs:label "Identifier" .
 
 
+###  http://w3id.org/fairness-quality-measures/IdentifierAttribute
+fqm:IdentifierAttribute rdf:type owl:Class ;
+                        rdfs:subClassOf [ owl:intersectionOf ( fqm:Attribute
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty fqm:describes ;
+                                                                 owl:someValuesFrom fqm:Identifier
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                        rdfs:label "IdentifierAttribute" .
+
+
 ###  http://w3id.org/fairness-quality-measures/IdentifierScheme
 fqm:IdentifierScheme rdf:type owl:Class ;
                      rdfs:subClassOf fqm:Concept ;
@@ -1531,8 +1522,8 @@ fqm:IdentifierScheme rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/Infrastructure
 fqm:Infrastructure rdf:type owl:Class ;
-                   owl:equivalentClass fqm:Resource ;
                    rdfs:subClassOf fqm:Category ;
+                   owl:disjointWith fqm:Metadata ;
                    rdfs:label "Infrastructure" .
 
 
@@ -1553,34 +1544,6 @@ fqm:Language rdf:type owl:Class ;
              rdfs:subClassOf fqm:Concept ;
              rdfs:comment "A formal system used to express the context of data and/or metadata in a format such as XML (eXtensible Markup Language) and RDF (Resource Description Framework) that can be utilized by machines" ;
              rdfs:label "Language" .
-
-
-###  http://w3id.org/fairness-quality-measures/Level-0
-fqm:Level-0 rdf:type owl:Class ;
-            rdfs:subClassOf fqm:FAIRQualityMaturityLevel ;
-            rdfs:comment "denotes the state of ‘None' or 'No Information Available'" ;
-            rdfs:label "Level-0" .
-
-
-###  http://w3id.org/fairness-quality-measures/Level-1
-fqm:Level-1 rdf:type owl:Class ;
-            rdfs:subClassOf fqm:FAIRQualityMaturityLevel ;
-            rdfs:comment "The stage of minimal compliance with the FAIR principles" ;
-            rdfs:label "Level-1" .
-
-
-###  http://w3id.org/fairness-quality-measures/Level-2
-fqm:Level-2 rdf:type owl:Class ;
-            rdfs:subClassOf fqm:FAIRQualityMaturityLevel ;
-            rdfs:comment "The stage of intermediate compliance with the FAIR principles" ;
-            rdfs:label "Level-2" .
-
-
-###  http://w3id.org/fairness-quality-measures/Level-3
-fqm:Level-3 rdf:type owl:Class ;
-            rdfs:subClassOf fqm:FAIRQualityMaturityLevel ;
-            rdfs:comment "The stage of optimal compliance with the FAIR principles" ;
-            rdfs:label "Level-3" .
 
 
 ###  http://w3id.org/fairness-quality-measures/License
@@ -1697,30 +1660,15 @@ fqm:MetadataAssociatedWithProvenance rdf:type owl:Class ;
                                      rdfs:label "MetadataAssociatedWithProvenance" .
 
 
-###  http://w3id.org/fairness-quality-measures/MetadataClearlyAndExplicitlyIncludesDataIdentifier
-fqm:MetadataClearlyAndExplicitlyIncludesDataIdentifier rdf:type owl:Class ;
-                                                       owl:equivalentClass [ owl:intersectionOf ( fqm:MetadataClearlyIncludesDataIdentifier
-                                                                                                  fqm:MetadataExplicitlyIncludesDataIdentifier
-                                                                                                ) ;
-                                                                             rdf:type owl:Class
-                                                                           ] ;
-                                                       rdfs:subClassOf fqm:MetadataIncludeDataIdentifier ;
-                                                       rdfs:label "MetadataClearlyAndExplicitlyIncludesDataIdentifier" .
-
-
 ###  http://w3id.org/fairness-quality-measures/MetadataClearlyIncludesDataIdentifier
 fqm:MetadataClearlyIncludesDataIdentifier rdf:type owl:Class ;
                                           rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeDataIdentifier
                                                                                  [ rdf:type owl:Restriction ;
                                                                                    owl:onProperty fqm:includes ;
-                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                   owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierAttribute
                                                                                                                              [ rdf:type owl:Restriction ;
                                                                                                                                owl:onProperty fqm:hasCharacteristic ;
                                                                                                                                owl:someValuesFrom fqm:Clear
-                                                                                                                             ]
-                                                                                                                             [ rdf:type owl:Restriction ;
-                                                                                                                               owl:onProperty fqm:identifies ;
-                                                                                                                               owl:someValuesFrom fqm:Data
                                                                                                                              ]
                                                                                                                            ) ;
                                                                                                         rdf:type owl:Class
@@ -1731,16 +1679,6 @@ fqm:MetadataClearlyIncludesDataIdentifier rdf:type owl:Class ;
                                                           ] ;
                                           fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F3-02M ;
                                           rdfs:label "MetadataClearlyIncludesDataIdentifier" .
-
-
-###  http://w3id.org/fairness-quality-measures/MetadataClearlyOrExplicitlyIncludesDataIdentifier
-fqm:MetadataClearlyOrExplicitlyIncludesDataIdentifier rdf:type owl:Class ;
-                                                      owl:equivalentClass [ rdf:type owl:Class ;
-                                                                            owl:unionOf ( fqm:MetadataClearlyIncludesDataIdentifier
-                                                                                          fqm:MetadataExplicitlyIncludesDataIdentifier
-                                                                                        )
-                                                                          ] ;
-                                                      rdfs:subClassOf fqm:MetadataIncludeDataIdentifier .
 
 
 ###  http://w3id.org/fairness-quality-measures/MetadataDescribedWithAccurateAttributes
@@ -1867,14 +1805,10 @@ fqm:MetadataExplicitlyIncludesDataIdentifier rdf:type owl:Class ;
                                              rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataIncludeDataIdentifier
                                                                                     [ rdf:type owl:Restriction ;
                                                                                       owl:onProperty fqm:includes ;
-                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                      owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierAttribute
                                                                                                                                 [ rdf:type owl:Restriction ;
                                                                                                                                   owl:onProperty fqm:hasCharacteristic ;
                                                                                                                                   owl:someValuesFrom fqm:Explicit
-                                                                                                                                ]
-                                                                                                                                [ rdf:type owl:Restriction ;
-                                                                                                                                  owl:onProperty fqm:identifies ;
-                                                                                                                                  owl:someValuesFrom fqm:Data
                                                                                                                                 ]
                                                                                                                               ) ;
                                                                                                            rdf:type owl:Class
@@ -2161,7 +2095,7 @@ fqm:MetadataIncludeDataAccessAttributes rdf:type owl:Class ;
                                         rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
                                                                                [ rdf:type owl:Restriction ;
                                                                                  owl:onProperty fqm:includes ;
-                                                                                 owl:someValuesFrom [ owl:intersectionOf ( fqm:Attribute
+                                                                                 owl:someValuesFrom [ owl:intersectionOf ( fqm:DataAccessAttribute
                                                                                                                            [ rdf:type owl:Restriction ;
                                                                                                                              owl:onProperty fqm:hasCharacteristic ;
                                                                                                                              owl:someValuesFrom fqm:Accessible
@@ -2182,10 +2116,17 @@ fqm:MetadataIncludeDataIdentifier rdf:type owl:Class ;
                                   rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
                                                                          [ rdf:type owl:Restriction ;
                                                                            owl:onProperty fqm:includes ;
-                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:IdentifierAttribute
                                                                                                                      [ rdf:type owl:Restriction ;
-                                                                                                                       owl:onProperty fqm:identifies ;
-                                                                                                                       owl:someValuesFrom fqm:Data
+                                                                                                                       owl:onProperty fqm:describes ;
+                                                                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Identifier
+                                                                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                                                                   owl:onProperty fqm:identifies ;
+                                                                                                                                                                   owl:someValuesFrom fqm:Data
+                                                                                                                                                                 ]
+                                                                                                                                                               ) ;
+                                                                                                                                            rdf:type owl:Class
+                                                                                                                                          ]
                                                                                                                      ]
                                                                                                                    ) ;
                                                                                                 rdf:type owl:Class
@@ -2203,10 +2144,17 @@ fqm:MetadataIncludeDataProvenance rdf:type owl:Class ;
                                   rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
                                                                          [ rdf:type owl:Restriction ;
                                                                            owl:onProperty fqm:includes ;
-                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:Provenance
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( fqm:ProvenanceAttribute
                                                                                                                      [ rdf:type owl:Restriction ;
-                                                                                                                       owl:onProperty fqm:isProvenanceFor ;
-                                                                                                                       owl:someValuesFrom fqm:Data
+                                                                                                                       owl:onProperty fqm:describes ;
+                                                                                                                       owl:someValuesFrom [ owl:intersectionOf ( fqm:Provenance
+                                                                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                                                                   owl:onProperty fqm:isProvenanceFor ;
+                                                                                                                                                                   owl:someValuesFrom fqm:Data
+                                                                                                                                                                 ]
+                                                                                                                                                               ) ;
+                                                                                                                                            rdf:type owl:Class
+                                                                                                                                          ]
                                                                                                                      ]
                                                                                                                    ) ;
                                                                                                 rdf:type owl:Class
@@ -2224,7 +2172,7 @@ fqm:MetadataIncludeDataRetrievalAttributes rdf:type owl:Class ;
                                            rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
                                                                                   [ rdf:type owl:Restriction ;
                                                                                     owl:onProperty fqm:includes ;
-                                                                                    owl:someValuesFrom [ owl:intersectionOf ( fqm:Attribute
+                                                                                    owl:someValuesFrom [ owl:intersectionOf ( fqm:DataRetrievalAttribute
                                                                                                                               [ rdf:type owl:Restriction ;
                                                                                                                                 owl:onProperty fqm:hasCharacteristic ;
                                                                                                                                 owl:someValuesFrom fqm:Retrievable
@@ -2245,7 +2193,7 @@ fqm:MetadataIncludeDataUsageLicense rdf:type owl:Class ;
                                     rdfs:subClassOf [ owl:intersectionOf ( fqm:Metadata
                                                                            [ rdf:type owl:Restriction ;
                                                                              owl:onProperty fqm:includes ;
-                                                                             owl:someValuesFrom fqm:DataUsageLicense
+                                                                             owl:someValuesFrom fqm:DataUsageLicenseAttribute
                                                                            ]
                                                                          ) ;
                                                       rdf:type owl:Class
@@ -2354,35 +2302,14 @@ fqm:MetadataIncludeReferencesToOtherMetadata rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/MetadataMeetCommunityStandards
 fqm:MetadataMeetCommunityStandards rdf:type owl:Class ;
-                                   rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataMeetStandards
-                                                                          [ rdf:type owl:Restriction ;
-                                                                            owl:onProperty fqm:meets ;
-                                                                            owl:someValuesFrom fqm:CommunityStandard
-                                                                          ]
-                                                                        ) ;
-                                                     rdf:type owl:Class
-                                                   ] ;
+                                   rdfs:subClassOf fqm:MetadataMeetStandards ;
                                    fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_R1.3-03M ;
                                    rdfs:label "MetadataMeetCommunityStandards" .
 
 
 ###  http://w3id.org/fairness-quality-measures/MetadataMeetDomainRelevantStandards
 fqm:MetadataMeetDomainRelevantStandards rdf:type owl:Class ;
-                                        rdfs:subClassOf [ owl:intersectionOf ( fqm:MetadataMeetStandards
-                                                                               [ rdf:type owl:Restriction ;
-                                                                                 owl:onProperty fqm:meets ;
-                                                                                 owl:someValuesFrom [ owl:intersectionOf ( fqm:Standard
-                                                                                                                           [ rdf:type owl:Restriction ;
-                                                                                                                             owl:onProperty fqm:hasCharacteristic ;
-                                                                                                                             owl:someValuesFrom fqm:DomainSpecific
-                                                                                                                           ]
-                                                                                                                         ) ;
-                                                                                                      rdf:type owl:Class
-                                                                                                    ]
-                                                                               ]
-                                                                             ) ;
-                                                          rdf:type owl:Class
-                                                        ] ;
+                                        rdfs:subClassOf fqm:MetadataMeetStandards ;
                                         fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_R1.3-02M ;
                                         rdfs:label "MetadataMeetDomainRelevantStandards" .
 
@@ -2453,7 +2380,7 @@ fqm:MetadataRegisteredOrIndexedInSearchableResource rdf:type owl:Class ;
                                                                                          ) ;
                                                                       rdf:type owl:Class
                                                                     ] ;
-                                                    fqm:satisfiesFAIRQualityMeasure fqm:CoreIndicator_F4-03IS ;
+                                                    fqm:satisfiesFAIRQualityMeasure fqm:SupplementalIndicator_F4-03IS ;
                                                     rdfs:label "MetadataRegisteredOrIndexedInSearchableResource" .
 
 
@@ -2820,6 +2747,19 @@ by whom, its sources and ownership throughout its lifecycle""" ;
                rdfs:label "Provenance" .
 
 
+###  http://w3id.org/fairness-quality-measures/ProvenanceAttribute
+fqm:ProvenanceAttribute rdf:type owl:Class ;
+                        rdfs:subClassOf [ owl:intersectionOf ( fqm:Attribute
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty fqm:describes ;
+                                                                 owl:someValuesFrom fqm:Provenance
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                        rdfs:label "ProvenanceAttribute" .
+
+
 ###  http://w3id.org/fairness-quality-measures/Qualified
 fqm:Qualified rdf:type owl:Class ;
               rdfs:subClassOf fqm:Element ;
@@ -2866,12 +2806,14 @@ fqm:Rich rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/Searchable
 fqm:Searchable rdf:type owl:Class ;
-               rdfs:subClassOf fqm:Element .
+               rdfs:subClassOf fqm:Element ;
+               rdfs:label "Searchable" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Shared
 fqm:Shared rdf:type owl:Class ;
-           rdfs:subClassOf fqm:Element .
+           rdfs:subClassOf fqm:Element ;
+           rdfs:label "Shared" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Standard
@@ -2883,7 +2825,8 @@ fqm:Standard rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/Standardized
 fqm:Standardized rdf:type owl:Class ;
-                 rdfs:subClassOf fqm:Element .
+                 rdfs:subClassOf fqm:Element ;
+                 rdfs:label "Standardized" .
 
 
 ###  http://w3id.org/fairness-quality-measures/SupplementalIndicator
@@ -2891,8 +2834,7 @@ fqm:SupplementalIndicator rdf:type owl:Class ;
                           rdfs:subClassOf [ owl:intersectionOf ( fqm:FAIRQualityMeasure
                                                                  [ rdf:type owl:Restriction ;
                                                                    owl:onProperty fqm:supplementsCoreIndicator ;
-                                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                   owl:onClass fqm:CoreIndicator
+                                                                   owl:someValuesFrom fqm:CoreIndicator
                                                                  ]
                                                                ) ;
                                             rdf:type owl:Class
@@ -2903,7 +2845,8 @@ fqm:SupplementalIndicator rdf:type owl:Class ;
 
 ###  http://w3id.org/fairness-quality-measures/UniversallyImplementable
 fqm:UniversallyImplementable rdf:type owl:Class ;
-                             rdfs:subClassOf fqm:Element .
+                             rdfs:subClassOf fqm:Element ;
+                             rdfs:label "UniversallyImplementable" .
 
 
 ###  http://w3id.org/fairness-quality-measures/Usable
@@ -2928,6 +2871,8 @@ may consist of terms and definitions that describe the types of data, their char
 fqm:CoreIndicator_A1-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:A1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data identifier resolves to a Digital Object" ;
                          rdfs:label "CoreIndicator: A1-01D" .
 
@@ -2936,6 +2881,8 @@ fqm:CoreIndicator_A1-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_A1-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:A1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata identifier resolves to a Digital Object" ;
                          rdfs:label "CoreIndicator: A1-01M" .
 
@@ -2944,6 +2891,8 @@ fqm:CoreIndicator_A1-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_A1.2-01IS rdf:type owl:NamedIndividual ,
                                      fqm:CoreIndicator ;
                             fqm:forPrinciple fair:A1.2 ;
+                            fqm:indicatorNumber 1 ;
+                            fqm:inspectsCategoryClass fqm:Infrastructure ;
                             rdfs:comment "The protocol allows for procedure, where necessary" ;
                             rdfs:label "CoreIndicator: A1.2-01IS" .
 
@@ -2952,6 +2901,8 @@ fqm:CoreIndicator_A1.2-01IS rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_A2-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:A2 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata are accessible permanently" ;
                          rdfs:label "CoreIndicator: A2-01M" .
 
@@ -2960,6 +2911,8 @@ fqm:CoreIndicator_A2-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_F1-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:F1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data are assigned an Identifier" ;
                          rdfs:label "CoreIndicator: F1-01D" .
 
@@ -2968,6 +2921,8 @@ fqm:CoreIndicator_F1-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_F1-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:F1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata are assigned an Identifier" ;
                          rdfs:label "CoreIndicator: F1-01M" .
 
@@ -2976,6 +2931,8 @@ fqm:CoreIndicator_F1-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_F2-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:F2 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data are described with rich Metadata" ;
                          rdfs:label "CoreIndicator: F2-01D" .
 
@@ -2984,6 +2941,8 @@ fqm:CoreIndicator_F2-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_F3-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:F3 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata include the identifier of the data it describes" ;
                          rdfs:label "CoreIndicator: F3-01M" .
 
@@ -2992,6 +2951,8 @@ fqm:CoreIndicator_F3-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_F4-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:F4 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data are registered or indexed in a resource" ;
                          rdfs:label "CoreIndicator: F4-01D" .
 
@@ -3000,6 +2961,8 @@ fqm:CoreIndicator_F4-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_F4-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:F4 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata are registered or indexed in a resource" ;
                          rdfs:label "CoreIndicator: F4-01M" .
 
@@ -3008,6 +2971,8 @@ fqm:CoreIndicator_F4-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_I1-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:I1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data use langauge for knowledge representation" ;
                          rdfs:label "CoreIndicator: I1-01D" .
 
@@ -3016,6 +2981,8 @@ fqm:CoreIndicator_I1-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_I1-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:I1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata use langauge for knowledge representation" ;
                          rdfs:label "CoreIndicator: I1-01M" .
 
@@ -3024,6 +2991,8 @@ fqm:CoreIndicator_I1-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_I2-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:I2 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data use a vocabulary" ;
                          rdfs:label "CoreIndicator: I2-01D" .
 
@@ -3032,6 +3001,8 @@ fqm:CoreIndicator_I2-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_I2-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:I2 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata use a vocabulary" ;
                          rdfs:label "CoreIndicator: I2-01M" .
 
@@ -3040,6 +3011,8 @@ fqm:CoreIndicator_I2-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_I3-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:I3 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data include references" ;
                          rdfs:label "CoreIndicator: I3-01D" .
 
@@ -3048,6 +3021,8 @@ fqm:CoreIndicator_I3-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_I3-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:I3 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata include references" ;
                          rdfs:label "CoreIndicator: I3-01M" .
 
@@ -3056,6 +3031,8 @@ fqm:CoreIndicator_I3-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1-01D rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:R1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Data ;
                          rdfs:comment "Data described with attributes" ;
                          rdfs:label "CoreIndicator: R1-01D" .
 
@@ -3064,6 +3041,8 @@ fqm:CoreIndicator_R1-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1-01M rdf:type owl:NamedIndividual ,
                                   fqm:CoreIndicator ;
                          fqm:forPrinciple fair:R1 ;
+                         fqm:indicatorNumber 1 ;
+                         fqm:inspectsCategoryClass fqm:Metadata ;
                          rdfs:comment "Metadata described with attributes" ;
                          rdfs:label "CoreIndicator: R1-01M" .
 
@@ -3072,6 +3051,8 @@ fqm:CoreIndicator_R1-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1.1-01D rdf:type owl:NamedIndividual ,
                                     fqm:CoreIndicator ;
                            fqm:forPrinciple fair:R1.1 ;
+                           fqm:indicatorNumber 1 ;
+                           fqm:inspectsCategoryClass fqm:Data ;
                            rdfs:comment "Data are released with a data usage license" ;
                            rdfs:label "CoreIndicator: R1.1-01D" .
 
@@ -3080,6 +3061,8 @@ fqm:CoreIndicator_R1.1-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1.1-01M rdf:type owl:NamedIndividual ,
                                     fqm:CoreIndicator ;
                            fqm:forPrinciple fair:R1.1 ;
+                           fqm:indicatorNumber 1 ;
+                           fqm:inspectsCategoryClass fqm:Metadata ;
                            rdfs:comment "Metadata are released with a data usage license" ;
                            rdfs:label "CoreIndicator: R1.1-01M" .
 
@@ -3088,6 +3071,8 @@ fqm:CoreIndicator_R1.1-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1.2-01D rdf:type owl:NamedIndividual ,
                                     fqm:CoreIndicator ;
                            fqm:forPrinciple fair:R1.2 ;
+                           fqm:indicatorNumber 1 ;
+                           fqm:inspectsCategoryClass fqm:Data ;
                            rdfs:comment "Data are associated with provenance" ;
                            rdfs:label "CoreIndicator: R1.2-01D" .
 
@@ -3096,6 +3081,8 @@ fqm:CoreIndicator_R1.2-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1.2-01M rdf:type owl:NamedIndividual ,
                                     fqm:CoreIndicator ;
                            fqm:forPrinciple fair:R1.2 ;
+                           fqm:indicatorNumber 1 ;
+                           fqm:inspectsCategoryClass fqm:Metadata ;
                            rdfs:comment "Metadata are associated with provenance" ;
                            rdfs:label "CoreIndicator: R1.2-01M" .
 
@@ -3104,6 +3091,8 @@ fqm:CoreIndicator_R1.2-01M rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1.3-01D rdf:type owl:NamedIndividual ,
                                     fqm:CoreIndicator ;
                            fqm:forPrinciple fair:R1.3 ;
+                           fqm:indicatorNumber 1 ;
+                           fqm:inspectsCategoryClass fqm:Data ;
                            rdfs:comment "Data meet standards" ;
                            rdfs:label "CoreIndicator: R1.3-01D" .
 
@@ -3112,46 +3101,10 @@ fqm:CoreIndicator_R1.3-01D rdf:type owl:NamedIndividual ,
 fqm:CoreIndicator_R1.3-01M rdf:type owl:NamedIndividual ,
                                     fqm:CoreIndicator ;
                            fqm:forPrinciple fair:R1.3 ;
+                           fqm:indicatorNumber 1 ;
+                           fqm:inspectsCategoryClass fqm:Metaata ;
                            rdfs:comment "Metadata meet standards" ;
                            rdfs:label "CoreIndicator: R1.3-01M" .
-
-
-###  http://w3id.org/fairness-quality-measures/FQMLevel-0_NoInformationAvailable
-fqm:FQMLevel-0_NoInformationAvailable rdf:type owl:NamedIndividual ,
-                                               fqm:Level-0 ;
-                                      owl:sameAs fqm:FQMLevel-0_None ;
-                                      fqm:maturityLevel 0 ;
-                                      rdfs:label "FAIRQualityMaturityLevel0: No Information Available" .
-
-
-###  http://w3id.org/fairness-quality-measures/FQMLevel-0_None
-
-###  http://w3id.org/fairness-quality-measures/FQMLevel-0_None
-fqm:FQMLevel-0_None rdf:type owl:NamedIndividual ,
-                             fqm:Level-0 ;
-                    fqm:maturityLevel 0 ;
-                    rdfs:label "FAIRQualityMaturityLevel0: None" .
-
-
-###  http://w3id.org/fairness-quality-measures/FQMLevel-1_Minimal
-fqm:FQMLevel-1_Minimal rdf:type owl:NamedIndividual ,
-                                fqm:Level-1 ;
-                       fqm:maturityLevel 1 ;
-                       rdfs:label "FairQualityMaturityLevel1: Minimal" .
-
-
-###  http://w3id.org/fairness-quality-measures/FQMLevel-2_Intermediate
-fqm:FQMLevel-2_Intermediate rdf:type owl:NamedIndividual ,
-                                     fqm:Level-2 ;
-                            fqm:maturityLevel 2 ;
-                            rdfs:label "FAIRQualityMaturityLevel2: Intermediate" .
-
-
-###  http://w3id.org/fairness-quality-measures/FQMLevel-3_Optimal
-fqm:FQMLevel-3_Optimal rdf:type owl:NamedIndividual ,
-                                fqm:Level-3 ;
-                       fqm:maturityLevel 3 ;
-                       rdfs:label "FAIRQualityMaturityLevel3: Optimal" .
 
 
 ###  http://w3id.org/fairness-quality-measures/SupplementalIndicator_A1-01IS
@@ -3159,6 +3112,8 @@ fqm:SupplementalIndicator_A1-01IS rdf:type owl:NamedIndividual ,
                                            fqm:SupplementalIndicator ;
                                   fqm:forPrinciple fair:A1 ;
                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ;
+                                  fqm:indicatorNumber 1 ;
+                                  fqm:inspectsCategoryClass fqm:Infrastructure ;
                                   rdfs:comment "The communication protocol for data retrieval is standardized" ;
                                   rdfs:label "SupplementalIndicator: A1-01IS" .
 
@@ -3168,6 +3123,8 @@ fqm:SupplementalIndicator_A1-02IS rdf:type owl:NamedIndividual ,
                                            fqm:SupplementalIndicator ;
                                   fqm:forPrinciple fair:A1 ;
                                   fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01M ;
+                                  fqm:indicatorNumber 2 ;
+                                  fqm:inspectsCategoryClass fqm:Infrastructure ;
                                   rdfs:comment "The communication protocol for metadata retrieval is standardized" ;
                                   rdfs:label "SupplementalIndicator: A1-02IS" .
 
@@ -3178,6 +3135,8 @@ fqm:SupplementalIndicator_A1.1-01IS rdf:type owl:NamedIndividual ,
                                     fqm:forPrinciple fair:A1.1 ;
                                     fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ,
                                                                  fqm:CoreIndicator_A1-01M ;
+                                    fqm:indicatorNumber 1 ;
+                                    fqm:inspectsCategoryClass fqm:Infrastructure ;
                                     rdfs:comment "The protocol is open" ;
                                     rdfs:label "SupplementalIndicator: A1.1-01IS" .
 
@@ -3188,6 +3147,8 @@ fqm:SupplementalIndicator_A1.1-02IS rdf:type owl:NamedIndividual ,
                                     fqm:forPrinciple fair:A1.1 ;
                                     fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ,
                                                                  fqm:CoreIndicator_A1-01M ;
+                                    fqm:indicatorNumber 2 ;
+                                    fqm:inspectsCategoryClass fqm:Infrastructure ;
                                     rdfs:comment "The protocol is free" ;
                                     rdfs:label "SupplementalIndicator: A1.1-02IS" .
 
@@ -3198,6 +3159,8 @@ fqm:SupplementalIndicator_A1.1-03IS rdf:type owl:NamedIndividual ,
                                     fqm:forPrinciple fair:A1.1 ;
                                     fqm:supplementsCoreIndicator fqm:CoreIndicator_A1-01D ,
                                                                  fqm:CoreIndicator_A1-01M ;
+                                    fqm:indicatorNumber 3 ;
+                                    fqm:inspectsCategoryClass fqm:Infrastructure ;
                                     rdfs:comment "The protocol is universally implementable" ;
                                     rdfs:label "SupplementalIndicator: A1.1-03IS" .
 
@@ -3207,6 +3170,8 @@ fqm:SupplementalIndicator_A1.2-02IS rdf:type owl:NamedIndividual ,
                                              fqm:SupplementalIndicator ;
                                     fqm:forPrinciple fair:A1.2 ;
                                     fqm:supplementsCoreIndicator fqm:CoreIndicator_A1.2-01IS ;
+                                    fqm:indicatorNumber 2 ;
+                                    fqm:inspectsCategoryClass fqm:Infrastructure ;
                                     rdfs:comment "The procedure includes that for authentication" ;
                                     rdfs:label "SupplementalIndicator: A1.2-02IS" .
 
@@ -3216,6 +3181,8 @@ fqm:SupplementalIndicator_A1.2-03IS rdf:type owl:NamedIndividual ,
                                              fqm:SupplementalIndicator ;
                                     fqm:forPrinciple fair:A1.2 ;
                                     fqm:supplementsCoreIndicator fqm:CoreIndicator_A1.2-01IS ;
+                                    fqm:indicatorNumber 3 ;
+                                    fqm:inspectsCategoryClass fqm:Infrastructure ;
                                     rdfs:comment "The procedure includes that for authorization" ;
                                     rdfs:label "SupplementalIndicator: A1.2-03IS" .
 
@@ -3225,6 +3192,8 @@ fqm:SupplementalIndicator_F1-02D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01D ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "Data Identifier is globally unique" ;
                                  rdfs:label "SupplementalIndicator: F1-02D" .
 
@@ -3234,6 +3203,8 @@ fqm:SupplementalIndicator_F1-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata Identifier is globally unique" ;
                                  rdfs:label "SupplementalIndicator: F1-02M" .
 
@@ -3243,6 +3214,8 @@ fqm:SupplementalIndicator_F1-03D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "Data Identifier is eternally persistent" ;
                                  rdfs:label "SupplementalIndicator: F1-03D" .
 
@@ -3252,6 +3225,8 @@ fqm:SupplementalIndicator_F1-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata Identifier is eternally persistent" ;
                                  rdfs:label "SupplementalIndicator: F1-03M" .
 
@@ -3261,6 +3236,8 @@ fqm:SupplementalIndicator_F2-01M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 fqm:indicatorNumber 1 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include data usage license" ;
                                  rdfs:label "SupplementalIndicator: F2-01M" .
 
@@ -3270,6 +3247,8 @@ fqm:SupplementalIndicator_F2-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include data provenance" ;
                                  rdfs:label "SupplementalIndicator: F2-02M" .
 
@@ -3279,6 +3258,8 @@ fqm:SupplementalIndicator_F2-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include attributes for discovery" ;
                                  rdfs:label "SupplementalIndicator: F2-03M" .
 
@@ -3288,6 +3269,8 @@ fqm:SupplementalIndicator_F2-04M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include attributes for data retrieval" ;
                                  rdfs:label "SupplementalIndicator: F2-04M" .
 
@@ -3297,6 +3280,8 @@ fqm:SupplementalIndicator_F2-05M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F2-01D ;
+                                 fqm:indicatorNumber 5 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include attributes for data access" ;
                                  rdfs:label "SupplementalIndicator: F2-05M" .
 
@@ -3306,6 +3291,8 @@ fqm:SupplementalIndicator_F3-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F3-01M ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata clearly includes the data identifier" ;
                                  rdfs:label "SupplementalIndicator: F3-02M" .
 
@@ -3315,6 +3302,8 @@ fqm:SupplementalIndicator_F3-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:F3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F3-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata explicitly includes the data identifier" ;
                                  rdfs:label "SupplementalIndicator: F3-03M" .
 
@@ -3323,7 +3312,9 @@ fqm:SupplementalIndicator_F3-03M rdf:type owl:NamedIndividual ,
 fqm:SupplementalIndicator_F4-02IS rdf:type owl:NamedIndividual ,
                                            fqm:SupplementalIndicator ;
                                   fqm:forPrinciple fair:F4 ;
-                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F4-01D ;
+                                  fqm:indicatorNumber 2 ;
+                                  fqm:inspectsCategoryClass fqm:Infrastructure ;
                                   rdfs:comment "Resource for data is searchable" ;
                                   rdfs:label "SupplementalIndicator: F4-02IS" .
 
@@ -3332,7 +3323,9 @@ fqm:SupplementalIndicator_F4-02IS rdf:type owl:NamedIndividual ,
 fqm:SupplementalIndicator_F4-03IS rdf:type owl:NamedIndividual ,
                                            fqm:SupplementalIndicator ;
                                   fqm:forPrinciple fair:F4 ;
-                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F1-01M ;
+                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_F4-01M ;
+                                  fqm:indicatorNumber 3 ;
+                                  fqm:inspectsCategoryClass fqm:Infrastructure ;
                                   rdfs:comment "Resource for metadata is searchable" ;
                                   rdfs:label "SupplementalIndicator: F4-03IS" .
 
@@ -3342,6 +3335,8 @@ fqm:SupplementalIndicator_I1-02D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data language is formal" ;
                                  rdfs:label "SupplementalIndicator: I1-02D" .
 
@@ -3351,6 +3346,8 @@ fqm:SupplementalIndicator_I1-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata language is formal" ;
                                  rdfs:label "SupplementalIndicator: I1-02M" .
 
@@ -3360,6 +3357,8 @@ fqm:SupplementalIndicator_I1-03D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data language is accessible" ;
                                  rdfs:label "SupplementalIndicator: I1-03D" .
 
@@ -3369,6 +3368,8 @@ fqm:SupplementalIndicator_I1-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata language is accessible" ;
                                  rdfs:label "SupplementalIndicator: I1-03M" .
 
@@ -3378,6 +3379,8 @@ fqm:SupplementalIndicator_I1-04D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data language is shared" ;
                                  rdfs:label "SupplementalIndicator: I1-04D" .
 
@@ -3387,6 +3390,8 @@ fqm:SupplementalIndicator_I1-04M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata language is shared" ;
                                  rdfs:label "SupplementalIndicator: I1-04M" .
 
@@ -3396,6 +3401,8 @@ fqm:SupplementalIndicator_I1-05D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01D ;
+                                 fqm:indicatorNumber 5 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data language is broadly applicable" ;
                                  rdfs:label "SupplementalIndicator: I1-05D" .
 
@@ -3405,6 +3412,8 @@ fqm:SupplementalIndicator_I1-05M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I1-01M ;
+                                 fqm:indicatorNumber 5 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata language is broadly applicable" ;
                                  rdfs:label "SupplementalIndicator: I1-05M" .
 
@@ -3414,6 +3423,8 @@ fqm:SupplementalIndicator_I2-02D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data vocabulary is findable" ;
                                  rdfs:label "SupplementalIndicator: I2-02D" .
 
@@ -3423,6 +3434,8 @@ fqm:SupplementalIndicator_I2-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata vocabulary is findable" ;
                                  rdfs:label "SupplementalIndicator: I2-02M" .
 
@@ -3432,6 +3445,8 @@ fqm:SupplementalIndicator_I2-03D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data vocabulary is accessible" ;
                                  rdfs:label "SupplementalIndicator: I2-03D" .
 
@@ -3441,6 +3456,8 @@ fqm:SupplementalIndicator_I2-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata vocabulary is accessible" ;
                                  rdfs:label "SupplementalIndicator: I2-03M" .
 
@@ -3450,6 +3467,8 @@ fqm:SupplementalIndicator_I2-04D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data vocabulary is interoperable" ;
                                  rdfs:label "SupplementalIndicator: I2-04D" .
 
@@ -3459,6 +3478,8 @@ fqm:SupplementalIndicator_I2-04M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata vocabulary is interoperable" ;
                                  rdfs:label "SupplementalIndicator: I2-04M" .
 
@@ -3468,6 +3489,8 @@ fqm:SupplementalIndicator_I2-05D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01D ;
+                                 fqm:indicatorNumber 5 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data vocabulary is reusable" ;
                                  rdfs:label "SupplementalIndicator: I2-05D" .
 
@@ -3477,6 +3500,8 @@ fqm:SupplementalIndicator_I2-05M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I2 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I2-01M ;
+                                 fqm:indicatorNumber 5 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata vocabulary is reusable" ;
                                  rdfs:label "SupplementalIndicator: I2-05M" .
 
@@ -3486,6 +3511,8 @@ fqm:SupplementalIndicator_I3-02D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01D ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "The data references are qualified" ;
                                  rdfs:label "SupplementalIndicator: I3-02D" .
 
@@ -3495,6 +3522,8 @@ fqm:SupplementalIndicator_I3-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01M ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "The metadata references are qualified" ;
                                  rdfs:label "SupplementalIndicator: I3-02M" .
 
@@ -3504,6 +3533,8 @@ fqm:SupplementalIndicator_I3-03D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01D ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "References included in data are to other data" ;
                                  rdfs:label "SupplementalIndicator: I3-03D" .
 
@@ -3513,6 +3544,8 @@ fqm:SupplementalIndicator_I3-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "References included in metadata are to other data" ;
                                  rdfs:label "SupplementalIndicator: I3-03M" .
 
@@ -3522,6 +3555,8 @@ fqm:SupplementalIndicator_I3-04D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01D ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "References included in data are to other metadata" ;
                                  rdfs:label "SupplementalIndicator: I3-04D" .
 
@@ -3531,6 +3566,8 @@ fqm:SupplementalIndicator_I3-04M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:I3 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_I3-01M ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "References included in metadata are to other metadata" ;
                                  rdfs:label "SupplementalIndicator: I3-04M" .
 
@@ -3540,6 +3577,8 @@ fqm:SupplementalIndicator_R1-02D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01D ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "Data attributes are plural" ;
                                  rdfs:label "SupplementalIndicator: R1-02D" .
 
@@ -3549,6 +3588,8 @@ fqm:SupplementalIndicator_R1-02M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 fqm:indicatorNumber 2 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata attributes are plural" ;
                                  rdfs:label "SupplementalIndicator: R1-02M" .
 
@@ -3558,6 +3599,8 @@ fqm:SupplementalIndicator_R1-03D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01D ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "Data attributes are accurate" ;
                                  rdfs:label "SupplementalIndicator: R1-03D" .
 
@@ -3567,6 +3610,8 @@ fqm:SupplementalIndicator_R1-03M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 fqm:indicatorNumber 3 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata attributes are accurate" ;
                                  rdfs:label "SupplementalIndicator: R1-03M" .
 
@@ -3576,6 +3621,8 @@ fqm:SupplementalIndicator_R1-04D rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01D ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Data ;
                                  rdfs:comment "Data attributes are relevant" ;
                                  rdfs:label "SupplementalIndicator: R1-04D" .
 
@@ -3585,6 +3632,8 @@ fqm:SupplementalIndicator_R1-04M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 fqm:indicatorNumber 4 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata attributes are relevant" ;
                                  rdfs:label "SupplementalIndicator: R1-04M" .
 
@@ -3594,6 +3643,8 @@ fqm:SupplementalIndicator_R1-05M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 fqm:indicatorNumber 5 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include attributes for data use" ;
                                  rdfs:label "SupplementalIndicator: R1-05M" .
 
@@ -3603,6 +3654,8 @@ fqm:SupplementalIndicator_R1-06M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 fqm:indicatorNumber 6 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include attributes for data contextual information" ;
                                  rdfs:label "SupplementalIndicator: R1-06M" .
 
@@ -3612,6 +3665,8 @@ fqm:SupplementalIndicator_R1-07M rdf:type owl:NamedIndividual ,
                                           fqm:SupplementalIndicator ;
                                  fqm:forPrinciple fair:R1 ;
                                  fqm:supplementsCoreIndicator fqm:CoreIndicator_R1-01M ;
+                                 fqm:indicatorNumber 7 ;
+                                 fqm:inspectsCategoryClass fqm:Metadata ;
                                  rdfs:comment "Metadata include attributes for data processing information" ;
                                  rdfs:label "SupplementalIndicator: R1-07M" .
 
@@ -3621,6 +3676,8 @@ fqm:SupplementalIndicator_R1.1-02D rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.1 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01D ;
+                                   fqm:indicatorNumber 2 ;
+                                   fqm:inspectsCategoryClass fqm:Data ;
                                    rdfs:comment "Data license is clear" ;
                                    rdfs:label "SupplementalIndicator: R1.1-02D" .
 
@@ -3630,6 +3687,8 @@ fqm:SupplementalIndicator_R1.1-02M rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.1 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01M ;
+                                   fqm:indicatorNumber 2 ;
+                                   fqm:inspectsCategoryClass fqm:Metadata ;
                                    rdfs:comment "Metadata license is clear" ;
                                    rdfs:label "SupplementalIndicator: R1.1-02M" .
 
@@ -3639,6 +3698,8 @@ fqm:SupplementalIndicator_R1.1-03D rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.1 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01D ;
+                                   fqm:indicatorNumber 3 ;
+                                   fqm:inspectsCategoryClass fqm:Data ;
                                    rdfs:comment "Data license is accessible" ;
                                    rdfs:label "SupplementalIndicator: R1.1-03D" .
 
@@ -3648,6 +3709,8 @@ fqm:SupplementalIndicator_R1.1-03M rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.1 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.1-01M ;
+                                   fqm:indicatorNumber 3 ;
+                                   fqm:inspectsCategoryClass fqm:Metadata ;
                                    rdfs:comment "Metadata license is accessible" ;
                                    rdfs:label "SupplementalIndicator: R1.1-03M" .
 
@@ -3657,6 +3720,8 @@ fqm:SupplementalIndicator_R1.2-02D rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.2 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.2-01D ;
+                                   fqm:indicatorNumber 2 ;
+                                   fqm:inspectsCategoryClass fqm:Data ;
                                    rdfs:comment "Data provenance is detailed" ;
                                    rdfs:label "SupplementalIndicator: R1.2-02D" .
 
@@ -3666,6 +3731,8 @@ fqm:SupplementalIndicator_R1.2-02M rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.2 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.2-01M ;
+                                   fqm:indicatorNumber 2 ;
+                                   fqm:inspectsCategoryClass fqm:Metadata ;
                                    rdfs:comment "Metadata provenance is detailed" ;
                                    rdfs:label "SupplementalIndicator: R1.2-02M" .
 
@@ -3675,6 +3742,8 @@ fqm:SupplementalIndicator_R1.3-02D rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.3 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01D ;
+                                   fqm:indicatorNumber 2 ;
+                                   fqm:inspectsCategoryClass fqm:Data ;
                                    rdfs:comment "Data standards are domain-relevant" ;
                                    rdfs:label "SupplementalIndicator: R1.3-02D" .
 
@@ -3684,6 +3753,8 @@ fqm:SupplementalIndicator_R1.3-02M rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.3 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01M ;
+                                   fqm:indicatorNumber 2 ;
+                                   fqm:inspectsCategoryClass fqm:Metadata ;
                                    rdfs:comment "Metadata standards are domain-relevant" ;
                                    rdfs:label "SupplementalIndicator: R1.3-02M" .
 
@@ -3693,6 +3764,8 @@ fqm:SupplementalIndicator_R1.3-03D rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.3 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01D ;
+                                   fqm:indicatorNumber 3 ;
+                                   fqm:inspectsCategoryClass fqm:Data ;
                                    rdfs:comment "Data standards are community standards" ;
                                    rdfs:label "SupplementalIndicator: R1.3-03D" .
 
@@ -3702,6 +3775,8 @@ fqm:SupplementalIndicator_R1.3-03M rdf:type owl:NamedIndividual ,
                                             fqm:SupplementalIndicator ;
                                    fqm:forPrinciple fair:R1.3 ;
                                    fqm:supplementsCoreIndicator fqm:CoreIndicator_R1.3-01M ;
+                                   fqm:indicatorNumber 3 ;
+                                   fqm:inspectsCategoryClass fqm:Metadata ;
                                    rdfs:comment "Metadata standards are community standards" ;
                                    rdfs:label "SupplementalIndicator: R1.3-03M" .
 
@@ -3709,6 +3784,7 @@ fqm:SupplementalIndicator_R1.3-03M rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/fair/principles/terms/A
 fair:A rdf:type owl:NamedIndividual ,
                 fqm:Dimension ;
+       fqm:rank 2 ;
        rdfs:label "Dimension: Accessibility" .
 
 
@@ -3716,6 +3792,7 @@ fair:A rdf:type owl:NamedIndividual ,
 fair:A1 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:A ;
+        fqm:rank 1 ;
         rdfs:label "Principle: A1" .
 
 
@@ -3723,6 +3800,7 @@ fair:A1 rdf:type owl:NamedIndividual ,
 fair:A1.1 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:A ;
+          fqm:rank 1.1 ;
           rdfs:label "Principle: A1.1" .
 
 
@@ -3730,6 +3808,7 @@ fair:A1.1 rdf:type owl:NamedIndividual ,
 fair:A1.2 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:A ;
+          fqm:rank 1.2 ;
           rdfs:label "Principle: A1.2" .
 
 
@@ -3737,12 +3816,14 @@ fair:A1.2 rdf:type owl:NamedIndividual ,
 fair:A2 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:A ;
+        fqm:rank 2 ;
         rdfs:label "Principle: A2" .
 
 
 ###  https://w3id.org/fair/principles/terms/F
 fair:F rdf:type owl:NamedIndividual ,
                 fqm:Dimension ;
+       fqm:rank 1 ;
        rdfs:label "Dimension: Findability" .
 
 
@@ -3750,6 +3831,7 @@ fair:F rdf:type owl:NamedIndividual ,
 fair:F1 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:F ;
+        fqm:rank 1 ;
         rdfs:label "Principle: F1" .
 
 
@@ -3757,6 +3839,7 @@ fair:F1 rdf:type owl:NamedIndividual ,
 fair:F2 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:F ;
+        fqm:rank 2 ;
         rdfs:label "Principle: F2" .
 
 
@@ -3764,6 +3847,7 @@ fair:F2 rdf:type owl:NamedIndividual ,
 fair:F3 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:F ;
+        fqm:rank 3 ;
         rdfs:label "Principle: F3" .
 
 
@@ -3771,12 +3855,14 @@ fair:F3 rdf:type owl:NamedIndividual ,
 fair:F4 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:F ;
+        fqm:rank 4 ;
         rdfs:label "Principle: F4" .
 
 
 ###  https://w3id.org/fair/principles/terms/I
 fair:I rdf:type owl:NamedIndividual ,
                 fqm:Dimension ;
+       fqm:rank 3 ;
        rdfs:label "Dimension: Interoperability" .
 
 
@@ -3784,6 +3870,7 @@ fair:I rdf:type owl:NamedIndividual ,
 fair:I1 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:I ;
+        fqm:rank 1 ;
         rdfs:label "Principle: I1" .
 
 
@@ -3791,6 +3878,7 @@ fair:I1 rdf:type owl:NamedIndividual ,
 fair:I2 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:I ;
+        fqm:rank 2 ;
         rdfs:label "Principle: I2" .
 
 
@@ -3798,12 +3886,14 @@ fair:I2 rdf:type owl:NamedIndividual ,
 fair:I3 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:I ;
+        fqm:rank 3 ;
         rdfs:label "Principle: I3" .
 
 
 ###  https://w3id.org/fair/principles/terms/R
 fair:R rdf:type owl:NamedIndividual ,
                 fqm:Dimension ;
+       fqm:rank 4 ;
        rdfs:label "Dimension: Reusability" .
 
 
@@ -3811,6 +3901,7 @@ fair:R rdf:type owl:NamedIndividual ,
 fair:R1 rdf:type owl:NamedIndividual ,
                  fqm:Principle ;
         fqm:hasDimension fair:R ;
+        fqm:rank 1 ;
         rdfs:label "Principle: R1" .
 
 
@@ -3818,6 +3909,7 @@ fair:R1 rdf:type owl:NamedIndividual ,
 fair:R1.1 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:R ;
+          fqm:rank 1.1 ;
           rdfs:label "Principle: R1.1" .
 
 
@@ -3825,6 +3917,7 @@ fair:R1.1 rdf:type owl:NamedIndividual ,
 fair:R1.2 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:R ;
+          fqm:rank 1.2 ;
           rdfs:label "Principle: R1.2" .
 
 
@@ -3832,6 +3925,7 @@ fair:R1.2 rdf:type owl:NamedIndividual ,
 fair:R1.3 rdf:type owl:NamedIndividual ,
                    fqm:Principle ;
           fqm:hasDimension fair:R ;
+          fqm:rank 1.3 ;
           rdfs:label "Principle: R1.3" .
 
 
