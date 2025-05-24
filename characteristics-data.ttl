@@ -1,0 +1,111 @@
+@prefix fqm: <http://w3id.org/fairness-quality-measures/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+############# UUID #############
+
+fqm:UUID_Characteristics a fqm:GloballyUnique .
+
+<http://www.wikidata.org/entity/Q195284>  a fqm:IdentifierScheme ;
+                                          rdfs:label "UUID" ;
+                                          fqm:hasCharacteristic fqm:UUID_Characteristics .
+
+############# URL #############
+
+fqm:URL_Characteristics a fqm:GloballyUnique .
+
+<http://www.wikidata.org/entity/Q42253> a fqm:IdentifierScheme ;
+                                        rdfs:label "URL" ;
+                                        fqm:hasCharacteristic fqm:URL_Characteristics .
+
+############# DOI #############
+
+fqm:DOI_Characteristics a fqm:GloballyUnique, fqm:EternallyPersistent .
+
+<http://www.wikidata.org/entity/Q25670>   a fqm:IdentifierScheme ;
+                                          rdfs:label "DOI" ;
+                                          fqm:hasCharacteristic fqm:DOI_Characteristics .
+
+############# PURL #############
+
+fqm:PURL_Characteristics a fqm:GloballyUnique, fqm:EternallyPersistent .
+
+<http://www.wikidata.org/entity/Q195305>  a fqm:IdentifierScheme ;
+                                          rdfs:label "PURL" ;
+                                          fqm:hasCharacteristic fqm:PURL_Characteristics .
+
+############# ARK #############
+
+fqm:ARK_Characteristics a fqm:GloballyUnique, fqm:EternallyPersistent .
+
+<http://www.wikidata.org/entity/Q2860403> a fqm:IdentifierScheme ;
+                                          rdfs:label "ARK" ;
+                                          fqm:hasCharacteristic fqm:ARK_Characteristics .
+
+############# Handle System #############
+
+fqm:Handle_Characteristics a fqm:GloballyUnique, fqm:EternallyPersistent .
+
+<http://www.wikidata.org/entity/Q3126718> a fqm:IdentifierScheme ;
+                                          rdfs:label "Handle System" ;
+                                          fqm:hasCharacteristic fqm:Handle_Characteristics .
+
+
+############# Protocol & Procedure #############
+
+<http://www.wikidata.org/entity/Q42283>  a fqm:CommunicationProtocol ;
+                                        rdfs:label "FTP Protocol" .
+
+<http://www.wikidata.org/entity/Q8777>  a fqm:CommunicationProtocol ;
+                                        rdfs:label "HTTP Protocol" .
+
+fqm:SSH_Procedure_Characteristics a fqm:Authenticatable .
+
+<http://www.wikidata.org/entity/Q170460>  a fqm:CommunicationProtocol ;
+                                        rdfs:label "SSH" ;
+                                        fqm:allowsFor [
+                                          a fqm:Procedure ;
+                                          fqm:hasCharacteristic fqm:SSH_Procedure_Characteristics ;
+                                        ] .
+
+fqm:TLS_Procedure_Characteristics a fqm:Authenticatable .
+
+<http://www.wikidata.org/entity/Q206494>  a fqm:CommunicationProtocol ;
+                                        rdfs:label "TLS" ;
+                                        fqm:allowsFor [
+                                          a fqm:Procedure ;
+                                          fqm:hasCharacteristic fqm:TLS_Procedure_Characteristics ;
+                                        ] .
+
+fqm:OAuth_Procedure_Characteristics a fqm:Authenticatable .
+
+<http://www.wikidata.org/entity/Q743238>  a fqm:CommunicationProtocol ;
+                                        rdfs:label "OAuth" ;
+                                        fqm:allowsFor [
+                                          a fqm:Procedure ;
+                                          fqm:hasCharacteristic fqm:OAuth_Procedure_Characteristics ; 
+                                        ] .
+
+fqm:OAuth2_Procedure_Characteristics a fqm:Authenticatable, fqm:Permissibility .
+
+<http://www.wikidata.org/entity/Q97371579>  a fqm:CommunicationProtocol ;
+                                            rdfs:label "OAuth 2" ;
+                                            fqm:allowsFor [
+                                              a fqm:Procedure ;
+                                              fqm:hasCharacteristic fqm:OAuth2_Procedure_Characteristics ; 
+                                            ] .
+                                        
+fqm:SAML_Procedure_Characteristics a fqm:Authenticatable, fqm:Permissibility .
+
+<http://www.wikidata.org/entity/Q7388635>  a fqm:CommunicationProtocol ;
+                                            rdfs:label "SAML" ;
+                                            fqm:allowsFor [
+                                              a fqm:Procedure ;
+                                              fqm:hasCharacteristic fqm:SAML_Procedure_Characteristics ; 
+                                            ] .
+
+
+fqm:RBAC_Characteristics a fqm:Authenticatable, fqm:Permissibility .
+
+<http://www.wikidata.org/entity/Q1702839> a fqm:Procedure ;
+                                          rdfs:label "RBAC" ;
+                                          fqm:hasCharacteristic fqm:RBAC_Characteristics .
